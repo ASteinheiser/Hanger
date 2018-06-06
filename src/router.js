@@ -1,7 +1,7 @@
 import React                        from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 
-// import BottomNavigation from './components/bottom-navigation.js';
+import BottomNavigation from './components/bottom-navigation.js';
 import Home             from './routers/home.js';
 
 const Router = createBottomTabNavigator(
@@ -12,7 +12,7 @@ const Router = createBottomTabNavigator(
   },
   {
     initialRouteName: 'Home',
-    // tabBarComponent: props => <BottomNavigation {...props} />
+    tabBarComponent: props => <BottomNavigation {...props} />
   }
 );
 
