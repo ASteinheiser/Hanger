@@ -1,9 +1,9 @@
 import React                      from 'react';
-import styled                     from 'styled-components';
-import { Toolbar, Icon }          from 'react-native-material-ui';
+import { View, Text, ScrollView } from 'react-native';
+import { Avatar, Icon, Toolbar }  from 'react-native-material-ui';
 import SplashScreen               from 'react-native-splash-screen';
 import Image                      from 'react-native-scalable-image';
-import { View, Text, ScrollView } from 'react-native';
+import styled                     from 'styled-components';
 
 import theme from '../theme.js';
 import logo  from '../../assets/hanger-black.png';
@@ -21,6 +21,16 @@ export default class Home extends React.Component {
           <Centered>
             <Image source={logo} height={40} />
           </Centered>
+        }
+        leftElement={
+          <MarginLeft>
+            <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+          </MarginLeft>
+        }
+        rightElement={
+          <MarginRight>
+            <Icon name='notifications' size={30} />
+          </MarginRight>
         } />
 
         <Container color={theme.palette.canvasColor}>
@@ -50,8 +60,8 @@ const Container = styled.ScrollView`
 `
 
 const Centered = styled.View`
-  padding-right: 20px;
   margin: 0 auto;
+  padding-right: 20px;
 `
 
 const Margin = styled.View`
@@ -69,4 +79,8 @@ const FlexRow = styled.View`
 
 const MarginRight = styled.View`
   margin-right: 10px;
+`
+
+const MarginLeft = styled.View`
+  margin-left: 10px;
 `
