@@ -5,7 +5,7 @@ import Image                      from 'react-native-scalable-image';
 import styled                     from 'styled-components';
 
 import theme from '../theme.js';
-import logo  from '../../assets/hanger-black.png';
+import logo  from '../../assets/hanger-text-logo-black.png';
 
 export default class Settings extends React.Component {
   render() {
