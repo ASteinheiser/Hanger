@@ -1,6 +1,6 @@
 // import { Platform } from 'react-native';
 
-export const pink = '#f85dff';
+export const pink = '#fa86ff';
 export const black = '#000000';
 export const white = '#ffffff';
 export const darkGrey = '#303030';
