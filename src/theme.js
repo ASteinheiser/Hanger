@@ -6,12 +6,10 @@ export const white = '#ffffff';
 export const darkGrey = '#303030';
 export const fadedWhite = '#c9c9c9';
 
-let height = 90;
-let padding = 25;
+let height = 70;
 
 // if (Platform.OS === 'ios') {
 //   height = 80;
-//   padding = 15;
 // }
 
 export default theme = {
@@ -32,15 +30,6 @@ export default theme = {
   toolbar: {
     container: {
       height: height
-    },
-    centerElementContainer: {
-      paddingTop: padding
-    },
-    leftElementContainer: {
-      paddingTop: padding
-    },
-    rightElementContainer: {
-      paddingTop: padding
     }
   }
 }
