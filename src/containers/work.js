@@ -1,19 +1,13 @@
 import React                      from 'react';
 import styled                     from 'styled-components';
 import { Toolbar, Icon }          from 'react-native-material-ui';
-import SplashScreen               from 'react-native-splash-screen';
 import Image                      from 'react-native-scalable-image';
 import { View, Text, ScrollView } from 'react-native';
 
 import theme from '../theme.js';
 import logo  from '../../assets/hanger-black.png';
 
-export default class Home extends React.Component {
-
-  componentWillMount() {
-    setTimeout(() => { SplashScreen.hide(); }, 1000);
-  }
-
+export default class Work extends React.Component {
   render() {
     return (
       <Flex>
@@ -27,10 +21,10 @@ export default class Home extends React.Component {
           <Margin>
             <FlexRow>
               <MarginRight>
-                <Icon name='home'/>
+                <Icon name='work'/>
               </MarginRight>
               <StyledText>
-                Welcome to the home
+                Paid gigs and services
               </StyledText>
             </FlexRow>
           </Margin>

@@ -6,7 +6,7 @@ export default class BottomNav extends React.Component {
     super(props);
 
     this.state = {
-      active: null// this.props.navigation.something
+      active: this.props.navigation.state.routes[this.props.navigation.state.index].key
     }
   }
 
@@ -14,25 +14,45 @@ export default class BottomNav extends React.Component {
     return (
       <BottomNavigation active={this.state.active} hidden={false}>
         <BottomNavigation.Action
-            key="Pantry"
-            icon="kitchen"
-            label="Virtual Pantry"
+            key="Home"
+            icon="home"
             onPress={() => {
-                this.setState({ active: 'Pantry' })
-                this.props.navigation.navigate('Pantry')
+                this.setState({ active: 'Home' })
+                this.props.navigation.navigate('Home')
               }
-            }
-        />
+            } />
         <BottomNavigation.Action
-           key="Crafting"
-           icon="local-dining"
-           label="Crafting"
+           key="Work"
+           icon="work"
            onPress={() => {
-               this.setState({ active: 'Crafting' })
-               this.props.navigation.navigate('Recipes')
+               this.setState({ active: 'Work' })
+               this.props.navigation.navigate('Work')
              }
-           }
-       />
+           } />
+         <BottomNavigation.Action
+            key="Camera"
+            icon="add-a-photo"
+            onPress={() => {
+                this.setState({ active: 'Camera' })
+                this.props.navigation.navigate('Camera')
+              }
+            } />
+          <BottomNavigation.Action
+             key="Messages"
+             icon="message"
+             onPress={() => {
+                 this.setState({ active: 'Messages' })
+                 this.props.navigation.navigate('Messages')
+               }
+             } />
+           <BottomNavigation.Action
+              key="Settings"
+              icon="settings"
+              onPress={() => {
+                  this.setState({ active: 'Settings' })
+                  this.props.navigation.navigate('Settings')
+                }
+              } />
       </BottomNavigation>
     )
   }
