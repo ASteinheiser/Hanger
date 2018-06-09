@@ -20,7 +20,7 @@ export default class TopNavigationBasic extends Component {
       }
       rightElement={
         <MarginRight>
-          <Icon name='notifications' size={30} />
+          <Icon name='notifications' color='white' size={30} />
         </MarginRight>
       } />
     );

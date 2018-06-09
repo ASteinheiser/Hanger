@@ -5,7 +5,7 @@ import BottomNavigation from './components/bottom-navigation.js';
 import Camera           from './routers/camera.js';
 import Home             from './routers/home.js';
 import Messages         from './routers/messages.js';
-import Settings         from './routers/settings.js';
+import ShoppingCart     from './routers/shopping-cart.js';
 import Work             from './routers/work.js';
 
 const Router = createBottomTabNavigator(
@@ -19,8 +19,8 @@ const Router = createBottomTabNavigator(
     'Messages': {
       screen: Messages
     },
-    'Settings': {
-      screen: Settings
+    'ShoppingCart': {
+      screen: ShoppingCart
     },
     'Work': {
       screen: Work

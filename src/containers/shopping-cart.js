@@ -6,7 +6,7 @@ import IconWithText       from '../components/icon-with-text.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
 
-export default class Settings extends React.Component {
+export default class ShoppingCart extends React.Component {
   render() {
     return (
       <Flex>
@@ -14,8 +14,8 @@ export default class Settings extends React.Component {
 
         <Container color={theme.palette.canvasColor}>
           <IconWithText
-            icon='settings'
-            text='Settings Page' />
+            icon='shopping-basket'
+            text='Shopping Cart page!!' />
         </Container>
       </Flex>
     )

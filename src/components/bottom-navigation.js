@@ -42,11 +42,11 @@ export default class BottomNav extends React.Component {
             this.props.navigation.navigate('Messages')
           } } />
         <BottomNavigation.Action
-          key="Settings"
-          icon="settings"
+          key="ShoppingCart"
+          icon="shopping-cart"
           onPress={() => {
-            this.setState({ active: 'Settings' })
-            this.props.navigation.navigate('Settings')
+            this.setState({ active: 'ShoppingCart' })
+            this.props.navigation.navigate('ShoppingCart')
           } } />
       </BottomNavigation>
     )
