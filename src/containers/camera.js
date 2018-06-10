@@ -1,32 +1,37 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
-import styled               from 'styled-components';
+import React                 from 'react';
+import { View, StyleSheet }  from 'react-native';
+import Camera                from 'react-native-camera';
 
-import IconWithText       from '../components/icon-with-text.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
-import theme              from '../theme.js';
 
-export default class Camera extends React.Component {
+export default class StyledCamera extends React.Component {
   render() {
     return (
-      <Flex>
+      <View style={styles.container}>
+
         <TopNavigationBasic />
 
-        <Container color={theme.palette.canvasColor}>
-          <IconWithText
-            icon='add-a-photo'
-            text='Post options such as video, image, camera...' />
-        </Container>
-      </Flex>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          captureTarget={Camera.constants.CaptureTarget.temp}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill} />
+
+      </View>
     )
   }
 }
 
-const Flex = styled.View`
-  flex: 1;
-`
-
-const Container = styled.ScrollView`
-  background-color: ${props => props.color};
-  flex: 1;
-`
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  }
+});
