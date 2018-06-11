@@ -1,14 +1,24 @@
 import React, { Component }      from 'react';
+import { Platform }              from 'react-native';
 import { Avatar, Toolbar, Icon } from 'react-native-material-ui';
 import Image                     from 'react-native-scalable-image';
 import styled                    from 'styled-components';
 
 import logo from '../../assets/hanger-text-logo-white.png';
 
+let iosTopPadding = { container: {} };
+if (Platform.OS === 'ios') {
+  iosTopPadding.container = {
+    paddingTop: 30,
+    height: 90
+  };
+}
+
 export default class TopNavigationBasic extends Component {
   render() {
     return (
-      <Toolbar centerElement={
+      <Toolbar style={ iosTopPadding }
+      centerElement={
         <Centered>
           <Image source={logo} height={40} />
         </Centered>
@@ -28,7 +38,7 @@ export default class TopNavigationBasic extends Component {
 }
 
 const Centered = styled.View`
-  padding-right: 20px;
+  padding-right: 25px;
   margin: 0 auto;
 `
 
