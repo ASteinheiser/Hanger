@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import BottomNavigation from './components/bottom-navigation.js';
 import Camera           from './routers/camera.js';
 import Home             from './routers/home.js';
+import Login            from './routers/login.js';
 import Messages         from './routers/messages.js';
 import ShoppingCart     from './routers/shopping-cart.js';
 import Work             from './routers/work.js';
@@ -16,6 +17,9 @@ const Router = createBottomTabNavigator(
     'Home': {
       screen: Home
     },
+    'Login': {
+      screen: Login
+    },
     'Messages': {
       screen: Messages
     },
@@ -27,7 +31,7 @@ const Router = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     tabBarComponent: props => <BottomNavigation {...props} />
   }
 );

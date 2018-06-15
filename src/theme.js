@@ -3,7 +3,7 @@
 export const blue = '#4976f9';
 export const black = '#000000';
 export const white = '#ffffff';
-export const darkGrey = '#303030';
+export const darkGrey = '#565656';
 export const fadedWhite = '#c9c9c9';
 
 let height = 70;
@@ -18,10 +18,10 @@ export default theme = {
   // fontFamily: 'Roboto',
   palette: {
     primaryColor: blue,
-    accentColor: black,
-    primaryTextColor: darkGrey,
-    secondaryTextColor: black,
-    canvasColor: white,
+    accentColor: white,
+    primaryTextColor: white,
+    secondaryTextColor: blue,
+    canvasColor: darkGrey,
     borderColor: fadedWhite,
     disabledColor: fadedWhite,
     // pickerHeaderColor: fade(white, 0.12),
