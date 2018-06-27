@@ -41,11 +41,11 @@ export default class BottomNav extends Component {
               this.props.navigation.navigate('Home')
             } } />
           <BottomNavigation.Action
-            key='Work'
-            icon={ <Icon name='work' size={25} /> }
+            key='Search'
+            icon={ <Icon name='search' size={25} /> }
             onPress={() => {
-              this.setState({ active: 'Work' })
-              this.props.navigation.navigate('Work')
+              this.setState({ active: 'Search' })
+              this.props.navigation.navigate('Search')
             } } />
           <BottomNavigation.Action
             key='Camera'
