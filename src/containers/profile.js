@@ -6,7 +6,7 @@ import IconWithText       from '../components/icon-with-text.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
 
-export default class Work extends React.Component {
+export default class Profile extends React.Component {
   render() {
     return (
       <Flex>
@@ -14,8 +14,8 @@ export default class Work extends React.Component {
 
         <Container color={theme.palette.canvasColor}>
           <IconWithText
-            icon='work'
-            text='Paid gigs and services' />
+            icon='person'
+            text='Super Awesome Profile PAGE!!!' />
         </Container>
       </Flex>
     )

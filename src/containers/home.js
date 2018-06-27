@@ -26,7 +26,7 @@ export default class Home extends React.Component {
 
     return (
       <Flex>
-        <TopNavigationBasic />
+        <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
 

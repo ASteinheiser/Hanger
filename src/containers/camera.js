@@ -9,7 +9,7 @@ export default class StyledCamera extends React.Component {
     return (
       <View style={styles.container}>
 
-        <TopNavigationBasic />
+        <TopNavigationBasic navigation={this.props.navigation} />
 
         {/* <Camera
           ref={(cam) => {

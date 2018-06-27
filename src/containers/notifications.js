@@ -6,7 +6,7 @@ import IconWithText       from '../components/icon-with-text.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
 
-export default class Work extends React.Component {
+export default class Notifications extends React.Component {
   render() {
     return (
       <Flex>
@@ -14,8 +14,8 @@ export default class Work extends React.Component {
 
         <Container color={theme.palette.canvasColor}>
           <IconWithText
-            icon='work'
-            text='Paid gigs and services' />
+            icon='notifications'
+            text='Check out all your notifications here!!' />
         </Container>
       </Flex>
     )

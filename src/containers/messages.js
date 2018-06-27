@@ -10,7 +10,7 @@ export default class Messages extends React.Component {
   render() {
     return (
       <Flex>
-        <TopNavigationBasic />
+        <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
           <IconWithText

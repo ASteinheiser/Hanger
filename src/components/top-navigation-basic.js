@@ -35,7 +35,9 @@ export default class TopNavigationBasic extends Component {
               null
             :
             <MarginLeft>
-              <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+              <Touchable onPress={() => this.props.navigation.navigate('Profile')}>
+                <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+              </Touchable>
             </MarginLeft>
         }
         rightElement={
@@ -46,7 +48,9 @@ export default class TopNavigationBasic extends Component {
               null
             :
             <MarginRight>
-              <Icon name='notifications' color='white' size={30} />
+              <Touchable onPress={() => this.props.navigation.navigate('Notifications')}>
+                <Icon name='notifications' color='white' size={30} />
+              </Touchable>
             </MarginRight>
         } />
     );
