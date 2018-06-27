@@ -33,7 +33,7 @@ export default class Login extends React.Component {
 
           <TopMargin>
             <Button
-              accent
+              primary
               icon="subdirectory-arrow-right"
               text="Login"
               onPress={() => this.props.navigation.navigate('Home')} />
@@ -43,7 +43,7 @@ export default class Login extends React.Component {
 
           <Margin>
             <Button
-              primary
+              accent
               icon="assignment"
               text="Register"
               onPress={()=> {
@@ -55,7 +55,7 @@ export default class Login extends React.Component {
           </Margin>
           <Margin>
             <Button
-              primary
+              accent
               icon="help-outline"
               text="Forgot Password"
               onPress={()=> {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button }           from 'react-native-material-ui';
 
-import theme from '../theme.js';
+import theme, { white } from '../theme.js';
 
 export default class StyledButton extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class StyledButton extends Component {
       },
       text: {
         fontFamily: theme.fontFamily ? theme.fontFamily : 'Roboto',
-        color: this.props.accent ? theme.palette.secondaryTextColor : theme.palette.primaryTextColor,
+        color: this.props.accent ? theme.palette.secondaryTextColor : white,
         fontWeight: 'bold',
         fontSize: 16
       }

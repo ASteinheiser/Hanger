@@ -19,9 +19,9 @@ export default theme = {
   palette: {
     primaryColor: blue,
     accentColor: white,
-    primaryTextColor: white,
+    primaryTextColor: darkGrey,
     secondaryTextColor: blue,
-    canvasColor: darkGrey,
+    canvasColor: white,
     borderColor: fadedWhite,
     disabledColor: fadedWhite,
     // pickerHeaderColor: fade(white, 0.12),
