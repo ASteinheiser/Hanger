@@ -10,7 +10,10 @@ export default class Register extends React.Component {
   render() {
     return (
       <Flex>
-        <TopNavigationBasic />
+        <TopNavigationBasic
+          back-button
+          route='Login'
+          navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
           <IconWithText

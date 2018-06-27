@@ -46,24 +46,14 @@ export default class Login extends React.Component {
               accent
               icon="assignment"
               text="Register"
-              onPress={()=> {
-                this.props.navigation.dispatch(NavigationActions.reset({
-                  index: 0,
-                  actions: [ NavigationActions.navigate({ routeName: 'Register'}) ]
-                }))
-              }} />
+              onPress={()=> { this.props.navigation.replace('Register') }} />
           </Margin>
           <Margin>
             <Button
               accent
               icon="help-outline"
               text="Forgot Password"
-              onPress={()=> {
-                this.props.navigation.dispatch(NavigationActions.reset({
-                  index: 0,
-                  actions: [ NavigationActions.navigate({ routeName: 'ForgotPassword'}) ]
-                }))
-              }} />
+              onPress={()=> { this.props.navigation.replace('ForgotPassword') }} />
           </Margin>
         </Container>
       </Flex>
