@@ -13,7 +13,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <Flex>
-        <TopNavigationBasic />
+        <TopNavigationBasic no-buttons />
 
         <Container color={theme.palette.canvasColor}>
           <Input

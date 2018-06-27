@@ -24,14 +24,20 @@ export default class TopNavigationBasic extends Component {
         </Centered>
       }
       leftElement={
-        <MarginLeft>
-          <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
-        </MarginLeft>
+        this.props['no-buttons'] ?
+          null
+          :
+          <MarginLeft>
+            <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+          </MarginLeft>
       }
       rightElement={
-        <MarginRight>
-          <Icon name='notifications' color='white' size={30} />
-        </MarginRight>
+        this.props['no-buttons'] ?
+          null
+          :
+          <MarginRight>
+            <Icon name='notifications' color='white' size={30} />
+          </MarginRight>
       } />
     );
   }

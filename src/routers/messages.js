@@ -1,8 +1,8 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import Messages from '../containers/messages.js';
 
-const MessagesRoute = StackNavigator(
+const MessagesRoute = createStackNavigator(
   {
     Messages: {
       screen: Messages,

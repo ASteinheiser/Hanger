@@ -2,10 +2,13 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import SplashScreen         from 'react-native-splash-screen';
 import styled               from 'styled-components';
+import _map                 from 'lodash.map';
 
-import IconWithText       from '../components/icon-with-text.js';
+import FeedPost           from '../components/feed-post.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
+
+import SAMPLE_POSTS from '../posts.json';
 
 export default class Home extends React.Component {
 
@@ -14,14 +17,21 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const FeedPosts = _map(SAMPLE_POSTS, post =>
+      <FeedPost
+        key={post.id}
+        title={post.title}
+        image={post.image} />
+    );
+
     return (
       <Flex>
         <TopNavigationBasic />
 
         <Container color={theme.palette.canvasColor}>
-          <IconWithText
-            icon='home'
-            text='Welcome to the Home!' />
+
+          { FeedPosts }
+
         </Container>
       </Flex>
     );

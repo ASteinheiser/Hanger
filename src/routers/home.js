@@ -1,8 +1,8 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import Home from '../containers/home.js';
 
-const HomeRoute = StackNavigator(
+const HomeRoute = createStackNavigator(
   {
     Home: {
       screen: Home,

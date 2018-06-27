@@ -1,8 +1,8 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import Camera from '../containers/camera.js';
 
-const CameraRoute = StackNavigator(
+const CameraRoute = createStackNavigator(
   {
     Camera: {
       screen: Camera,

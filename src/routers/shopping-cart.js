@@ -1,8 +1,8 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 import ShoppingCart from '../containers/shopping-cart.js';
 
-const ShoppingCartRoute = StackNavigator(
+const ShoppingCartRoute = createStackNavigator(
   {
     ShoppingCart: {
       screen: ShoppingCart,
