@@ -6,9 +6,9 @@ import styled                         from 'styled-components';
 
 import logo from '../../assets/hanger-text-logo-white.png';
 
-let iosTopPadding = { container: {} };
+let toolbarStyle = { container: {} };
 if (Platform.OS === 'ios') {
-  iosTopPadding.container = {
+  toolbarStyle.container = { // iOS needs extra padding to look good
     paddingTop: 30,
     height: 90
   };
@@ -17,7 +17,7 @@ if (Platform.OS === 'ios') {
 export default class TopNavigationBasic extends Component {
   render() {
     return (
-      <Toolbar style={ iosTopPadding }
+      <Toolbar style={ toolbarStyle }
         centerElement={
           <Centered>
             <Image source={logo} height={40} />
