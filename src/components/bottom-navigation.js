@@ -55,18 +55,18 @@ export default class BottomNav extends Component {
               this.props.navigation.navigate('Camera')
             } } />
           <BottomNavigation.Action
+            key='Favorites'
+            icon={ <Icon name='star' size={25} /> }
+            onPress={() => {
+              this.setState({ active: 'Favorites' })
+              this.props.navigation.navigate('Favorites')
+            } } />
+          <BottomNavigation.Action
             key='Messages'
             icon={ <Icon name='message' size={25} /> }
             onPress={() => {
               this.setState({ active: 'Messages' })
               this.props.navigation.navigate('Messages')
-            } } />
-          <BottomNavigation.Action
-            key='ShoppingCart'
-            icon={ <Icon name='shopping-cart' size={25} /> }
-            onPress={() => {
-              this.setState({ active: 'ShoppingCart' })
-              this.props.navigation.navigate('ShoppingCart')
             } } />
         </BottomNavigation>
       );

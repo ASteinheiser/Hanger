@@ -2,11 +2,11 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 
-import HeaderText         from '../components/header-text.js';
-import Button             from '../components/button.js';
-import Input              from '../components/input.js';
-import TopNavigationBasic from '../components/top-navigation-basic.js';
-import theme              from '../theme.js';
+import HeaderText         from '../../components/header-text.js';
+import Button             from '../../components/button.js';
+import Input              from '../../components/input.js';
+import TopNavigationBasic from '../../components/top-navigation-basic.js';
+import theme              from '../../theme.js';
 
 export default class ForgotPassword extends React.Component {
   render() {

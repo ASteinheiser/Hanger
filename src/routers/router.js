@@ -5,7 +5,7 @@ import Login            from './login.js';
 import Camera           from '../containers/camera.js';
 import Home             from '../containers/home.js';
 import Messages         from '../containers/messages.js';
-import ShoppingCart     from '../containers/shopping-cart.js';
+import Favorites        from '../containers/favorites.js';
 import Search           from '../containers/search.js';
 import Notifications    from '../containers/notifications';
 import Profile          from '../containers/profile';
@@ -25,8 +25,8 @@ const Router = createBottomTabNavigator(
     'Messages': {
       screen: Messages
     },
-    'ShoppingCart': {
-      screen: ShoppingCart
+    'Favorites': {
+      screen: Favorites
     },
     'Search': {
       screen: Search

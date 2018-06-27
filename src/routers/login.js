@@ -1,8 +1,8 @@
 import { createStackNavigator } from 'react-navigation';
 
-import Login          from '../containers/login.js';
-import Register       from '../containers/register.js';
-import ForgotPassword from '../containers/forgot-password.js';
+import Login          from '../containers/auth/login.js';
+import Register       from '../containers/auth/register.js';
+import ForgotPassword from '../containers/auth/forgot-password.js';
 
 const LoginRoute = createStackNavigator(
   {
