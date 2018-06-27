@@ -2,7 +2,9 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 
-import IconWithText       from '../components/icon-with-text.js';
+import HeaderText         from '../components/header-text.js';
+import Button             from '../components/button.js';
+import Input              from '../components/input.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
 
@@ -16,9 +18,24 @@ export default class ForgotPassword extends React.Component {
           navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
-          <IconWithText
-            icon='help-outline'
-            text='Forgotten Passwords PAGE!!' />
+
+          <HeaderText text='Reset Password' />
+
+          <Input
+            keyboardType={'email-address'}
+            // onChange
+            // onSubmitEditing
+            placeholder={'Email Address'}
+            // value
+            />
+
+          <TopMargin>
+            <Button
+              primary
+              icon="subdirectory-arrow-right"
+              text="Reset Password"
+              onPress={() => this.props.navigation.replace('Login')} />
+          </TopMargin>
         </Container>
       </Flex>
     )
@@ -32,4 +49,8 @@ const Flex = styled.View`
 const Container = styled.ScrollView`
   background-color: ${props => props.color};
   flex: 1;
+`
+
+const TopMargin = styled.View`
+  margin: 30px 20px 0 20px;
 `

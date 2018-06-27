@@ -3,6 +3,7 @@ import { View, ScrollView }  from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import styled                from 'styled-components';
 
+import HeaderText         from '../components/header-text.js';
 import Button             from '../components/button.js';
 import Divider            from '../components/divider.js';
 import Input              from '../components/input.js';
@@ -16,6 +17,9 @@ export default class Login extends React.Component {
         <TopNavigationBasic no-buttons />
 
         <Container color={theme.palette.canvasColor}>
+
+          <HeaderText text='Sign in' />
+
           <Input
             keyboardType={'email-address'}
             // onChange
