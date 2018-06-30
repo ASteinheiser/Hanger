@@ -1,11 +1,11 @@
 import React                 from 'react';
 import { View, Text, Image } from 'react-native';
-import { Card, Icon }        from 'react-native-material-ui';
+import { Card }              from 'react-native-material-ui';
 import styled                from 'styled-components';
 
 import theme from '../theme.js';
 
-export default class IconWithText extends React.Component {
+export default class FeedPost extends React.Component {
   render() {
     return (
       <Margin>

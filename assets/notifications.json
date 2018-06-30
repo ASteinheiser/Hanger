@@ -1,0 +1,38 @@
+{
+  "1": {
+    "id": "1",
+    "text": "followed you",
+    "username": "JennaModel",
+    "timestamp": "8s"
+  },
+  "2": {
+    "id": "2",
+    "text": "liked your photo",
+    "username": "CoolInfluencer",
+    "timestamp": "4m"
+  },
+  "3": {
+    "id": "3",
+    "text": "posted a new product",
+    "username": "Bape_US",
+    "timestamp": "12m"
+  },
+  "4": {
+    "id": "4",
+    "text": "commented on your photo",
+    "username": "PhoenixFashionWeek",
+    "timestamp": "3h"
+  },
+  "5": {
+    "id": "5",
+    "text": "liked your photo",
+    "username": "JoeShmoe",
+    "timestamp": "1d"
+  },
+  "6": {
+    "id": "6",
+    "text": "followed you",
+    "username": "PicturesNMore",
+    "timestamp": "2w"
+  }
+}

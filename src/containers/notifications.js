@@ -1,21 +1,32 @@
 import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
+import _map                 from 'lodash.map';
 
-import IconWithText       from '../components/icon-with-text.js';
+import NotificationItem   from '../components/notification-item.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
 
+import SAMPLE_NOTIFICATIONS from '../../assets/notifications.json';
+
 export default class Notifications extends React.Component {
   render() {
+    const Notifications = _map(SAMPLE_NOTIFICATIONS, notif =>
+      <NotificationItem
+        key={notif.id}
+        text={notif.text}
+        username={notif.username}
+        timestamp={notif.timestamp}/>
+    );
+
     return (
       <Flex>
         <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
-          <IconWithText
-            icon='notifications'
-            text='Check out all your notifications here!!' />
+
+          { Notifications }
+
         </Container>
       </Flex>
     )

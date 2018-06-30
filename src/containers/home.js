@@ -8,7 +8,7 @@ import FeedPost           from '../components/feed-post.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
 
-import SAMPLE_POSTS from '../posts.json';
+import SAMPLE_POSTS from '../../assets/posts.json';
 
 export default class Home extends React.Component {
 
