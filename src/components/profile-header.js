@@ -3,6 +3,8 @@ import { Text, View } from 'react-native';
 import { Avatar }     from 'react-native-material-ui';
 import styled         from 'styled-components';
 
+import Button from './button.js';
+
 import theme from '../theme.js';
 
 export default class ProfileHeader extends React.Component {
@@ -13,12 +15,20 @@ export default class ProfileHeader extends React.Component {
           <Avatar icon='person' iconColor='gray' size={80} iconSize={60} />
         </ProfileContainer>
 
-        <HeaderText color={theme.palette.secondaryTextColor}>
-          { this.props.user.username }
-        </HeaderText>
+        <FlexRow>
+          <UsernameText color={theme.palette.secondaryTextColor}>
+            { this.props.user.username }
+          </UsernameText>
+
+          <Button
+            small
+            primary
+            text="Follow"
+            onPress={()=> { console.log('followed user!') }} />
+        </FlexRow>
 
         <HeaderText color={theme.palette.disabledColor}>
-          { this.props.user.category }
+          { this.props.user.category + ' in ' + this.props.user.location }
         </HeaderText>
 
         <BodyText color={theme.palette.primaryTextColor}>
@@ -28,6 +38,27 @@ export default class ProfileHeader extends React.Component {
     )
   }
 }
+
+const Container = styled.View`
+  flex: 1;
+  flex-direction: column;
+
+  padding: 15px;
+  border-color: ${props => props.color};
+  border-bottom-width: 1px;
+`
+
+const ProfileContainer = styled.View`
+  margin: 0 auto;
+  padding-bottom: 10px;
+`
+
+const UsernameText = styled.Text`
+  font-size: 16px;
+  color: ${props => props.color};
+
+  padding: 0 5px 0 5px;
+`
 
 const HeaderText = styled.Text`
   font-size: 16px;
@@ -43,16 +74,7 @@ const BodyText = styled.Text`
   color: ${props => props.color};
 `
 
-const Container = styled.View`
-  flex: 1;
-  flex-direction: column;
-
-  padding: 15px;
-  border-color: ${props => props.color};
-  border-bottom-width: 1px;
-`
-
-const ProfileContainer = styled.View`
-  margin: 0 auto;
-  padding-bottom: 10px;
+const FlexRow = styled.View`
+  flex-direction: row;
+  justify-content: center;
 `

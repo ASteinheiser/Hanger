@@ -17,6 +17,11 @@ export default class StyledButton extends Component {
       }
     }
 
+    if (this.props.small) {
+      buttonStyle.container.height = 25;
+      buttonStyle.text.fontSize = 14;
+    }
+
     return (
       <Button
         raised
