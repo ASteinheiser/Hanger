@@ -2,9 +2,12 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 
+import ProfileHeader      from '../components/profile-header.js';
 import IconWithText       from '../components/icon-with-text.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
+
+import SAMPLE_USER from '../../assets/user.json';
 
 export default class Profile extends React.Component {
   render() {
@@ -13,9 +16,11 @@ export default class Profile extends React.Component {
         <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
+          <ProfileHeader user={SAMPLE_USER}/>
+
           <IconWithText
             icon='person'
-            text='Super Awesome Profile PAGE!!!' />
+            text='Profile content goes here :)' />
         </Container>
       </Flex>
     )
