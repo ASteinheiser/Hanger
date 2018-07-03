@@ -1,11 +1,14 @@
 import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
+import _debounce            from 'lodash.debounce';
 
-import HeaderText         from '../components/header-text.js';
-import FeedPost           from '../components/feed-post.js';
-import SearchBar          from '../components/search-bar.js';
-import theme              from '../theme.js';
+import HeaderText from '../components/header-text.js';
+import FeedPost   from '../components/feed-post.js';
+import SearchBar  from '../components/search-bar.js';
+import theme      from '../theme.js';
+
+const SEARCH_DEBOUNCE_TIME = 2000; // 2 seconds
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -14,10 +17,18 @@ export default class Search extends React.Component {
     this.state = {
       searchValue: ''
     };
+
+    this._searchEvents = _debounce(this.searchEvents, SEARCH_DEBOUNCE_TIME);
+  }
+
+  searchEvents() {
+    console.log('Searching for events: ', this.state.searchValue);
   }
 
   onChange(e) {
-    this.setState({ searchValue: e });
+    this.setState({ searchValue: e }, () => {
+      this._searchEvents();
+    });
   }
 
   render() {
