@@ -25,6 +25,11 @@ export default class Register extends React.Component {
     this.setState({ [`${field}`]: e });
   }
 
+  handleLogin() {
+    console.log(this.state);
+    this.props.navigation.navigate('Home');
+  }
+
   render() {
     return (
       <Flex>
@@ -77,7 +82,7 @@ export default class Register extends React.Component {
               primary
               icon="subdirectory-arrow-right"
               text="Register"
-              onPress={() => this.props.navigation.navigate('Home')} />
+              onPress={this.handleLogin.bind(this)} />
           </TopMargin>
         </Container>
       </Flex>

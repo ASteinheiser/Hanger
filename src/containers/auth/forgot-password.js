@@ -21,6 +21,11 @@ export default class ForgotPassword extends React.Component {
     this.setState({ email: e });
   }
 
+  handleLogin() {
+    console.log(this.state);
+    this.props.navigation.navigate('Login');
+  }
+
   render() {
     return (
       <Flex>
@@ -46,7 +51,7 @@ export default class ForgotPassword extends React.Component {
               primary
               icon="subdirectory-arrow-right"
               text="Reset Password"
-              onPress={() => this.props.navigation.replace('Login')} />
+              onPress={this.handleLogin.bind(this)} />
           </TopMargin>
         </Container>
       </Flex>
