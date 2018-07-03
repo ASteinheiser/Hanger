@@ -14,7 +14,7 @@ export default class Input extends React.Component {
         baseColor={ DISABLED_COLOR }
         tintColor={ MAIN_COLOR }
         textColor={ TEXT_COLOR }
-        onChangeText={this.props.onChange}
+        onChangeText={(event) => this.props.onChange(event)}
         {...this.props}
       />
     )

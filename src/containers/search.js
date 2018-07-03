@@ -17,7 +17,7 @@ export default class Search extends React.Component {
   }
 
   onChange(e) {
-    console.log('Changing!!!!');
+    this.setState({ searchValue: e });
   }
 
   render() {

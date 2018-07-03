@@ -23,18 +23,6 @@ if (Platform.OS === 'ios') { // iOS needs extra padding to look good
 }
 
 export default class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      editable: false
-    };
-  }
-
-  handleSearchOpen() {
-    this.setState({ editable: true });
-  }
-
   render() {
     return (
       <Toolbar style={ toolbarStyle }
@@ -46,9 +34,8 @@ export default class SearchBar extends Component {
             accent={true}
             placeholder={'Search Events, Gigs, etc.'}
             label={''}
-            onChange={this.props.onChange}
-            value={this.props.value}
             containerStyle={{ paddingRight: 35, paddingBottom: 25 }}
+            {...this.props}
             />
         } />
     );
