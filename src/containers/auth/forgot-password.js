@@ -9,6 +9,18 @@ import TopNavigationBasic from '../../components/top-navigation-basic.js';
 import theme              from '../../theme.js';
 
 export default class ForgotPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: ''
+    };
+  }
+
+  onChange(e) {
+    this.setState({ email: e });
+  }
+
   render() {
     return (
       <Flex>
@@ -23,10 +35,10 @@ export default class ForgotPassword extends React.Component {
 
           <Input
             keyboardType={'email-address'}
-            // onChange
+            onChange={this.onChange.bind(this)}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Email Address'}
-            // value
+            value={this.state.email}
             />
 
           <TopMargin>

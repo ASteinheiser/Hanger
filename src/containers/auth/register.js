@@ -9,6 +9,22 @@ import TopNavigationBasic from '../../components/top-navigation-basic.js';
 import theme              from '../../theme.js';
 
 export default class Register extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userName: '',
+      fullName: '',
+      emailAddress: '',
+      password: '',
+      confirmPassword: ''
+    };
+  }
+
+  onChange(field, e) {
+    this.setState({ [`${field}`]: e });
+  }
+
   render() {
     return (
       <Flex>
@@ -22,38 +38,38 @@ export default class Register extends React.Component {
           <HeaderText text='Register' />
 
           <Input
-            // onChange
+            onChange={this.onChange.bind(this, 'userName')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Username'}
-            // value
+            value={this.state.userName}
             />
           <Input
             secureTextEntry={true}
-            // onChange
+            onChange={this.onChange.bind(this, 'fullName')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Full Name'}
-            // value
+            value={this.state.fullName}
             />
           <Input
             keyboardType={'email-address'}
-            // onChange
+            onChange={this.onChange.bind(this, 'emailAddress')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Email Address'}
-            // value
+            value={this.state.emailAddress}
             />
           <Input
             secureTextEntry={true}
-            // onChange
+            onChange={this.onChange.bind(this, 'password')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Password'}
-            // value
+            value={this.state.password}
             />
           <Input
             secureTextEntry={true}
-            // onChange
+            onChange={this.onChange.bind(this, 'confirmPassword')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Confirm Password'}
-            // value
+            value={this.state.confirmPassword}
             />
 
           <TopMargin>

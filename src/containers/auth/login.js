@@ -11,6 +11,19 @@ import TopNavigationBasic from '../../components/top-navigation-basic.js';
 import theme              from '../../theme.js';
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
+  onChange(field, e) {
+    this.setState({ [`${field}`]: e });
+  }
+
   render() {
     return (
       <Flex>
@@ -23,16 +36,16 @@ export default class Login extends React.Component {
           <Input
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             keyboardType={'email-address'}
-            // onChange
+            onChange={this.onChange.bind(this, 'email')}
             label={'Email Address'}
-            // value
+            value={this.state.email}
             />
           <Input
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             secureTextEntry={true}
-            // onChange
+            onChange={this.onChange.bind(this, 'password')}
             label={'Password'}
-            // value
+            value={this.state.password}
             />
 
           <TopMargin>
