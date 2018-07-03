@@ -7,11 +7,25 @@ import SearchBar          from '../components/search-bar.js';
 import theme              from '../theme.js';
 
 export default class Search extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchValue: ''
+    };
+  }
+
+  onChange(e) {
+    console.log('Changing!!!!');
+  }
+
   render() {
     return (
       <Flex>
 
-        <SearchBar />
+        <SearchBar
+          onChange={this.onChange.bind(this)}
+          value={this.state.searchValue} />
 
         <Container color={theme.palette.canvasColor}>
 

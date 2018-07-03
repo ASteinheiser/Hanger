@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Platform, Text }   from 'react-native';
-import { Toolbar }          from 'react-native-material-ui';
+import { Platform }         from 'react-native';
+import { Toolbar, Icon }    from 'react-native-material-ui';
 import styled               from 'styled-components';
+
+import Input from './input.js';
 
 let toolbarStyle = {
   container: {},
@@ -21,23 +23,36 @@ if (Platform.OS === 'ios') { // iOS needs extra padding to look good
 }
 
 export default class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      editable: false
+    };
+  }
+
+  handleSearchOpen() {
+    this.setState({ editable: true });
+  }
+
   render() {
     return (
       <Toolbar style={ toolbarStyle }
         leftElement={
-          <StyledText>
-            {'Explore Events, Gigs and More!'}
-          </StyledText>
+          <Icon name='search' size={30} color={'white'} />
         }
-        searchable={{
-          autoFocus: true,
-          placeholder: 'Search...',
-        }} />
+        centerElement={
+          <Input
+            accent={true}
+            title={'search'}
+            placeholder={'Search Events, Gigs, etc.'}
+            label={''}
+            error={false}
+            onChange={this.props.onChange}
+            value={this.props.value}
+            containerStyle={{ paddingRight: 30 }}
+            />
+        } />
     );
   }
 }
-
-const StyledText = styled.Text`
-  font-size: 16px;
-  color: white;
-`
