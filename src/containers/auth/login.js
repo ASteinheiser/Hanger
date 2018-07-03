@@ -21,17 +21,17 @@ export default class Login extends React.Component {
           <HeaderText text='Sign in' />
 
           <Input
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             keyboardType={'email-address'}
             // onChange
-            // onSubmitEditing
-            placeholder={'Email Address'}
+            label={'Email Address'}
             // value
             />
           <Input
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             secureTextEntry={true}
             // onChange
-            // onSubmitEditing
-            placeholder={'Password'}
+            label={'Password'}
             // value
             />
 

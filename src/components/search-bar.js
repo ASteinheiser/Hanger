@@ -44,13 +44,11 @@ export default class SearchBar extends Component {
         centerElement={
           <Input
             accent={true}
-            title={'search'}
             placeholder={'Search Events, Gigs, etc.'}
             label={''}
-            error={false}
             onChange={this.props.onChange}
             value={this.props.value}
-            containerStyle={{ paddingRight: 30 }}
+            containerStyle={{ paddingRight: 35, paddingBottom: 25 }}
             />
         } />
     );

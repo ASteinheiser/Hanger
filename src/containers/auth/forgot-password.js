@@ -24,8 +24,8 @@ export default class ForgotPassword extends React.Component {
           <Input
             keyboardType={'email-address'}
             // onChange
-            // onSubmitEditing
-            placeholder={'Email Address'}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Email Address'}
             // value
             />
 

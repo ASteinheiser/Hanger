@@ -23,36 +23,36 @@ export default class Register extends React.Component {
 
           <Input
             // onChange
-            // onSubmitEditing
-            placeholder={'Username'}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Username'}
             // value
             />
           <Input
             secureTextEntry={true}
             // onChange
-            // onSubmitEditing
-            placeholder={'Full Name'}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Full Name'}
             // value
             />
           <Input
             keyboardType={'email-address'}
             // onChange
-            // onSubmitEditing
-            placeholder={'Email Address'}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Email Address'}
             // value
             />
           <Input
             secureTextEntry={true}
             // onChange
-            // onSubmitEditing
-            placeholder={'Password'}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Password'}
             // value
             />
           <Input
             secureTextEntry={true}
             // onChange
-            // onSubmitEditing
-            placeholder={'Confirm Password'}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Confirm Password'}
             // value
             />
 
