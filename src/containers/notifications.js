@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 import _map                 from 'lodash.map';
 
+import HeaderText         from '../components/header-text.js';
 import NotificationItem   from '../components/notification-item.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
@@ -24,6 +25,8 @@ export default class Notifications extends React.Component {
         <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
+
+          <HeaderText text='Notifications' />
 
           { Notifications }
 

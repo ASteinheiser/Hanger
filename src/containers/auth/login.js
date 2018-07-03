@@ -18,7 +18,7 @@ export default class Login extends React.Component {
 
         <Container color={theme.palette.canvasColor}>
 
-          <HeaderText text='Sign in' />
+          <HeaderText text='Login' />
 
           <Input
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}

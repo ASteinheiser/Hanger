@@ -2,6 +2,7 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 
+import HeaderText         from '../components/header-text.js';
 import FeedPost           from '../components/feed-post.js';
 import SearchBar          from '../components/search-bar.js';
 import theme              from '../theme.js';
@@ -28,6 +29,8 @@ export default class Search extends React.Component {
           value={this.state.searchValue} />
 
         <Container color={theme.palette.canvasColor}>
+
+          <HeaderText text='Explore Events, Gigs, etc!' small />
 
           <FeedPost
             title={'Phoenix Fashion Week 2018'}

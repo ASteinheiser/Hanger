@@ -4,6 +4,7 @@ import SplashScreen         from 'react-native-splash-screen';
 import styled               from 'styled-components';
 import _map                 from 'lodash.map';
 
+import HeaderText         from '../components/header-text.js';
 import FeedPost           from '../components/feed-post.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
@@ -29,6 +30,8 @@ export default class Home extends React.Component {
         <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
+
+          <HeaderText text='Hanger Feed' />
 
           { FeedPosts }
 

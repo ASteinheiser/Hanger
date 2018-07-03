@@ -2,6 +2,7 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 
+import HeaderText         from '../components/header-text.js';
 import IconWithText       from '../components/icon-with-text.js';
 import TopNavigationBasic from '../components/top-navigation-basic.js';
 import theme              from '../theme.js';
@@ -13,6 +14,7 @@ export default class Messages extends React.Component {
         <TopNavigationBasic navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
+          <HeaderText text='Messages' />
           <IconWithText
             icon='message'
             text='Read your messages here' />
