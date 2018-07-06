@@ -1,6 +1,6 @@
 import React                 from 'react';
 import { View, StyleSheet }  from 'react-native';
-// import Camera                from 'react-native-camera';
+import Camera                from 'react-native-camera';
 
 import TopNavigation from '../../components/top-navigation.js';
 
@@ -15,13 +15,13 @@ export default class StyledCamera extends React.Component {
           title='Camera'
           navigation={this.props.navigation} />
 
-        {/* <Camera
+        <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
           captureTarget={Camera.constants.CaptureTarget.temp}
           style={styles.preview}
-          aspect={Camera.constants.Aspect.fill} /> */}
+          aspect={Camera.constants.Aspect.fill} />
 
       </View>
     )
