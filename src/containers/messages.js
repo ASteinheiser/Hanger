@@ -3,7 +3,6 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 import _map                 from 'lodash.map';
 
-import HeaderText    from '../components/header-text.js';
 import MessageItem   from '../components/message-item.js';
 import TopNavigation from '../components/top-navigation.js';
 import theme         from '../theme.js';
@@ -22,10 +21,11 @@ export default class Messages extends React.Component {
 
     return (
       <Flex>
-        <TopNavigation navigation={this.props.navigation} />
+        <TopNavigation
+          title='Messages'
+          navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
-          <HeaderText text='Messages' />
 
           { Messages }
 

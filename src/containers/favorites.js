@@ -3,7 +3,6 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components';
 import _map                 from 'lodash.map';
 
-import HeaderText    from '../components/header-text.js';
 import FavoritesItem from '../components/favorites-item.js';
 import TopNavigation from '../components/top-navigation.js';
 import theme         from '../theme.js';
@@ -21,11 +20,11 @@ export default class Favorites extends React.Component {
 
     return (
       <Flex>
-        <TopNavigation navigation={this.props.navigation} />
+        <TopNavigation
+          title='Hanger Closet'
+          navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
-
-          <HeaderText text='Favorites' />
 
           { FavoritesItems }
 

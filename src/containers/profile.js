@@ -21,7 +21,9 @@ export default class Profile extends React.Component {
 
     return (
       <Flex>
-        <TopNavigation navigation={this.props.navigation} />
+        <TopNavigation
+          title='Profile'
+          navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
 

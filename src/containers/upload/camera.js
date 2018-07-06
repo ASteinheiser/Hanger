@@ -12,6 +12,7 @@ export default class StyledCamera extends React.Component {
         <TopNavigation
           back-button
           route='back'
+          title='Camera'
           navigation={this.props.navigation} />
 
         {/* <Camera

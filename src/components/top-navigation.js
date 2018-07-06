@@ -5,7 +5,8 @@ import { Avatar, Toolbar, Icon }      from 'react-native-material-ui';
 import Image                          from 'react-native-scalable-image';
 import styled                         from 'styled-components';
 
-import logo from '../../assets/hanger-text-logo-white.png';
+import logo  from '../../assets/hanger-text-logo-white.png';
+import theme from '../theme.js';
 
 let toolbarStyle = { container: {} };
 if (Platform.OS === 'ios') {
@@ -20,9 +21,16 @@ export default class TopNavigation extends Component {
     return (
       <Toolbar style={ toolbarStyle }
         centerElement={
-          <Centered>
-            <Image source={logo} height={40} />
-          </Centered>
+          this.props.title ?
+            <Centered>
+              <StyledText color={theme.palette.accentColor}>
+                { this.props.title }
+              </StyledText>
+            </Centered>
+            :
+            <Centered>
+              <Image source={logo} height={40} />
+            </Centered>
         }
         leftElement={
           this.props['no-buttons'] || this.props['back-button'] ?
@@ -83,4 +91,10 @@ const Touchable = styled.TouchableOpacity`
 
 const EmptyWidth = styled.View`
   width: 44px;
+`
+
+const StyledText = styled.Text`
+  color: ${props => props.color};
+  font-size: 20px;
+  padding-right: 15px;
 `
