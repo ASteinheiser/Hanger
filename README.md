@@ -17,8 +17,7 @@ react-native run-android
 
 ## Install To Android Device
 ```
-cd android/ && ./gradlew assembleRelease
-react-native run-android --variant=release
+./android-release
 ```
 
 ## Install To iOS Device

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+echo
+echo -e "${CYAN}BUILDING RELEASE!${NC}"
+echo
+cd android && ./gradlew assembleRelease
+
+echo
+echo -e "${CYAN}DEPLOYING TO DEVICE!${NC}"
+echo
+react-native run-android --variant=release
+
+echo
+echo -e "${GREEN}SUCCESS!${NC}"
+echo
+echo -e "${CYAN}New Version running on Device...${NC}"
+echo
