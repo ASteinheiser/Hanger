@@ -1,0 +1,32 @@
+{
+  "1": {
+    "id": 1,
+    "user": "PHX_FashionWeek",
+    "text": "Liked your message",
+    "timestamp": "8s"
+  },
+  "2": {
+    "id": 2,
+    "user": "JennaModel",
+    "text": "Thank you for hosting an amazing photosh...",
+    "timestamp": "4m"
+  },
+  "3": {
+    "id": 3,
+    "user": "Johnny_Suave",
+    "text": "Shared a picture",
+    "timestamp": "12m"
+  },
+  "4": {
+    "id": 4,
+    "user": "CoolBoutique",
+    "text": "Hey, I would like to invite you to my new...",
+    "timestamp": "3h"
+  },
+  "5": {
+    "id": 5,
+    "user": "InfluencerJoe",
+    "text": "Nice meeting you at the last Fashion event...",
+    "timestamp": "1d"
+  }
+}
