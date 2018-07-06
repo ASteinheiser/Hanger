@@ -12,7 +12,7 @@ cd android && ./gradlew assembleRelease
 echo
 echo -e "${CYAN}DEPLOYING TO DEVICE!${NC}"
 echo
-react-native run-android --variant=release
+cd ../ && react-native run-android --variant=release
 
 echo
 echo -e "${GREEN}SUCCESS!${NC}"
