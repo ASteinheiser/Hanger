@@ -2,14 +2,17 @@ import React                 from 'react';
 import { View, StyleSheet }  from 'react-native';
 // import Camera                from 'react-native-camera';
 
-import TopNavigationBasic from '../components/top-navigation-basic.js';
+import TopNavigation from '../components/top-navigation.js';
 
 export default class StyledCamera extends React.Component {
   render() {
     return (
       <View style={styles.container}>
 
-        <TopNavigationBasic navigation={this.props.navigation} />
+        <TopNavigation
+          back-button
+          route='back'
+          navigation={this.props.navigation} />
 
         {/* <Camera
           ref={(cam) => {

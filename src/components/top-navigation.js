@@ -14,7 +14,7 @@ if (Platform.OS === 'ios') {
   };
 }
 
-export default class TopNavigationBasic extends Component {
+export default class TopNavigation extends Component {
   render() {
     return (
       <Toolbar style={ toolbarStyle }

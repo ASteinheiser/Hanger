@@ -5,7 +5,7 @@ import _map                 from 'lodash.map';
 
 import ProfileHeader           from '../components/profile-header.js';
 import ProfileContentThumbnail from '../components/profile-content-thumbnail.js';
-import TopNavigationBasic      from '../components/top-navigation-basic.js';
+import TopNavigation           from '../components/top-navigation.js';
 
 import SAMPLE_CONTENT from '../../assets/user-content.json';
 import SAMPLE_USER    from '../../assets/user.json';
@@ -21,7 +21,7 @@ export default class Profile extends React.Component {
 
     return (
       <Flex>
-        <TopNavigationBasic navigation={this.props.navigation} />
+        <TopNavigation navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
 
