@@ -9,8 +9,10 @@ export default class BottomNav extends Component {
 
     this.state = {
       active: currentRoute,
-      shouldHideNav: (currentRoute === 'Login' || currentRoute === 'Register' || currentRoute === 'ForgotPassword')
+      shouldHideNav: (currentRoute === 'Login' || currentRoute === 'Register' || currentRoute === 'ForgotPassword' || currentRoute === 'Upload')
     };
+
+    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -19,11 +21,20 @@ export default class BottomNav extends Component {
     if (currentRoute !== this.state.active) {
       this.setState({
         active: currentRoute,
-        shouldHideNav: (currentRoute === 'Login' || currentRoute === 'Register' || currentRoute === 'ForgotPassword')
+        shouldHideNav: (currentRoute === 'Login' || currentRoute === 'Register' || currentRoute === 'ForgotPassword' || currentRoute === 'Upload')
       });
       return true;
     } else {
       return false;
+    }
+  }
+
+  handleNavigation(route) {
+    this.setState({ active: route });
+    this.props.navigation.navigate(route);
+
+    if(route === 'Upload') {
+      this.setState({ shouldHideNav: true });
     }
   }
 
@@ -36,38 +47,23 @@ export default class BottomNav extends Component {
           <BottomNavigation.Action
             key='Home'
             icon={ <Icon name='home' size={25} /> }
-            onPress={() => {
-              this.setState({ active: 'Home' })
-              this.props.navigation.navigate('Home')
-            } } />
+            onPress={ () => this.handleNavigation('Home') } />
           <BottomNavigation.Action
             key='Search'
             icon={ <Icon name='search' size={25} /> }
-            onPress={() => {
-              this.setState({ active: 'Search' })
-              this.props.navigation.navigate('Search')
-            } } />
+            onPress={ () => this.handleNavigation('Search') } />
           <BottomNavigation.Action
-            key='Camera'
+            key='Upload'
             icon={ <Icon name='add-a-photo' size={25} /> }
-            onPress={() => {
-              this.setState({ active: 'Camera' })
-              this.props.navigation.navigate('Camera')
-            } } />
+            onPress={ () => this.handleNavigation('Upload') } />
           <BottomNavigation.Action
             key='Favorites'
             icon={ <Icon name='star' size={25} /> }
-            onPress={() => {
-              this.setState({ active: 'Favorites' })
-              this.props.navigation.navigate('Favorites')
-            } } />
+            onPress={ () => this.handleNavigation('Favorites') } />
           <BottomNavigation.Action
             key='Messages'
             icon={ <Icon name='message' size={25} /> }
-            onPress={() => {
-              this.setState({ active: 'Messages' })
-              this.props.navigation.navigate('Messages')
-            } } />
+            onPress={ () => this.handleNavigation('Messages') } />
         </BottomNavigation>
       );
     }

@@ -1,5 +1,6 @@
 import React, { Component }           from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
+import { NavigationActions }          from 'react-navigation';
 import { Avatar, Toolbar, Icon }      from 'react-native-material-ui';
 import Image                          from 'react-native-scalable-image';
 import styled                         from 'styled-components';
@@ -27,7 +28,13 @@ export default class TopNavigation extends Component {
           this.props['no-buttons'] || this.props['back-button'] ?
             this.props['back-button'] ?
               <MarginLeft>
-                <Touchable onPress={() => this.props.navigation.replace(this.props.route)}>
+                <Touchable onPress={() => {
+                    if(this.props.route !== 'back') {
+                      this.props.navigation.replace(this.props.route);
+                    } else {
+                      this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'Home' }));
+                    }
+                  } }>
                   <Icon name='arrow-back' color='white' size={30} />
                 </Touchable>
               </MarginLeft>

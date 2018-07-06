@@ -2,7 +2,7 @@ import React                        from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 
 import Login            from './login.js';
-import Camera           from './camera.js';
+import Upload           from './upload.js';
 import Home             from '../containers/home.js';
 import Messages         from '../containers/messages.js';
 import Favorites        from '../containers/favorites.js';
@@ -13,8 +13,8 @@ import BottomNavigation from '../components/bottom-navigation.js';
 
 const Router = createBottomTabNavigator(
   {
-    'Camera': {
-      screen: Camera
+    'Upload': {
+      screen: Upload
     },
     'Home': {
       screen: Home

@@ -2,7 +2,7 @@ import React                 from 'react';
 import { View, StyleSheet }  from 'react-native';
 // import Camera                from 'react-native-camera';
 
-import TopNavigation from '../components/top-navigation.js';
+import TopNavigation from '../../components/top-navigation.js';
 
 export default class StyledCamera extends React.Component {
   render() {

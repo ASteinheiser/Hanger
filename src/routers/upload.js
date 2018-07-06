@@ -2,7 +2,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import Camera from '../containers/upload/camera.js';
 
-const CameraRoute = createStackNavigator(
+const UploadRoute = createStackNavigator(
   {
     Camera: {
       screen: Camera,
@@ -16,4 +16,4 @@ const CameraRoute = createStackNavigator(
   }
 );
 
-export default CameraRoute;
+export default UploadRoute;
