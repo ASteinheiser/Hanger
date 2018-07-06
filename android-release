@@ -5,9 +5,14 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 echo
+echo -e "${CYAN}CLEANING OLD BUILDS!${NC}"
+echo
+cd android && ./gradlew clean
+
+echo
 echo -e "${CYAN}BUILDING RELEASE!${NC}"
 echo
-cd android && ./gradlew assembleRelease
+./gradlew assembleRelease
 
 echo
 echo -e "${CYAN}DEPLOYING TO DEVICE!${NC}"
