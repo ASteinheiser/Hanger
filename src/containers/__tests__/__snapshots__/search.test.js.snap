@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search tests -> Basic tests -> renders a search page 1`] = `
+<Styled(Component)>
+  <SearchBar
+    onChange={[Function]}
+    value=""
+  />
+  <Styled(ScrollView)
+    color="#ffffff"
+  >
+    <HeaderText
+      small={true}
+      text="Explore Events, Gigs, etc!"
+    />
+    <FeedPost
+      image="https://www.zonamedspa.com/wp-content/uploads/PHXFW.16-Silver-Flyer.jpg"
+      title="Phoenix Fashion Week 2018"
+    />
+    <FeedPost
+      image="https://i.pinimg.com/736x/d6/7a/3b/d67a3bac1c2deb60e02dd8373db472a0--behind-the-scenes-shooting.jpg"
+      title="Photographer and 2 Models needed for Paid Photoshoot"
+    />
+  </Styled(ScrollView)>
+</Styled(Component)>
+`;

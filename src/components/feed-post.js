@@ -1,7 +1,7 @@
 import React                 from 'react';
 import { View, Text, Image } from 'react-native';
 import { Card }              from 'react-native-material-ui';
-import styled                from 'styled-components';
+import styled                from 'styled-components/native';
 
 import theme from '../theme.js';
 

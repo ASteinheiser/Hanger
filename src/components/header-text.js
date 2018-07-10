@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text }             from 'react-native';
-import styled               from 'styled-components';
+import styled               from 'styled-components/native';
 
 import theme from '../theme.js';
 

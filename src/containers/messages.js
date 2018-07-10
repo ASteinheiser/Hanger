@@ -1,6 +1,6 @@
 import React                from 'react';
 import { View, ScrollView } from 'react-native';
-import styled               from 'styled-components';
+import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
 import MessageItem   from '../components/message-item.js';

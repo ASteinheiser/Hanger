@@ -1,7 +1,7 @@
 import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import SplashScreen         from 'react-native-splash-screen';
-import styled               from 'styled-components';
+import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
 import FeedPost      from '../components/feed-post.js';

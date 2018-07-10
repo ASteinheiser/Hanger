@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform }         from 'react-native';
 import { Toolbar, Icon }    from 'react-native-material-ui';
-import styled               from 'styled-components';
+import styled               from 'styled-components/native';
 
 import Input from './input.js';
 

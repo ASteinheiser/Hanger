@@ -1,6 +1,6 @@
 import React                from 'react';
 import { View, ScrollView } from 'react-native';
-import styled               from 'styled-components';
+import styled               from 'styled-components/native';
 
 import HeaderText    from '../../components/header-text.js';
 import Button        from '../../components/button.js';

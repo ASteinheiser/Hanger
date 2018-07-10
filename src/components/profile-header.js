@@ -1,7 +1,7 @@
 import React          from 'react';
 import { Text, View } from 'react-native';
 import { Avatar }     from 'react-native-material-ui';
-import styled         from 'styled-components';
+import styled         from 'styled-components/native';
 
 import Button from './button.js';
 

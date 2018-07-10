@@ -1,7 +1,7 @@
 import React          from 'react';
 import { View, Text } from 'react-native';
 import { Icon }       from 'react-native-material-ui';
-import styled         from 'styled-components';
+import styled         from 'styled-components/native';
 
 export default class IconWithText extends React.Component {
   render() {

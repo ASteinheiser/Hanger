@@ -3,7 +3,7 @@ import { Platform, TouchableOpacity } from 'react-native';
 import { NavigationActions }          from 'react-navigation';
 import { Avatar, Toolbar, Icon }      from 'react-native-material-ui';
 import Image                          from 'react-native-scalable-image';
-import styled                         from 'styled-components';
+import styled                         from 'styled-components/native';
 
 import logo  from '../../assets/hanger-text-logo-white.png';
 import theme from '../theme.js';
