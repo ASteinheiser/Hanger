@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderText tests -> Advanced tests -> and the 'text' prop 1`] = `
+<Styled(Text)
+  color="#4976f9"
+  size="36px"
+>
+  hello world!
+</Styled(Text)>
+`;
+
+exports[`HeaderText tests -> Advanced tests -> does not pass props... 1`] = `
+<Styled(Text)
+  color="#4976f9"
+  size="36px"
+/>
+`;
+
+exports[`HeaderText tests -> Advanced tests -> except for the 'small' prop 1`] = `
+<Styled(Text)
+  color="#4976f9"
+  size="28px"
+/>
+`;
+
+exports[`HeaderText tests -> Basic tests -> renders a header text component 1`] = `
+<Styled(Text)
+  color="#4976f9"
+  size="36px"
+/>
+`;
