@@ -1,6 +1,5 @@
 import React                from 'react';
 import { View, ScrollView } from 'react-native';
-import SplashScreen         from 'react-native-splash-screen';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
@@ -11,11 +10,6 @@ import theme         from '../theme.js';
 import SAMPLE_POSTS from '../../assets/data/posts.json';
 
 export default class Home extends React.Component {
-
-  componentWillMount() {
-    setTimeout(() => { SplashScreen.hide(); }, 1000);
-  }
-
   render() {
     const FeedPosts = _map(SAMPLE_POSTS, post =>
       <FeedPost
