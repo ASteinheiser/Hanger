@@ -7,7 +7,7 @@ import NotificationItem from '../components/notification-item.js';
 import TopNavigation    from '../components/top-navigation.js';
 import theme            from '../theme.js';
 
-import SAMPLE_NOTIFICATIONS from '../../assets/notifications.json';
+import SAMPLE_NOTIFICATIONS from '../../assets/data/notifications.json';
 
 export default class Notifications extends React.Component {
   render() {

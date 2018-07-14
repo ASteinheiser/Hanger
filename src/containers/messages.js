@@ -7,7 +7,7 @@ import MessageItem   from '../components/message-item.js';
 import TopNavigation from '../components/top-navigation.js';
 import theme         from '../theme.js';
 
-import SAMPLE_MESSAGES from '../../assets/messages.json';
+import SAMPLE_MESSAGES from '../../assets/data/messages.json';
 
 export default class Messages extends React.Component {
   render() {

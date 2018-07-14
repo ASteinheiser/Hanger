@@ -7,8 +7,8 @@ import ProfileHeader           from '../components/profile-header.js';
 import ProfileContentThumbnail from '../components/profile-content-thumbnail.js';
 import TopNavigation           from '../components/top-navigation.js';
 
-import SAMPLE_CONTENT from '../../assets/user-content.json';
-import SAMPLE_USER    from '../../assets/user.json';
+import SAMPLE_CONTENT from '../../assets/data/user-content.json';
+import SAMPLE_USER    from '../../assets/data/user.json';
 import theme          from '../theme.js';
 
 export default class Profile extends React.Component {

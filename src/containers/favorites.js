@@ -7,7 +7,7 @@ import FavoritesItem from '../components/favorites-item.js';
 import TopNavigation from '../components/top-navigation.js';
 import theme         from '../theme.js';
 
-import SAMPLE_FAVORITES from '../../assets/favorites.json';
+import SAMPLE_FAVORITES from '../../assets/data/favorites.json';
 
 export default class Favorites extends React.Component {
   render() {
