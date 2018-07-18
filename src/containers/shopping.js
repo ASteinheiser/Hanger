@@ -9,7 +9,7 @@ import theme         from '../theme.js';
 
 import SAMPLE_FAVORITES from '../../assets/data/favorites.json';
 
-export default class Favorites extends React.Component {
+export default class Shopping extends React.Component {
   render() {
     const FavoritesItems = _map(SAMPLE_FAVORITES, item =>
       <FavoritesItem

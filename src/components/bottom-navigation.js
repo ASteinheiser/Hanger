@@ -1,5 +1,11 @@
-import React, { Component }       from 'react';
-import { BottomNavigation, Icon } from 'react-native-material-ui';
+import React, { Component } from 'react';
+import { BottomNavigation } from 'react-native-material-ui';
+
+import HomeLogo     from '../../assets/icons/home.png';
+import SearchLogo   from '../../assets/icons/search.png';
+import PlusLogo     from '../../assets/icons/plus.png';
+import ChatLogo     from '../../assets/icons/chat.png';
+import ShoppingLogo from '../../assets/icons/shopping-cart.png';
 
 export default class BottomNav extends Component {
   constructor(props) {
@@ -46,24 +52,24 @@ export default class BottomNav extends Component {
         <BottomNavigation active={this.state.active}>
           <BottomNavigation.Action
             key='Home'
-            icon={ <Icon name='home' size={25} /> }
+            icon={ <Image source={HomeLogo} /> }
             onPress={ () => this.handleNavigation('Home') } />
           <BottomNavigation.Action
             key='Search'
-            icon={ <Icon name='search' size={25} /> }
+            icon={ <Image source={SearchLogo} /> }
             onPress={ () => this.handleNavigation('Search') } />
           <BottomNavigation.Action
             key='Upload'
-            icon={ <Icon name='add-a-photo' size={25} /> }
+            icon={ <Image source={PlusLogo} /> }
             onPress={ () => this.handleNavigation('Upload') } />
           <BottomNavigation.Action
-            key='Favorites'
-            icon={ <Icon name='star' size={25} /> }
-            onPress={ () => this.handleNavigation('Favorites') } />
-          <BottomNavigation.Action
             key='Messages'
-            icon={ <Icon name='message' size={25} /> }
+            icon={ <Image source={ChatLogo} /> }
             onPress={ () => this.handleNavigation('Messages') } />
+          <BottomNavigation.Action
+            key='Shopping'
+            icon={ <Image source={ShoppingLogo} /> }
+            onPress={ () => this.handleNavigation('Shopping') } />
         </BottomNavigation>
       );
     }
