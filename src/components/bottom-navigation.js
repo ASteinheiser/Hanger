@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Image, View }      from 'react-native';
-import styled               from 'styled-components/native';
+import React, { Component }              from 'react';
+import { Image, View, TouchableOpacity } from 'react-native';
+import styled                            from 'styled-components/native';
 
-import HomeLogo     from '../../assets/icons/home.png';
-import SearchLogo   from '../../assets/icons/search.png';
-import PlusLogo     from '../../assets/icons/plus.png';
-import MessageLogo  from '../../assets/icons/messages.png';
-import ShoppingLogo from '../../assets/icons/shopping-cart.png';
+import HomeLogo     from '../../assets/icons/home-white.png';
+import SearchLogo   from '../../assets/icons/search-white.png';
+import PlusLogo     from '../../assets/icons/plus-white.png';
+import MessageLogo  from '../../assets/icons/messages-white.png';
+import ShoppingLogo from '../../assets/icons/shopping-cart-white.png';
 
 import theme from '../theme.js';
 
@@ -53,21 +53,21 @@ export default class BottomNav extends Component {
     } else {
       return (
         <BottomNavContainer color={theme.palette.primaryColor}>
-          <ImageContainer onPress={ () => this.handleNavigation('Home') }>
+          <Touchable onPress={ () => this.handleNavigation('Home') }>
             <StyledImage source={HomeLogo} wide={true} />
-          </ImageContainer>
-          <ImageContainer onPress={ () => this.handleNavigation('Search') }>
+          </Touchable>
+          <Touchable onPress={ () => this.handleNavigation('Search') }>
             <StyledImage source={SearchLogo} />
-          </ImageContainer>
-          <ImageContainer onPress={ () => this.handleNavigation('Upload') }>
+          </Touchable>
+          <Touchable onPress={ () => this.handleNavigation('Upload') }>
             <StyledImage source={PlusLogo} />
-          </ImageContainer>
-          <ImageContainer onPress={ () => this.handleNavigation('Messages') }>
+          </Touchable>
+          <Touchable onPress={ () => this.handleNavigation('Messages') }>
             <StyledImage source={MessageLogo} wide={true} />
-          </ImageContainer>
-          <ImageContainer onPress={ () => this.handleNavigation('Shopping') }>
+          </Touchable>
+          <Touchable onPress={ () => this.handleNavigation('Shopping') }>
             <StyledImage source={ShoppingLogo} />
-          </ImageContainer>
+          </Touchable>
         </BottomNavContainer>
       );
     }
@@ -82,11 +82,12 @@ const BottomNavContainer = styled.View`
   justify-content: space-between;
 `
 
-const ImageContainer = styled.View`
-  padding: 15px;
+const StyledImage = styled.Image`
+  width: ${props => props.wide ? '35px' : '30px'};
+  height: 30px;
 `
 
-const StyledImage = styled.Image`
-  width: ${props => props.wide ? '45px' : '40px'};
-  height: 40px;
+const Touchable = styled.TouchableOpacity`
+  z-index: 101;
+  padding: 15px 20px;
 `
