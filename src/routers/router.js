@@ -39,7 +39,7 @@ const Router = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
     tabBarComponent: props => <BottomNavigation {...props} />
   }
 );

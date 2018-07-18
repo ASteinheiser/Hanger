@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { BottomNavigation } from 'react-native-material-ui';
+import { Image, View }      from 'react-native';
+import styled               from 'styled-components/native';
 
 import HomeLogo     from '../../assets/icons/home.png';
 import SearchLogo   from '../../assets/icons/search.png';
 import PlusLogo     from '../../assets/icons/plus.png';
-import ChatLogo     from '../../assets/icons/chat.png';
+import MessageLogo  from '../../assets/icons/messages.png';
 import ShoppingLogo from '../../assets/icons/shopping-cart.png';
+
+import theme from '../theme.js';
 
 export default class BottomNav extends Component {
   constructor(props) {
@@ -49,29 +52,41 @@ export default class BottomNav extends Component {
       return null;
     } else {
       return (
-        <BottomNavigation active={this.state.active}>
-          <BottomNavigation.Action
-            key='Home'
-            icon={ <Image source={HomeLogo} /> }
-            onPress={ () => this.handleNavigation('Home') } />
-          <BottomNavigation.Action
-            key='Search'
-            icon={ <Image source={SearchLogo} /> }
-            onPress={ () => this.handleNavigation('Search') } />
-          <BottomNavigation.Action
-            key='Upload'
-            icon={ <Image source={PlusLogo} /> }
-            onPress={ () => this.handleNavigation('Upload') } />
-          <BottomNavigation.Action
-            key='Messages'
-            icon={ <Image source={ChatLogo} /> }
-            onPress={ () => this.handleNavigation('Messages') } />
-          <BottomNavigation.Action
-            key='Shopping'
-            icon={ <Image source={ShoppingLogo} /> }
-            onPress={ () => this.handleNavigation('Shopping') } />
-        </BottomNavigation>
+        <BottomNavContainer color={theme.palette.primaryColor}>
+          <ImageContainer onPress={ () => this.handleNavigation('Home') }>
+            <StyledImage source={HomeLogo} wide={true} />
+          </ImageContainer>
+          <ImageContainer onPress={ () => this.handleNavigation('Search') }>
+            <StyledImage source={SearchLogo} />
+          </ImageContainer>
+          <ImageContainer onPress={ () => this.handleNavigation('Upload') }>
+            <StyledImage source={PlusLogo} />
+          </ImageContainer>
+          <ImageContainer onPress={ () => this.handleNavigation('Messages') }>
+            <StyledImage source={MessageLogo} wide={true} />
+          </ImageContainer>
+          <ImageContainer onPress={ () => this.handleNavigation('Shopping') }>
+            <StyledImage source={ShoppingLogo} />
+          </ImageContainer>
+        </BottomNavContainer>
       );
     }
   }
 }
+
+const BottomNavContainer = styled.View`
+  background: ${props => props.color};
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const ImageContainer = styled.View`
+  padding: 15px;
+`
+
+const StyledImage = styled.Image`
+  width: ${props => props.wide ? '45px' : '40px'};
+  height: 40px;
+`
