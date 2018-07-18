@@ -1,12 +1,14 @@
-import React, { Component }           from 'react';
-import { Platform, TouchableOpacity } from 'react-native';
-import { NavigationActions }          from 'react-navigation';
-import { Avatar, Toolbar, Icon }      from 'react-native-material-ui';
-import Image                          from 'react-native-scalable-image';
-import styled                         from 'styled-components/native';
+import React, { Component }                  from 'react';
+import { Platform, TouchableOpacity, Image } from 'react-native';
+import { NavigationActions }                 from 'react-navigation';
+import { Avatar, Toolbar }                   from 'react-native-material-ui';
+import ScaledImage                           from 'react-native-scalable-image';
+import styled                                from 'styled-components/native';
 
-import logo  from '../../assets/logos/hanger-text-logo-white.png';
-import theme from '../theme.js';
+import NotificationLogo from '../../assets/icons/hanger-white.png';
+import BackLogo         from '../../assets/icons/back-white.png';
+import HangerLogo       from '../../assets/logos/hanger-text-only-white.png';
+import theme            from '../theme.js';
 
 let toolbarStyle = { container: {} };
 if (Platform.OS === 'ios') {
@@ -29,8 +31,23 @@ export default class TopNavigation extends Component {
             </Centered>
             :
             <Centered>
-              <Image source={logo} height={40} />
+              <MarginLeft>
+                <ScaledImage source={HangerLogo} height={40} />
+              </MarginLeft>
             </Centered>
+        }
+        rightElement={
+          this.props['no-buttons'] || this.props['back-button'] ?
+            this.props['back-button'] ?
+              <EmptyWidth />
+              :
+              null
+            :
+            <MarginRight>
+              <Touchable onPress={() => this.props.navigation.navigate('Profile')}>
+                <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+              </Touchable>
+            </MarginRight>
         }
         leftElement={
           this.props['no-buttons'] || this.props['back-button'] ?
@@ -43,30 +60,17 @@ export default class TopNavigation extends Component {
                       this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'Home' }));
                     }
                   } }>
-                  <Icon name='arrow-back' color='white' size={30} />
+                  <StyledBackImage source={BackLogo} />
                 </Touchable>
               </MarginLeft>
               :
               null
             :
             <MarginLeft>
-              <Touchable onPress={() => this.props.navigation.navigate('Profile')}>
-                <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+              <Touchable onPress={() => this.props.navigation.navigate('Notifications')}>
+                <StyledNotifImage source={NotificationLogo} />
               </Touchable>
             </MarginLeft>
-        }
-        rightElement={
-          this.props['no-buttons'] || this.props['back-button'] ?
-            this.props['back-button'] ?
-              <EmptyWidth />
-              :
-              null
-            :
-            <MarginRight>
-              <Touchable onPress={() => this.props.navigation.navigate('Notifications')}>
-                <Icon name='notifications' color='white' size={30} />
-              </Touchable>
-            </MarginRight>
         } />
     );
   }
@@ -97,4 +101,14 @@ const StyledText = styled.Text`
   color: ${props => props.color};
   font-size: 20px;
   padding-right: 15px;
+`
+
+const StyledNotifImage = styled.Image`
+  width: 43px;
+  height: 35px;
+`
+
+const StyledBackImage = styled.Image`
+  width: 35px;
+  height: 30px;
 `
