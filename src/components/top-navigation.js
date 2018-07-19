@@ -1,6 +1,5 @@
 import React, { Component }                  from 'react';
 import { Platform, TouchableOpacity, Image } from 'react-native';
-// import { NavigationActions }                 from 'react-navigation';
 import { Avatar, Toolbar }                   from 'react-native-material-ui';
 import ScaledImage                           from 'react-native-scalable-image';
 import styled                                from 'styled-components/native';
@@ -44,7 +43,7 @@ export default class TopNavigation extends Component {
               null
             :
             <MarginRight>
-              <Touchable onPress={() => this.props.history.push('Profile')}>
+              <Touchable onPress={() => this.props.history.push('/profile')}>
                 <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
               </Touchable>
             </MarginRight>
@@ -67,7 +66,7 @@ export default class TopNavigation extends Component {
               null
             :
             <MarginLeft>
-              <Touchable onPress={() => this.props.history.push('Notifications')}>
+              <Touchable onPress={() => this.props.history.push('/notifications')}>
                 <StyledNotifImage source={NotificationLogo} />
               </Touchable>
             </MarginLeft>

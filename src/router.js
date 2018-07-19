@@ -17,7 +17,7 @@ export default class Router extends React.Component {
   render() {
     return(
       <NativeRouter>
-        <BottomNavigation active={this.props}>
+        <BottomNavigation>
           <Switch>
             <Route path="/" component={Login}/>
             <Route path="/camera" component={Camera}/>

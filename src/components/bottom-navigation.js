@@ -13,23 +13,21 @@ import theme from '../theme.js';
 export default class BottomNav extends Component {
   constructor(props) {
     super(props);
-    currentRoute = 'Home';
+    currentRoute = '/home';
 
     this.state = {
       active: currentRoute,
-      shouldHideNav: (currentRoute === 'Login' || currentRoute === 'Register' || currentRoute === 'ForgotPassword' || currentRoute === 'Upload')
+      shouldHideNav: (currentRoute === '/' || currentRoute === '/register' || currentRoute === '/forgot-password' || currentRoute === '/camera')
     };
-
-    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let currentRoute = nextProps.navigation.state.routes[nextProps.navigation.state.index].key;
+    let currentRoute = '/home';
 
     if (currentRoute !== this.state.active) {
       this.setState({
         active: currentRoute,
-        shouldHideNav: (currentRoute === 'Login' || currentRoute === 'Register' || currentRoute === 'ForgotPassword' || currentRoute === 'Upload')
+        shouldHideNav: (currentRoute === '/' || currentRoute === '/register' || currentRoute === '/forgot-password' || currentRoute === '/camera')
       });
       return true;
     } else {
@@ -41,7 +39,7 @@ export default class BottomNav extends Component {
     this.setState({ active: route });
     this.props.history.push(route);
 
-    if(route === 'Upload') {
+    if(route === '/camera') {
       this.setState({ shouldHideNav: true });
     }
   }
@@ -56,19 +54,19 @@ export default class BottomNav extends Component {
           { this.props.children }
 
           <BottomNavContainer color={theme.palette.primaryColor}>
-            <Touchable onPress={ () => this.handleNavigation('Home') }>
+            <Touchable onPress={this.handleNavigation.bind(this, '/home')}>
               <StyledImage source={HomeLogo} wide={true} />
             </Touchable>
-            <Touchable onPress={ () => this.handleNavigation('Search') }>
+            <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
               <StyledImage source={SearchLogo} />
             </Touchable>
-            <Touchable onPress={ () => this.handleNavigation('Upload') }>
+            <Touchable onPress={this.handleNavigation.bind(this, '/upload')}>
               <StyledImage source={PlusLogo} />
             </Touchable>
-            <Touchable onPress={ () => this.handleNavigation('Messages') }>
+            <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
               <StyledImage source={MessageLogo} wide={true} />
             </Touchable>
-            <Touchable onPress={ () => this.handleNavigation('Shopping') }>
+            <Touchable onPress={this.handleNavigation.bind(this, '/shopping')}>
               <StyledImage source={ShoppingLogo} />
             </Touchable>
           </BottomNavContainer>

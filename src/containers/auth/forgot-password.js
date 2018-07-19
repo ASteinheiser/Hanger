@@ -21,9 +21,9 @@ export default class ForgotPassword extends React.Component {
     this.setState({ email: e });
   }
 
-  handleLogin() {
+  handleSubmit() {
     console.log(this.state);
-    this.props.history.push('Login');
+    this.props.history.push('/');
   }
 
   render() {
@@ -31,8 +31,8 @@ export default class ForgotPassword extends React.Component {
       <Flex>
         <TopNavigation
           back-button
-          route='Login'
-          navigation={this.props.navigation} />
+          route='/'
+          history={this.props.history} />
 
         <Container color={theme.palette.canvasColor}>
 
@@ -51,7 +51,7 @@ export default class ForgotPassword extends React.Component {
               primary
               icon="subdirectory-arrow-right"
               text="Reset Password"
-              onPress={this.handleLogin.bind(this)} />
+              onPress={this.handleSubmit.bind(this)} />
           </TopMargin>
         </Container>
       </Flex>

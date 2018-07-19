@@ -25,9 +25,9 @@ export default class Register extends React.Component {
     this.setState({ [`${field}`]: e });
   }
 
-  handleLogin() {
+  handleSubmit() {
     console.log(this.state);
-    this.props.history.push('Home');
+    this.props.history.push('/home');
   }
 
   render() {
@@ -35,8 +35,8 @@ export default class Register extends React.Component {
       <Flex>
         <TopNavigation
           back-button
-          route='Login'
-          navigation={this.props.navigation} />
+          route='/'
+          history={this.props.history} />
 
         <Container color={theme.palette.canvasColor}>
 
@@ -82,7 +82,7 @@ export default class Register extends React.Component {
               primary
               icon="subdirectory-arrow-right"
               text="Register"
-              onPress={this.handleLogin.bind(this)} />
+              onPress={this.handleSubmit.bind(this)} />
           </TopMargin>
         </Container>
       </Flex>
