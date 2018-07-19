@@ -4,7 +4,7 @@ import { ThemeProvider } from 'react-native-material-ui';
 import SplashScreen      from 'react-native-splash-screen';
 
 import theme  from './src/theme.js';
-import Router from './src/routers/router.js';
+import Router from './src/router.js';
 
 class App extends React.Component {
   componentWillMount() {
