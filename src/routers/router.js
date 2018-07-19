@@ -1,5 +1,5 @@
-import React                        from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import React, { Component }    from 'react';
+import { NativeRouter, Route } from 'react-router-native';
 
 import Login            from './login.js';
 import Upload           from './upload.js';
@@ -11,37 +11,21 @@ import Notifications    from '../containers/notifications';
 import Profile          from '../containers/profile';
 import BottomNavigation from '../components/bottom-navigation.js';
 
-const Router = createBottomTabNavigator(
-  {
-    'Upload': {
-      screen: Upload
-    },
-    'Home': {
-      screen: Home
-    },
-    'Login': {
-      screen: Login
-    },
-    'Messages': {
-      screen: Messages
-    },
-    'Shopping': {
-      screen: Shopping
-    },
-    'Search': {
-      screen: Search
-    },
-    'Notifications': {
-      screen: Notifications
-    },
-    'Profile': {
-      screen: Profile
-    }
-  },
-  {
-    initialRouteName: 'Home',
-    tabBarComponent: props => <BottomNavigation {...props} />
+export default class Router extends React.Component {
+  render() {
+    return(
+      <NativeRouter>
+        <BottomNavigation active={this.props}>
+          <Route path="/" component={Login}/>
+          <Route path="/upload" component={Upload}/>
+          <Route path="/home" component={Home}/>
+          <Route path="/messages" component={Messages}/>
+          <Route path="/shopping" component={Shopping}/>
+          <Route path="/search" component={Search}/>
+          <Route path="/notifications" component={Notifications}/>
+          <Route path="/profile" component={Profile}/>
+        </BottomNavigation>
+      </NativeRouter>
+    );
   }
-);
-
-export default Router;
+}

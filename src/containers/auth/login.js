@@ -1,7 +1,6 @@
-import React                 from 'react';
-import { View, ScrollView }  from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import styled                from 'styled-components/native';
+import React                from 'react';
+import { View, ScrollView } from 'react-native';
+import styled               from 'styled-components/native';
 
 import HeaderText    from '../../components/header-text.js';
 import Button        from '../../components/button.js';
@@ -26,7 +25,7 @@ export default class Login extends React.Component {
 
   handleLogin() {
     console.log(this.state);
-    this.props.navigation.navigate('Home');
+    this.props.history.push('/home');
   }
 
   render() {
@@ -68,14 +67,14 @@ export default class Login extends React.Component {
               accent
               icon="assignment"
               text="Register"
-              onPress={()=> { this.props.navigation.replace('Register') }} />
+              onPress={()=> { this.props.history.push('/register') }} />
           </Margin>
           <Margin>
             <Button
               accent
               icon="help-outline"
               text="Forgot Password"
-              onPress={()=> { this.props.navigation.replace('ForgotPassword') }} />
+              onPress={()=> { this.props.history.push('/forgot-password') }} />
           </Margin>
         </Container>
       </Flex>

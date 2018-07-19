@@ -27,7 +27,7 @@ export default class Register extends React.Component {
 
   handleLogin() {
     console.log(this.state);
-    this.props.navigation.navigate('Home');
+    this.props.history.push('Home');
   }
 
   render() {

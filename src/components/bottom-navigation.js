@@ -1,6 +1,6 @@
-import React, { Component }              from 'react';
+import React, { Component } from 'react';
+import styled               from 'styled-components/native';
 import { Image, View, TouchableOpacity } from 'react-native';
-import styled                            from 'styled-components/native';
 
 import HomeLogo     from '../../assets/icons/home-white.png';
 import SearchLogo   from '../../assets/icons/search-white.png';
@@ -13,8 +13,7 @@ import theme from '../theme.js';
 export default class BottomNav extends Component {
   constructor(props) {
     super(props);
-
-    let currentRoute = this.props.navigation.state.routes[this.props.navigation.state.index].key;
+    currentRoute = 'Home';
 
     this.state = {
       active: currentRoute,
@@ -40,7 +39,7 @@ export default class BottomNav extends Component {
 
   handleNavigation(route) {
     this.setState({ active: route });
-    this.props.navigation.navigate(route);
+    this.props.history.push(route);
 
     if(route === 'Upload') {
       this.setState({ shouldHideNav: true });
@@ -52,27 +51,37 @@ export default class BottomNav extends Component {
       return null;
     } else {
       return (
-        <BottomNavContainer color={theme.palette.primaryColor}>
-          <Touchable onPress={ () => this.handleNavigation('Home') }>
-            <StyledImage source={HomeLogo} wide={true} />
-          </Touchable>
-          <Touchable onPress={ () => this.handleNavigation('Search') }>
-            <StyledImage source={SearchLogo} />
-          </Touchable>
-          <Touchable onPress={ () => this.handleNavigation('Upload') }>
-            <StyledImage source={PlusLogo} />
-          </Touchable>
-          <Touchable onPress={ () => this.handleNavigation('Messages') }>
-            <StyledImage source={MessageLogo} wide={true} />
-          </Touchable>
-          <Touchable onPress={ () => this.handleNavigation('Shopping') }>
-            <StyledImage source={ShoppingLogo} />
-          </Touchable>
-        </BottomNavContainer>
+        <FullScreen>
+
+          { this.props.children }
+
+          <BottomNavContainer color={theme.palette.primaryColor}>
+            <Touchable onPress={ () => this.handleNavigation('Home') }>
+              <StyledImage source={HomeLogo} wide={true} />
+            </Touchable>
+            <Touchable onPress={ () => this.handleNavigation('Search') }>
+              <StyledImage source={SearchLogo} />
+            </Touchable>
+            <Touchable onPress={ () => this.handleNavigation('Upload') }>
+              <StyledImage source={PlusLogo} />
+            </Touchable>
+            <Touchable onPress={ () => this.handleNavigation('Messages') }>
+              <StyledImage source={MessageLogo} wide={true} />
+            </Touchable>
+            <Touchable onPress={ () => this.handleNavigation('Shopping') }>
+              <StyledImage source={ShoppingLogo} />
+            </Touchable>
+          </BottomNavContainer>
+        </FullScreen>
       );
     }
   }
 }
+
+const FullScreen = styled.View`
+  display: flex;
+  flex: 1;
+`
 
 const BottomNavContainer = styled.View`
   background: ${props => props.color};

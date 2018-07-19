@@ -23,7 +23,7 @@ export default class ForgotPassword extends React.Component {
 
   handleLogin() {
     console.log(this.state);
-    this.props.navigation.navigate('Login');
+    this.props.history.push('Login');
   }
 
   render() {

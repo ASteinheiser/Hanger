@@ -1,6 +1,6 @@
 import React, { Component }                  from 'react';
 import { Platform, TouchableOpacity, Image } from 'react-native';
-import { NavigationActions }                 from 'react-navigation';
+// import { NavigationActions }                 from 'react-navigation';
 import { Avatar, Toolbar }                   from 'react-native-material-ui';
 import ScaledImage                           from 'react-native-scalable-image';
 import styled                                from 'styled-components/native';
@@ -44,7 +44,7 @@ export default class TopNavigation extends Component {
               null
             :
             <MarginRight>
-              <Touchable onPress={() => this.props.navigation.navigate('Profile')}>
+              <Touchable onPress={() => this.props.history.push('Profile')}>
                 <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
               </Touchable>
             </MarginRight>
@@ -55,9 +55,9 @@ export default class TopNavigation extends Component {
               <MarginLeft>
                 <Touchable onPress={() => {
                     if(this.props.route !== 'back') {
-                      this.props.navigation.replace(this.props.route);
+                      this.props.history.push(this.props.route);
                     } else {
-                      this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'Home' }));
+                      // this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'Home' }));
                     }
                   } }>
                   <StyledBackImage source={BackLogo} />
@@ -67,7 +67,7 @@ export default class TopNavigation extends Component {
               null
             :
             <MarginLeft>
-              <Touchable onPress={() => this.props.navigation.navigate('Notifications')}>
+              <Touchable onPress={() => this.props.history.push('Notifications')}>
                 <StyledNotifImage source={NotificationLogo} />
               </Touchable>
             </MarginLeft>
