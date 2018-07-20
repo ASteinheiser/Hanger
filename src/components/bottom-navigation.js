@@ -51,34 +51,35 @@ class BottomNav extends Component {
   }
 
   render() {
-    if (this.state.shouldHideNav) {
-      return null;
-    } else {
-      return (
-        <FullScreen>
+    return (
+      <FullScreen>
 
-          { this.props.children }
+        { this.props.children }
 
-          <BottomNavContainer color={theme.palette.primaryColor}>
-            <Touchable onPress={this.handleNavigation.bind(this, '/home')}>
-              <StyledImage source={HomeLogo} wide={true} />
-            </Touchable>
-            <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
-              <StyledImage source={SearchLogo} />
-            </Touchable>
-            <Touchable onPress={this.handleNavigation.bind(this, '/camera')}>
-              <StyledImage source={PlusLogo} />
-            </Touchable>
-            <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
-              <StyledImage source={MessageLogo} wide={true} />
-            </Touchable>
-            <Touchable onPress={this.handleNavigation.bind(this, '/shopping')}>
-              <StyledImage source={ShoppingLogo} />
-            </Touchable>
-          </BottomNavContainer>
-        </FullScreen>
-      );
-    }
+        {
+          this.state.shouldHideNav ?
+            null
+            :
+            <BottomNavContainer color={theme.palette.primaryColor}>
+              <Touchable onPress={this.handleNavigation.bind(this, '/home')}>
+                <StyledImage source={HomeLogo} wide={true} />
+              </Touchable>
+              <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
+                <StyledImage source={SearchLogo} />
+              </Touchable>
+              <Touchable onPress={this.handleNavigation.bind(this, '/camera')}>
+                <StyledImage source={PlusLogo} />
+              </Touchable>
+              <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
+                <StyledImage source={MessageLogo} wide={true} />
+              </Touchable>
+              <Touchable onPress={this.handleNavigation.bind(this, '/shopping')}>
+                <StyledImage source={ShoppingLogo} />
+              </Touchable>
+            </BottomNavContainer>
+        }
+      </FullScreen>
+    );
   }
 }
 
