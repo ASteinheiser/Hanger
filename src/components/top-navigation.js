@@ -1,5 +1,6 @@
 import React, { Component }                  from 'react';
 import { Platform, TouchableOpacity, Image } from 'react-native';
+import { withRouter }                        from 'react-router-native';
 import { Avatar, Toolbar }                   from 'react-native-material-ui';
 import ScaledImage                           from 'react-native-scalable-image';
 import styled                                from 'styled-components/native';
@@ -17,7 +18,7 @@ if (Platform.OS === 'ios') {
   };
 }
 
-export default class TopNavigation extends Component {
+class TopNavigation extends Component {
   render() {
     return (
       <Toolbar style={ toolbarStyle }
@@ -56,7 +57,7 @@ export default class TopNavigation extends Component {
                     if(this.props.route !== 'back') {
                       this.props.history.push(this.props.route);
                     } else {
-                      // this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'Home' }));
+                      this.props.history.push('/home');
                     }
                   } }>
                   <StyledBackImage source={BackLogo} />
@@ -111,3 +112,5 @@ const StyledBackImage = styled.Image`
   width: 35px;
   height: 30px;
 `
+
+export default withRouter(TopNavigation);
