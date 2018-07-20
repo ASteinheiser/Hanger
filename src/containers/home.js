@@ -19,7 +19,7 @@ export default class Home extends React.Component {
     );
 
     return (
-      <Flex>
+      <Height>
         <TopNavigation navigation={this.props.navigation} />
 
         <Container color={theme.palette.canvasColor}>
@@ -27,13 +27,14 @@ export default class Home extends React.Component {
           { FeedPosts }
 
         </Container>
-      </Flex>
+      </Height>
     );
   }
 }
 
-const Flex = styled.View`
-  flex: 1;
+const Height = styled.View`
+  height: 100%;
+  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

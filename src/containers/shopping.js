@@ -19,7 +19,7 @@ export default class Shopping extends React.Component {
     );
 
     return (
-      <Flex>
+      <Height>
         <TopNavigation
           title='Hanger Closet'
           navigation={this.props.navigation} />
@@ -29,13 +29,14 @@ export default class Shopping extends React.Component {
           { FavoritesItems }
 
         </Container>
-      </Flex>
+      </Height>
     )
   }
 }
 
-const Flex = styled.View`
-  flex: 1;
+const Height = styled.View`
+  height: 100%;
+  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

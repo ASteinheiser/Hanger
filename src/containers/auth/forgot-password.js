@@ -28,7 +28,7 @@ export default class ForgotPassword extends React.Component {
 
   render() {
     return (
-      <Flex>
+      <Height>
         <TopNavigation
           back-button
           route='/'
@@ -54,13 +54,13 @@ export default class ForgotPassword extends React.Component {
               onPress={this.handleSubmit.bind(this)} />
           </TopMargin>
         </Container>
-      </Flex>
+      </Height>
     )
   }
 }
 
-const Flex = styled.View`
-  flex: 1;
+const Height = styled.View`
+  height: 100%;
 `
 
 const Container = styled.ScrollView`

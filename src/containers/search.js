@@ -33,7 +33,7 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <Flex>
+      <Height>
 
         <SearchBar
           onChange={this.onChange.bind(this)}
@@ -53,13 +53,14 @@ export default class Search extends React.Component {
 
         </Container>
 
-      </Flex>
+      </Height>
     )
   }
 }
 
-const Flex = styled.View`
-  flex: 1;
+const Height = styled.View`
+  height: 100%;
+  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

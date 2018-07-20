@@ -30,8 +30,7 @@ export default class StyledCamera extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column'
+    height: '100%'
   },
   preview: {
     flex: 1,

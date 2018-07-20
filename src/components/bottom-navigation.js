@@ -91,7 +91,13 @@ const FullScreen = styled.View`
 const BottomNavContainer = styled.View`
   background: ${props => props.color};
 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
   display: flex;
+  flex-basis: 60px;
   flex-direction: row;
   justify-content: space-between;
 `
