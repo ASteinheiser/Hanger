@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import styled               from 'styled-components/native';
+import React, { Component }              from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
+import { withRouter }                    from 'react-router-native';
+import styled                            from 'styled-components/native';
 
 import HomeLogo     from '../../assets/icons/home-white.png';
 import SearchLogo   from '../../assets/icons/search-white.png';
@@ -10,24 +11,25 @@ import ShoppingLogo from '../../assets/icons/shopping-cart-white.png';
 
 import theme from '../theme.js';
 
-export default class BottomNav extends Component {
+class BottomNav extends Component {
   constructor(props) {
     super(props);
-    currentRoute = '/home';
+
+    let currentRoute = props.location.pathname;
 
     this.state = {
       active: currentRoute,
-      shouldHideNav: (currentRoute === '/' || currentRoute === '/register' || currentRoute === '/forgot-password' || currentRoute === '/camera')
+      shouldHideNav: this.shouldHideNav(currentRoute)
     };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let currentRoute = '/home';
+    let currentRoute = this.props.location.pathname;
 
     if (currentRoute !== this.state.active) {
       this.setState({
         active: currentRoute,
-        shouldHideNav: (currentRoute === '/' || currentRoute === '/register' || currentRoute === '/forgot-password' || currentRoute === '/camera')
+        shouldHideNav: this.shouldHideNav(currentRoute)
       });
       return true;
     } else {
@@ -36,11 +38,15 @@ export default class BottomNav extends Component {
   }
 
   handleNavigation(route) {
-    this.setState({ active: route });
+    this.setState({ active: route, shouldHideNav: this.shouldHideNav(route) });
     this.props.history.push(route);
+  }
 
-    if(route === '/camera') {
-      this.setState({ shouldHideNav: true });
+  shouldHideNav(route) {
+    if(route === '/' || route === '/register' || route === '/forgot-password' || route === '/camera') {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -60,7 +66,7 @@ export default class BottomNav extends Component {
             <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
               <StyledImage source={SearchLogo} />
             </Touchable>
-            <Touchable onPress={this.handleNavigation.bind(this, '/upload')}>
+            <Touchable onPress={this.handleNavigation.bind(this, '/camera')}>
               <StyledImage source={PlusLogo} />
             </Touchable>
             <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
@@ -98,3 +104,5 @@ const Touchable = styled.TouchableOpacity`
   z-index: 101;
   padding: 15px 20px;
 `
+
+export default withRouter(BottomNav);
