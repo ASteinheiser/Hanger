@@ -14,7 +14,7 @@ export const validateField = function(field, value, state) {
       valid = (value === state.password.value)
       break;
     default:
-      valid = true;
+      valid = value.length > 1;
       break;
   }
 

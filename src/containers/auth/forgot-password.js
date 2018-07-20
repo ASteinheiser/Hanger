@@ -2,28 +2,44 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
-import HeaderText    from '../../components/header-text.js';
-import Button        from '../../components/button.js';
-import Input         from '../../components/input.js';
-import TopNavigation from '../../components/top-navigation.js';
-import theme         from '../../theme.js';
+import HeaderText        from '../../components/header-text.js';
+import Button            from '../../components/button.js';
+import Input             from '../../components/input.js';
+import TopNavigation     from '../../components/top-navigation.js';
+import theme             from '../../theme.js';
+import { validateField } from '../../functions/validate-field.js';
+import { validateForm }  from '../../functions/validate-form.js';
 
 export default class ForgotPassword extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: ''
+      email: { value: '', valid: true }
     };
   }
 
-  onChange(e) {
-    this.setState({ email: e });
+  onChange(field, e) {
+    if(e.nativeEvent) {
+      let { value, valid } = validateField(field, e.nativeEvent.text, this.state);
+
+      this.setState({
+        [field]: { value, valid }
+      });
+    }
   }
 
   handleSubmit() {
-    console.log(this.state);
-    this.props.history.push('/');
+    const formObject = { email: this.state.email };
+    const { formValid, emptyFields } = validateForm(formObject);
+
+    if (formValid) {
+      this.props.history.replace('/');
+    } else {
+      emptyFields.forEach(fieldName => {
+        this.setState({[fieldName]: {value: '', valid: false}});
+      });
+    }
   }
 
   render() {
@@ -40,10 +56,11 @@ export default class ForgotPassword extends React.Component {
 
           <Input
             keyboardType={'email-address'}
-            onChange={this.onChange.bind(this)}
+            onChange={this.onChange.bind(this, 'email')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Email Address'}
-            value={this.state.email}
+            value={this.state.email.value}
+            error={!this.state.email.valid ? 'Enter a valid email.' : ''}
             />
 
           <TopMargin>
