@@ -2,30 +2,46 @@ import React                from 'react';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
-import HeaderText    from '../../components/header-text.js';
-import Button        from '../../components/button.js';
-import Divider       from '../../components/divider.js';
-import Input         from '../../components/input.js';
-import TopNavigation from '../../components/top-navigation.js';
-import theme         from '../../theme.js';
+import HeaderText        from '../../components/header-text.js';
+import Button            from '../../components/button.js';
+import Divider           from '../../components/divider.js';
+import Input             from '../../components/input.js';
+import TopNavigation     from '../../components/top-navigation.js';
+import theme             from '../../theme.js';
+import { validateField } from '../../functions/validate-field.js';
+import { validateForm }  from '../../functions/validate-form.js';
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      password: ''
+      email:    { value: '', valid: true },
+      password: { value: '', valid: true }
     };
   }
 
   onChange(field, e) {
-    this.setState({ [`${field}`]: e });
+    if(e.nativeEvent) {
+      let { value, valid } = validateField(field, e.nativeEvent.text, this.state);
+
+      this.setState({
+        [field]: { value, valid }
+      });
+    }
   }
 
   handleLogin() {
-    console.log(this.state);
-    this.props.history.replace('/home');
+    const formObject = { email: this.state.email, password: this.state.password };
+    const { formValid, emptyFields } = validateForm(formObject);
+
+    if (formValid) {
+      this.props.history.replace('/home');
+    } else {
+      emptyFields.forEach(fieldName => {
+        this.setState({[fieldName]: {value: '', valid: false}});
+      });
+    }
   }
 
   render() {
@@ -42,14 +58,16 @@ export default class Login extends React.Component {
             keyboardType={'email-address'}
             onChange={this.onChange.bind(this, 'email')}
             label={'Email Address'}
-            value={this.state.email}
+            value={this.state.email.value}
+            error={!this.state.email.valid ? 'Enter a valid email.' : ''}
             />
           <Input
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             secureTextEntry={true}
             onChange={this.onChange.bind(this, 'password')}
             label={'Password'}
-            value={this.state.password}
+            value={this.state.password.value}
+            error={!this.state.password.valid ? 'Enter a valid password.' : ''}
             />
 
           <TopMargin>
