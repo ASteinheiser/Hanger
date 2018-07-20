@@ -1,5 +1,5 @@
-import React, { Component }            from 'react';
-import { NativeRouter, Route, Switch } from 'react-router-native';
+import React, { Component }    from 'react';
+import { NativeRouter, Route } from 'react-router-native';
 
 import BottomNavigation from './components/bottom-navigation.js';
 import Camera           from './containers/upload/camera.js';
@@ -18,18 +18,16 @@ export default class Router extends React.Component {
     return(
       <NativeRouter>
         <BottomNavigation>
-          <Switch>
-            <Route path="/" component={Login}/>
-            <Route path="/camera" component={Camera}/>
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <Route path="/home" component={Home}/>
-            <Route path="/messages" component={Messages}/>
-            <Route path="/notifications" component={Notifications}/>
-            <Route path="/profile" component={Profile}/>
-            <Route path="/register" component={Register} />
-            <Route path="/shopping" component={Shopping}/>
-            <Route path="/search" component={Search}/>
-          </Switch>
+          <Route path="/" component={Login}/>
+          <Route path="/camera" component={Camera}/>
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path="/home" component={Home}/>
+          <Route path="/messages" component={Messages}/>
+          <Route path="/notifications" component={Notifications}/>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/register" component={Register} />
+          <Route path="/shopping" component={Shopping}/>
+          <Route path="/search" component={Search}/>
         </BottomNavigation>
       </NativeRouter>
     );

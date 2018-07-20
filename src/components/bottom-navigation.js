@@ -24,7 +24,7 @@ class BottomNav extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let currentRoute = this.props.location.pathname;
+    let currentRoute = nextProps.location.pathname;
 
     if (currentRoute !== this.state.active) {
       this.setState({

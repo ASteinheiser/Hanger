@@ -25,7 +25,7 @@ export default class Login extends React.Component {
 
   handleLogin() {
     console.log(this.state);
-    this.props.history.push('/home');
+    this.props.history.replace('/home');
   }
 
   render() {
