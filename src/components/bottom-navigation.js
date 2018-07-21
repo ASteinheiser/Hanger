@@ -54,13 +54,8 @@ class BottomNav extends Component {
     }
   }
 
-  handleOpenUploadMenu() {
-    console.log('showing menu');
-    this.setState({ showUploadMenu: true });
-  }
-
-  handleCloseUploadMenu() {
-    this.setState({ showUploadMenu: false });
+  handleToggleUploadMenu() {
+    this.setState({ showUploadMenu: !this.state.showUploadMenu });
   }
 
   render() {
@@ -72,7 +67,7 @@ class BottomNav extends Component {
         <UploadMenu
           open={this.state.showUploadMenu}
           history={this.props.history}
-          close={this.handleCloseUploadMenu.bind(this)} />
+          close={this.handleToggleUploadMenu.bind(this)} />
 
         {
           this.state.shouldHideNav ?
@@ -85,7 +80,7 @@ class BottomNav extends Component {
               <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
                 <StyledImage source={SearchLogo} />
               </Touchable>
-              <Touchable onPress={this.handleOpenUploadMenu.bind(this)}>
+              <Touchable onPress={this.handleToggleUploadMenu.bind(this)}>
                 <StyledImage source={PlusLogo} />
               </Touchable>
               <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
