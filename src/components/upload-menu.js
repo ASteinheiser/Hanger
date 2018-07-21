@@ -21,21 +21,25 @@ export default class UploadMenu extends Component {
     }
 
     return(
-      <StyledView>
-        <CircleContainer color={theme.palette.primaryColor}>
-          <StyledImage source={VideoLogo} />
-        </CircleContainer>
+      <FullScreen>
+        <StyledView>
+          <CircleContainer color={theme.palette.primaryColor}>
+            <StyledImage source={VideoLogo} />
+          </CircleContainer>
 
-        <CircleContainer color={theme.palette.primaryColor}>
-          <Touchable onPress={this.handleCameraClick.bind(this)}>
-            <StyledImage source={CameraLogo} />
-          </Touchable>
-        </CircleContainer>
+          <CircleContainer color={theme.palette.primaryColor}>
+            <Touchable onPress={this.handleCameraClick.bind(this)}>
+              <StyledImage source={CameraLogo} />
+            </Touchable>
+          </CircleContainer>
 
-        <CircleContainer color={theme.palette.primaryColor}>
-          <StyledImage source={TextLogo} />
-        </CircleContainer>
-      </StyledView>
+          <CircleContainer color={theme.palette.primaryColor}>
+            <StyledImage source={TextLogo} />
+          </CircleContainer>
+        </StyledView>
+
+        <TouchableBackground onPress={() => this.props.close()}/>
+      </FullScreen>
     )
   }
 }
@@ -72,4 +76,18 @@ const StyledImage = styled.Image`
 
 const Touchable = styled.TouchableOpacity`
   z-index: 101;
+`
+
+const TouchableBackground = styled.TouchableOpacity`
+  z-index: 99;
+
+  flex: 1;
+`
+
+const FullScreen = styled.View`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `
