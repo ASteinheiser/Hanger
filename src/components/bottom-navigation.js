@@ -8,6 +8,7 @@ import SearchLogo   from '../../assets/icons/search-white.png';
 import PlusLogo     from '../../assets/icons/plus-white.png';
 import MessageLogo  from '../../assets/icons/messages-white.png';
 import ShoppingLogo from '../../assets/icons/shopping-cart-white.png';
+import UploadMenu   from './upload-menu.js';
 
 import theme from '../theme.js';
 
@@ -19,7 +20,8 @@ class BottomNav extends Component {
 
     this.state = {
       active: currentRoute,
-      shouldHideNav: this.shouldHideNav(currentRoute)
+      shouldHideNav: this.shouldHideNav(currentRoute),
+      showUploadMenu: false
     };
   }
 
@@ -31,6 +33,8 @@ class BottomNav extends Component {
         active: currentRoute,
         shouldHideNav: this.shouldHideNav(currentRoute)
       });
+      return true;
+    } else if (nextProps.showUploadMenu !== this.state.showUploadMenu) {
       return true;
     } else {
       return false;
@@ -50,11 +54,25 @@ class BottomNav extends Component {
     }
   }
 
+  handleOpenUploadMenu() {
+    console.log('showing menu');
+    this.setState({ showUploadMenu: true });
+  }
+
+  handleCloseUploadMenu() {
+    this.setState({ showUploadMenu: false });
+  }
+
   render() {
     return (
       <FullScreen>
 
         { this.props.children }
+
+        <UploadMenu
+          open={this.state.showUploadMenu}
+          history={this.props.history}
+          close={this.handleCloseUploadMenu.bind(this)} />
 
         {
           this.state.shouldHideNav ?
@@ -67,7 +85,7 @@ class BottomNav extends Component {
               <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
                 <StyledImage source={SearchLogo} />
               </Touchable>
-              <Touchable onPress={this.handleNavigation.bind(this, '/camera')}>
+              <Touchable onPress={this.handleOpenUploadMenu.bind(this)}>
                 <StyledImage source={PlusLogo} />
               </Touchable>
               <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
