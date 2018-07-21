@@ -62,7 +62,7 @@ class BottomNav extends Component {
             :
             <BottomNavContainer color={theme.palette.primaryColor}>
               <Touchable onPress={this.handleNavigation.bind(this, '/home')}>
-                <StyledImage source={HomeLogo} wide={true} />
+                <StyledImage source={HomeLogo} />
               </Touchable>
               <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
                 <StyledImage source={SearchLogo} />
@@ -71,7 +71,7 @@ class BottomNav extends Component {
                 <StyledImage source={PlusLogo} />
               </Touchable>
               <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
-                <StyledImage source={MessageLogo} wide={true} />
+                <StyledImage source={MessageLogo} />
               </Touchable>
               <Touchable onPress={this.handleNavigation.bind(this, '/shopping')}>
                 <StyledImage source={ShoppingLogo} />
@@ -103,7 +103,7 @@ const BottomNavContainer = styled.View`
 `
 
 const StyledImage = styled.Image`
-  width: ${props => props.wide ? '35px' : '30px'};
+  width: 30px;
   height: 30px;
 `
 

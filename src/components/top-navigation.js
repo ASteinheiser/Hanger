@@ -60,7 +60,7 @@ class TopNavigation extends Component {
                       this.props.history.push('/home');
                     }
                   } }>
-                  <StyledBackImage source={BackLogo} />
+                  <StyledIconImage source={BackLogo} />
                 </Touchable>
               </MarginLeft>
               :
@@ -68,7 +68,7 @@ class TopNavigation extends Component {
             :
             <MarginLeft>
               <Touchable onPress={() => this.props.history.push('/notifications')}>
-                <StyledNotifImage source={NotificationLogo} />
+                <StyledIconImage source={NotificationLogo} />
               </Touchable>
             </MarginLeft>
         } />
@@ -82,7 +82,7 @@ const Centered = styled.View`
 
 const MarginRight = styled.View`
   margin-right: 10px;
-  width: 44px;
+  width: 40px;
 `
 
 const MarginLeft = styled.View`
@@ -98,7 +98,7 @@ const Touchable = styled.TouchableOpacity`
 `
 
 const EmptyWidth = styled.View`
-  width: 44px;
+  width: 40px;
 `
 
 const StyledText = styled.Text`
@@ -107,14 +107,9 @@ const StyledText = styled.Text`
   padding-right: 15px;
 `
 
-const StyledNotifImage = styled.Image`
-  width: 43px;
-  height: 35px;
-`
-
-const StyledBackImage = styled.Image`
-  width: 35px;
-  height: 30px;
+const StyledIconImage = styled.Image`
+  width: 40px;
+  height: 40px;
 `
 
 export default withRouter(TopNavigation);
