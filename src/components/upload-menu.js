@@ -3,6 +3,8 @@ import { View, Image, TouchableOpacity } from 'react-native';
 import styled                            from 'styled-components/native';
 
 import CameraLogo from '../../assets/icons/camera-white.png';
+import TextLogo   from '../../assets/icons/text-white.png';
+import VideoLogo  from '../../assets/icons/video-white.png';
 
 import theme from '../theme.js';
 
@@ -21,9 +23,17 @@ export default class UploadMenu extends Component {
     return(
       <StyledView>
         <CircleContainer color={theme.palette.primaryColor}>
+          <StyledImage source={VideoLogo} />
+        </CircleContainer>
+
+        <CircleContainer color={theme.palette.primaryColor}>
           <Touchable onPress={this.handleCameraClick.bind(this)}>
             <StyledImage source={CameraLogo} />
           </Touchable>
+        </CircleContainer>
+
+        <CircleContainer color={theme.palette.primaryColor}>
+          <StyledImage source={TextLogo} />
         </CircleContainer>
       </StyledView>
     )
@@ -47,7 +57,7 @@ const CircleContainer = styled.View`
   height: 60px;
   border-radius: 30px;
 
-  margin-bottom: 15px;
+  margin: 0 10px 15px 10px;
   background: ${props => props.color};
 
   display: flex;
