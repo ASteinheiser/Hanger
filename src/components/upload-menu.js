@@ -81,7 +81,11 @@ const Touchable = styled.TouchableOpacity`
 const TouchableBackground = styled.TouchableOpacity`
   z-index: 99;
 
-  flex: 1;
+  position: absolute;
+  top: 0;
+  bottom: 140;
+  left: 0;
+  right: 0;
 `
 
 const FullScreen = styled.View`
