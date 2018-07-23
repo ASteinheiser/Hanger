@@ -11,12 +11,15 @@ import theme             from '../../theme.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 
-export default class ForgotPassword extends React.Component {
+export default class NewPassword extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: { value: '', valid: true },
+      email: '',
+      code:          { value: '', valid: true },
+      password:      { value: '', valid: true },
+      passwordMatch: { value: '', valid: true },
       snackbarMessage: ''
     };
   }
@@ -32,20 +35,23 @@ export default class ForgotPassword extends React.Component {
   }
 
   handleSubmit() {
-    const formObject = { email: this.state.email };
+    const formObject = {
+      code: this.state.code,
+      password: this.state.password,
+      passwordMatch: this.state.passwordMatch
+    };
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
       this.props.history.replace('/');
 
-      // Auth.forgotPassword(this.state.email.value)
-      //  .then(response => {
-      //    this.props.history.push(`/new-password?email=${this.state.email.value}`);
-      //  })
-      //  .catch(err => {
-      //    console.log(err);
-      //    this.setState({ snackbarMessage: err.message });
-      //  });
+    //   Auth.forgotPasswordSubmit(this.state.email, this.state.code.value, this.state.password.value)
+    //     .then(response => {
+    //       this.props.history.push('/');
+    //     })
+    //     .catch(err => {
+    //       this.setState({ snackbarMessage: err.message });
+    //     });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
@@ -63,22 +69,37 @@ export default class ForgotPassword extends React.Component {
 
         <Container color={theme.palette.canvasColor}>
 
-          <HeaderText text='Reset Password' />
+          <HeaderText text='New Password' />
 
           <Input
-            keyboardType={'email-address'}
-            onChange={this.onChange.bind(this, 'email')}
+            onChange={this.onChange.bind(this, 'code')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'Email Address'}
-            value={this.state.email.value}
-            error={!this.state.email.valid ? 'Enter a valid email.' : ''}
+            label={'Code'}
+            value={this.state.code.value}
+            error={!this.state.code.valid ? 'Enter a code.' : ''}
+            />
+          <Input
+            secureTextEntry={true}
+            onChange={this.onChange.bind(this, 'password')}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Password'}
+            value={this.state.password.value}
+            error={!this.state.password.valid ? 'Enter a valid password.' : ''}
+            />
+          <Input
+            secureTextEntry={true}
+            onChange={this.onChange.bind(this, 'passwordMatch')}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Confirm Password'}
+            value={this.state.passwordMatch.value}
+            error={!this.state.passwordMatch.valid ? 'Passwords do not match.' : ''}
             />
 
           <TopMargin>
             <Button
               primary
               icon="subdirectory-arrow-right"
-              text="Reset Password"
+              text="Set New Password"
               onPress={this.handleSubmit.bind(this)} />
           </TopMargin>
         </Container>

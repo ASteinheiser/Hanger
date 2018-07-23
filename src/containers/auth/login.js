@@ -1,4 +1,5 @@
 import React                from 'react';
+import { Auth }             from 'aws-amplify';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
@@ -17,7 +18,8 @@ export default class Login extends React.Component {
 
     this.state = {
       email:    { value: '', valid: true },
-      password: { value: '', valid: true }
+      password: { value: '', valid: true },
+      snackbarMessage: ''
     };
 
     this.props.history.push('/home');
@@ -39,6 +41,15 @@ export default class Login extends React.Component {
 
     if (formValid) {
       this.props.history.replace('/home');
+
+      // Auth.signIn(this.state.email.value, this.state.password.value)
+      //   .then(response => {
+      //     this.props.history.push('/auth-codes');
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //     this.setState({ snackbarMessage: err.message });
+      //   });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});

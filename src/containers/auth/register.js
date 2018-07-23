@@ -1,4 +1,5 @@
 import React                from 'react';
+import { Auth }             from 'aws-amplify';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
@@ -20,6 +21,7 @@ export default class Register extends React.Component {
       email:         { value: '', valid: true },
       password:      { value: '', valid: true },
       passwordMatch: { value: '', valid: true },
+      snackbarMessage: ''
     };
   }
 
@@ -45,6 +47,25 @@ export default class Register extends React.Component {
 
     if (formValid) {
       this.props.history.replace('/home');
+
+      // let params = {
+      //   username: username,
+      //   password: this.state.password.value,
+      //   attributes: {
+      //     given_name: this.state.firstName.value,
+      //     family_name: this.state.lastName.value,
+      //     email: this.state.email.value.toLowerCase()
+      //   }
+      // };
+      //
+      // Auth.signUp(params)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch(() => {
+      //     console.log(err);
+      //     this.setState({ snackbarMessage: err.message });
+      //   });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
