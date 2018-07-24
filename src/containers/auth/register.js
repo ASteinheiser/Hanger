@@ -65,7 +65,7 @@ export default class Register extends React.Component {
         .then((response) => {
           this.props.history.replace('/');
         })
-        .catch(() => {
+        .catch((err) => {
           console.log(err);
           this.setState({ alertMessage: err.message });
         });
