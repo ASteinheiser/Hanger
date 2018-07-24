@@ -3,9 +3,10 @@ import { Auth }             from 'aws-amplify';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
-import HeaderText        from '../../components/header-text.js';
+import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
 import Divider           from '../../components/divider.js';
+import HeaderText        from '../../components/header-text.js';
 import Input             from '../../components/input.js';
 import TopNavigation     from '../../components/top-navigation.js';
 import theme             from '../../theme.js';
@@ -19,10 +20,8 @@ export default class Login extends React.Component {
     this.state = {
       email:    { value: '', valid: true },
       password: { value: '', valid: true },
-      snackbarMessage: ''
+      alertMessage: ''
     };
-
-    this.props.history.push('/home');
   }
 
   onChange(field, e) {
@@ -40,21 +39,24 @@ export default class Login extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.props.history.replace('/home');
+      this.closeAlert();
 
-      // Auth.signIn(this.state.email.value, this.state.password.value)
-      //   .then(response => {
-      //     this.props.history.push('/auth-codes');
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     this.setState({ snackbarMessage: err.message });
-      //   });
+      Auth.signIn(this.state.email.value, this.state.password.value)
+        .then(response => {
+          this.props.history.replace('/home');
+        })
+        .catch(err => {
+          this.setState({ alertMessage: err.message });
+        });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
       });
     }
+  }
+
+  closeAlert() {
+    this.setState({ alertMessage: '' });
   }
 
   render() {
@@ -65,6 +67,8 @@ export default class Login extends React.Component {
         <Container color={theme.palette.canvasColor}>
 
           <HeaderText text='Login' />
+
+          <Alert message={this.state.alertMessage} />
 
           <Input
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
@@ -123,7 +127,7 @@ const Container = styled.ScrollView`
 `
 
 const Margin = styled.View`
-  margin: 20px 20px 0 20px;
+  margin: 20px 20px 20px 20px;
 `
 
 const TopMargin = styled.View`

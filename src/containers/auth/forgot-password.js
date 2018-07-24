@@ -3,8 +3,9 @@ import { Auth }             from 'aws-amplify';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
-import HeaderText        from '../../components/header-text.js';
+import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
+import HeaderText        from '../../components/header-text.js';
 import Input             from '../../components/input.js';
 import TopNavigation     from '../../components/top-navigation.js';
 import theme             from '../../theme.js';
@@ -17,7 +18,7 @@ export default class ForgotPassword extends React.Component {
 
     this.state = {
       email: { value: '', valid: true },
-      snackbarMessage: ''
+      alertMessage: ''
     };
   }
 
@@ -36,21 +37,26 @@ export default class ForgotPassword extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.props.history.replace('/');
+      this.clearAlert();
 
-      // Auth.forgotPassword(this.state.email.value)
-      //  .then(response => {
-      //    this.props.history.push(`/new-password?email=${this.state.email.value}`);
-      //  })
-      //  .catch(err => {
-      //    console.log(err);
-      //    this.setState({ snackbarMessage: err.message });
-      //  });
+      Auth.forgotPassword(this.state.email.value)
+       .then(response => {
+         console.log(response);
+         this.props.history.push(`/new-password?email=${this.state.email.value}`);
+       })
+       .catch(err => {
+         console.log(err);
+         this.setState({ alertMessage: err.message });
+       });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
       });
     }
+  }
+
+  clearAlert() {
+    this.setState({ alertMessage: '' });
   }
 
   render() {
@@ -65,6 +71,8 @@ export default class ForgotPassword extends React.Component {
 
           <HeaderText text='Reset Password' />
 
+          <Alert message={this.state.alertMessage} />
+
           <Input
             keyboardType={'email-address'}
             onChange={this.onChange.bind(this, 'email')}
@@ -74,13 +82,13 @@ export default class ForgotPassword extends React.Component {
             error={!this.state.email.valid ? 'Enter a valid email.' : ''}
             />
 
-          <TopMargin>
+          <Margin>
             <Button
               primary
               icon="subdirectory-arrow-right"
               text="Reset Password"
               onPress={this.handleSubmit.bind(this)} />
-          </TopMargin>
+          </Margin>
         </Container>
       </Height>
     )
@@ -96,6 +104,6 @@ const Container = styled.ScrollView`
   flex: 1;
 `
 
-const TopMargin = styled.View`
-  margin: 30px 20px 0 20px;
+const Margin = styled.View`
+  margin: 30px 20px 20px 20px;
 `

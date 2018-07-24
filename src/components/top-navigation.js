@@ -5,10 +5,10 @@ import { Avatar, Toolbar }                   from 'react-native-material-ui';
 import ScaledImage                           from 'react-native-scalable-image';
 import styled                                from 'styled-components/native';
 
-import NotificationLogo from '../../assets/icons/hanger-white.png';
-import BackLogo         from '../../assets/icons/back-white.png';
-import HangerLogo       from '../../assets/logos/hanger-text-only-white.png';
-import theme            from '../theme.js';
+import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
+import BackLogo        from '../../assets/icons/back-white.png';
+import HangerTextLogo  from '../../assets/logos/hanger-text-only-white.png';
+import theme           from '../theme.js';
 
 let toolbarStyle = { container: {} };
 if (Platform.OS === 'ios') {
@@ -19,6 +19,18 @@ if (Platform.OS === 'ios') {
 }
 
 class TopNavigation extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showDrawer: false
+    };
+  }
+
+  toggleDrawer() {
+    this.setState({ showDrawer: !this.state.showDrawer });
+  }
+
   render() {
     return (
       <Toolbar style={ toolbarStyle }
@@ -32,7 +44,7 @@ class TopNavigation extends Component {
             :
             <Centered>
               <PaddingLeft>
-                <ScaledImage source={HangerLogo} height={40} />
+                <ScaledImage source={HangerTextLogo} height={40} />
               </PaddingLeft>
             </Centered>
         }
@@ -67,8 +79,8 @@ class TopNavigation extends Component {
               null
             :
             <MarginLeft>
-              <Touchable onPress={() => this.props.history.push('/notifications')}>
-                <StyledIconImage source={NotificationLogo} />
+              <Touchable onPress={this.toggleDrawer.bind(this)}>
+                <StyledIconImage source={HangerWhiteLogo} />
               </Touchable>
             </MarginLeft>
         } />

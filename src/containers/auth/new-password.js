@@ -3,8 +3,9 @@ import { Auth }             from 'aws-amplify';
 import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
-import HeaderText        from '../../components/header-text.js';
+import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
+import HeaderText        from '../../components/header-text.js';
 import Input             from '../../components/input.js';
 import TopNavigation     from '../../components/top-navigation.js';
 import theme             from '../../theme.js';
@@ -20,7 +21,7 @@ export default class NewPassword extends React.Component {
       code:          { value: '', valid: true },
       password:      { value: '', valid: true },
       passwordMatch: { value: '', valid: true },
-      snackbarMessage: ''
+      alertMessage: ''
     };
   }
 
@@ -43,20 +44,25 @@ export default class NewPassword extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.props.history.replace('/');
+      this.clearAlert();
 
-    //   Auth.forgotPasswordSubmit(this.state.email, this.state.code.value, this.state.password.value)
-    //     .then(response => {
-    //       this.props.history.push('/');
-    //     })
-    //     .catch(err => {
-    //       this.setState({ snackbarMessage: err.message });
-    //     });
+      Auth.forgotPasswordSubmit(this.state.email, this.state.code.value, this.state.password.value)
+        .then(response => {
+          console.log(response);
+          this.props.history.push('/');
+        })
+        .catch(err => {
+          this.setState({ alertMessage: err.message });
+        });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
       });
     }
+  }
+
+  clearAlert() {
+    this.setState({ alertMessage: '' });
   }
 
   render() {
@@ -70,6 +76,8 @@ export default class NewPassword extends React.Component {
         <Container color={theme.palette.canvasColor}>
 
           <HeaderText text='New Password' />
+
+          <Alert message={this.state.alertMessage} />
 
           <Input
             onChange={this.onChange.bind(this, 'code')}
@@ -95,13 +103,13 @@ export default class NewPassword extends React.Component {
             error={!this.state.passwordMatch.valid ? 'Passwords do not match.' : ''}
             />
 
-          <TopMargin>
+          <Margin>
             <Button
               primary
               icon="subdirectory-arrow-right"
               text="Set New Password"
               onPress={this.handleSubmit.bind(this)} />
-          </TopMargin>
+          </Margin>
         </Container>
       </Height>
     )
@@ -117,6 +125,6 @@ const Container = styled.ScrollView`
   flex: 1;
 `
 
-const TopMargin = styled.View`
-  margin: 30px 20px 0 20px;
+const Margin = styled.View`
+  margin: 30px 20px 20px 20px;
 `
