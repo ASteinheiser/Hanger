@@ -19,4 +19,5 @@ const StyledText = styled.Text`
   color: red;
   font-size: 16px;
   text-align: center;
+  padding: 0 25px;
 `
