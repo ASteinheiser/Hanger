@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Platform, Image }  from 'react-native';
+import { Platform, View }   from 'react-native';
 import { withRouter }       from 'react-router-native';
 import { Avatar, Toolbar }  from 'react-native-material-ui';
 import ScaledImage          from 'react-native-scalable-image';
 import styled               from 'styled-components/native';
 
+import Drawer          from './drawer.js';
 import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
 import BackLogo        from '../../assets/icons/back-white.png';
 import HangerTextLogo  from '../../assets/logos/hanger-text-only-white.png';
@@ -33,57 +34,62 @@ class TopNavigation extends Component {
 
   render() {
     return (
-      <Toolbar style={ toolbarStyle }
-        centerElement={
-          this.props.title ?
-            <Centered>
-              <StyledText color={theme.palette.accentColor}>
-                { this.props.title }
-              </StyledText>
-            </Centered>
-            :
-            <Centered>
-              <PaddingLeft>
-                <ScaledImage source={HangerTextLogo} height={40} />
-              </PaddingLeft>
-            </Centered>
-        }
-        rightElement={
-          this.props['no-buttons'] || this.props['back-button'] ?
-            this.props['back-button'] ?
-              <EmptyWidth />
+      <View>
+        <Toolbar style={ toolbarStyle }
+          centerElement={
+            this.props.title ?
+              <Centered>
+                <StyledText color={theme.palette.accentColor}>
+                  { this.props.title }
+                </StyledText>
+              </Centered>
               :
-              null
-            :
-            <MarginRight>
-              <Touchable onPress={() => this.props.history.push('/profile')}>
-                <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
-              </Touchable>
-            </MarginRight>
-        }
-        leftElement={
-          this.props['no-buttons'] || this.props['back-button'] ?
-            this.props['back-button'] ?
+              <Centered>
+                <PaddingLeft>
+                  <ScaledImage source={HangerTextLogo} height={40} />
+                </PaddingLeft>
+              </Centered>
+          }
+          rightElement={
+            this.props['no-buttons'] || this.props['back-button'] ?
+              this.props['back-button'] ?
+                <EmptyWidth />
+                :
+                null
+              :
+              <MarginRight>
+                <Touchable onPress={() => this.props.history.push('/profile')}>
+                  <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+                </Touchable>
+              </MarginRight>
+          }
+          leftElement={
+            this.props['no-buttons'] || this.props['back-button'] ?
+              this.props['back-button'] ?
+                <MarginLeft>
+                  <Touchable onPress={() => {
+                      if(this.props.route !== 'back') {
+                        this.props.history.push(this.props.route);
+                      } else {
+                        this.props.history.push('/home');
+                      }
+                    } }>
+                    <StyledIconImage source={BackLogo} />
+                  </Touchable>
+                </MarginLeft>
+                :
+                null
+              :
               <MarginLeft>
-                <Touchable onPress={() => {
-                    if(this.props.route !== 'back') {
-                      this.props.history.push(this.props.route);
-                    } else {
-                      this.props.history.push('/home');
-                    }
-                  } }>
-                  <StyledIconImage source={BackLogo} />
+                <Touchable onPress={this.toggleDrawer.bind(this)}>
+                  <StyledIconImage source={HangerWhiteLogo} />
                 </Touchable>
               </MarginLeft>
-              :
-              null
-            :
-            <MarginLeft>
-              <Touchable onPress={this.toggleDrawer.bind(this)}>
-                <StyledIconImage source={HangerWhiteLogo} />
-              </Touchable>
-            </MarginLeft>
-        } />
+          } />
+
+        <Drawer open={this.state.showDrawer} />
+
+      </View>
     );
   }
 }
