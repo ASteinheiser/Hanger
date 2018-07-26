@@ -16,17 +16,17 @@ export default class Drawer extends Component {
     }
 
     return(
-      <StyledView>
-        <StyledText>
+      <StyledView color={theme.palette.primaryColor}>
+        <StyledText color={theme.palette.accentColor}>
           {'Notifications'}
         </StyledText>
-        <StyledText>
+        <StyledText color={theme.palette.accentColor}>
           {'Hive'}
         </StyledText>
-        <StyledText>
+        <StyledText color={theme.palette.accentColor}>
           {'Projects'}
         </StyledText>
-        <StyledText>
+        <StyledText color={theme.palette.accentColor}>
           {'Settings'}
         </StyledText>
       </StyledView>
@@ -35,9 +35,14 @@ export default class Drawer extends Component {
 }
 
 const StyledView = styled.View`
-  background: red;
+  background: ${props => props.color};
+
+  padding: 25px 0px;
 `
 
 const StyledText = styled.Text`
-  font-size: 18px;
+  font-size: 24px;
+  color: ${props => props.color};
+
+  padding: 15px 25px;
 `
