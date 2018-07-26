@@ -17,18 +17,26 @@ export default class Drawer extends Component {
 
     return(
       <StyledView color={theme.palette.primaryColor}>
-        <StyledText color={theme.palette.accentColor}>
-          {'Notifications'}
-        </StyledText>
-        <StyledText color={theme.palette.accentColor}>
-          {'Hive'}
-        </StyledText>
-        <StyledText color={theme.palette.accentColor}>
-          {'Projects'}
-        </StyledText>
-        <StyledText color={theme.palette.accentColor}>
-          {'Settings'}
-        </StyledText>
+        <Touchable onPress={this.handleNavigation.bind(this, '/notifications')}>
+          <StyledText color={theme.palette.accentColor}>
+            {'Notifications'}
+          </StyledText>
+        </Touchable>
+        <Touchable onPress={this.handleNavigation.bind(this, '/hive')}>
+          <StyledText color={theme.palette.accentColor}>
+            {'Hive'}
+          </StyledText>
+        </Touchable>
+        <Touchable onPress={this.handleNavigation.bind(this, '/projects')}>
+          <StyledText color={theme.palette.accentColor}>
+            {'Projects'}
+          </StyledText>
+        </Touchable>
+        <Touchable onPress={this.handleNavigation.bind(this, '/settings')}>
+          <StyledText color={theme.palette.accentColor}>
+            {'Settings'}
+          </StyledText>
+        </Touchable>
       </StyledView>
     )
   }
@@ -45,4 +53,8 @@ const StyledText = styled.Text`
   color: ${props => props.color};
 
   padding: 15px 25px;
+`
+
+const Touchable = styled.TouchableOpacity`
+  z-index: 1001;
 `

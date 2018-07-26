@@ -4,15 +4,18 @@ import { NativeRouter, Route } from 'react-router-native';
 import BottomNavigation from './components/bottom-navigation.js';
 import Camera           from './containers/upload/camera.js';
 import ForgotPassword   from './containers/auth/forgot-password.js';
+import Hive             from './containers/hive.js';
 import Home             from './containers/home.js';
 import Login            from './containers/auth/login.js';
 import Messages         from './containers/messages.js';
 import NewPassword      from './containers/auth/new-password.js';
 import Notifications    from './containers/notifications';
+import Projects         from './containers/projects.js';
 import Profile          from './containers/profile';
 import Register         from './containers/auth/register.js';
 import Shopping         from './containers/shopping.js';
 import Search           from './containers/search.js';
+import Settings         from './containers/settings.js';
 
 export default class Router extends React.Component {
   render() {
@@ -30,6 +33,9 @@ export default class Router extends React.Component {
           <Route path="/register" component={Register} />
           <Route path="/shopping" component={Shopping}/>
           <Route path="/search" component={Search}/>
+          <Route path="/hive" component={Hive}/>
+          <Route path="/projects" component={Projects}/>
+          <Route path="/settings" component={Settings}/>
         </BottomNavigation>
       </NativeRouter>
     );

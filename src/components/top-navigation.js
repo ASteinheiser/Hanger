@@ -87,7 +87,10 @@ class TopNavigation extends Component {
               </MarginLeft>
           } />
 
-        <Drawer open={this.state.showDrawer} />
+        <Drawer
+          history={this.props.history}
+          open={this.state.showDrawer}
+          close={this.toggleDrawer.bind(this)} />
 
       </View>
     );
