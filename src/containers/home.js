@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
+import Drawer        from '../components/drawer.js';
 import FeedPost      from '../components/feed-post.js';
 import TopNavigation from '../components/top-navigation.js';
 import theme         from '../theme.js';
@@ -21,6 +22,8 @@ export default class Home extends React.Component {
     return (
       <Height>
         <TopNavigation navigation={this.props.navigation} />
+
+        <Drawer open={true} />
 
         <Container color={theme.palette.canvasColor}>
 

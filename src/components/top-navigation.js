@@ -1,9 +1,9 @@
-import React, { Component }                  from 'react';
-import { Platform, TouchableOpacity, Image } from 'react-native';
-import { withRouter }                        from 'react-router-native';
-import { Avatar, Toolbar }                   from 'react-native-material-ui';
-import ScaledImage                           from 'react-native-scalable-image';
-import styled                                from 'styled-components/native';
+import React, { Component } from 'react';
+import { Platform, Image }  from 'react-native';
+import { withRouter }       from 'react-router-native';
+import { Avatar, Toolbar }  from 'react-native-material-ui';
+import ScaledImage          from 'react-native-scalable-image';
+import styled               from 'styled-components/native';
 
 import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
 import BackLogo        from '../../assets/icons/back-white.png';

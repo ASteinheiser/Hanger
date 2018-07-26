@@ -22,6 +22,8 @@ export default class Login extends React.Component {
       password: { value: '', valid: true },
       alertMessage: ''
     };
+
+    this.props.history.push('/home');
   }
 
   onChange(field, e) {
