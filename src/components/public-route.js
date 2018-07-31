@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter }       from 'react-router-native';
-// import { Auth }             from 'aws-amplify';
+import { Auth }             from 'aws-amplify';
 
 class PublicRoute extends Component {
   constructor(props) {
@@ -16,30 +16,31 @@ class PublicRoute extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log(prevState);
     if (prevState.authenticationComplete === false) {
       this.authenticate();
     }
   }
 
   authenticate() {
-    this.setState({ authenticationComplete: true });
-    // Auth.currentUserInfo()
-    //   .then(user => {
-    //     if (user) {
-    //       this.props.history.replace({
-    //         pathname: '/auth-codes',
-    //         search: '',
-    //         state: { user }
-    //       });
-    //     }
-    //     else {
-    //       this.setState({ authenticationComplete: true });
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //     Auth.signOut();
-    //   });
+    console.log('public route auth');
+    Auth.currentUserInfo()
+      .then(user => {
+        if (user) {
+          console.log('redirecting to home')
+          this.props.history.replace({
+            pathname: '/home',
+            state: { user }
+          });
+        }
+        else {
+          this.setState({ authenticationComplete: true });
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        Auth.signOut();
+      });
   }
 
   render() {

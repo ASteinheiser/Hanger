@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter }       from 'react-router-native';
-// import { Auth }             from 'aws-amplify';
+import { Auth }             from 'aws-amplify';
 
 class PrivateRoute extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class PrivateRoute extends Component {
     }
 
     this.state = {
-      authenticationComplete: false,
+      authenticationComplete: user ? true : false,
       user: user
     };
   }
@@ -28,25 +28,29 @@ class PrivateRoute extends Component {
   }
 
   authenticate() {
-    // if(!this.state.user) {
-    //   Auth.currentUserInfo()
-    //     .then(user => {
-    //       if (!user) {
-    //         this.props.history.replace('/');
-    //         this.setState({ user: null });
-    //       }
-    //       else {
-    //         this.setState({ authenticationComplete: true, user: user });
-    //       }
-    //     })
-    //     .catch(err => {
-    //       console.error(err);
-    //       Auth.signOut();
-    //       this.props.history.replace('/');
-    //     });
-    // } else {
-    this.setState({ authenticationComplete: true });
-    // }
+    console.log('private route auth');
+    console.log(this.state.user)
+    if(!this.state.user) {
+      Auth.currentUserInfo()
+        .then(user => {
+          console.log('got user:')
+          console.log(user)
+          if (!user) {
+            this.props.history.replace('/');
+          }
+          else {
+            this.setState({ authenticationComplete: true, user: user });
+          }
+        })
+        .catch(err => {
+          console.log('got an err: ', err);
+          console.error(err);
+          Auth.signOut();
+          this.props.history.replace('/');
+        });
+    } else {
+      this.setState({ authenticationComplete: true });
+    }
   }
 
   render() {
