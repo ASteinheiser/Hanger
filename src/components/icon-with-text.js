@@ -6,7 +6,7 @@ import styled         from 'styled-components/native';
 export default class IconWithText extends React.Component {
   render() {
     return (
-      <Margin>
+      <Centered>
         <FlexRow>
           <MarginRight>
             <Icon name={ this.props.icon } />
@@ -15,17 +15,17 @@ export default class IconWithText extends React.Component {
             { this.props.text }
           </StyledText>
         </FlexRow>
-      </Margin>
+      </Centered>
     )
   }
 }
 
-const Margin = styled.View`
-  margin: 25px 20px;
+const Centered = styled.View`
+  margin: 20px auto;
 `
 
 const StyledText = styled.Text`
-  font-size: 16px;
+  font-size: 20px;
 `
 
 const FlexRow = styled.View`

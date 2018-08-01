@@ -1,10 +1,19 @@
-import React  from 'react';
-import styled from 'styled-components/native';
+import React    from 'react';
+import { Auth } from 'aws-amplify';
+import styled   from 'styled-components/native';
 
+import Button        from '../components/button.js';
+import IconWithText  from '../components/icon-with-text.js';
 import TopNavigation from '../components/top-navigation.js';
 import theme         from '../theme.js';
 
 export default class Settings extends React.Component {
+
+  handleSignout() {
+    Auth.signOut();
+    this.props.history.replace('/');
+  }
+
   render() {
     return (
       <Height>
@@ -12,9 +21,18 @@ export default class Settings extends React.Component {
 
         <Container color={theme.palette.canvasColor}>
 
-          <StyledText color={theme.palette.primaryColor}>
-            { 'Settings Page' }
-          </StyledText>
+          <IconWithText
+            text='Account Settings'
+            icon='settings'
+            />
+
+          <Margin>
+            <Button
+              primary
+              icon="subdirectory-arrow-left"
+              text="Logout"
+              onPress={this.handleSignout.bind(this)} />
+          </Margin>
 
         </Container>
       </Height>
@@ -32,7 +50,6 @@ const Container = styled.ScrollView`
   flex: 1;
 `
 
-const StyledText = styled.Text`
-  color: ${props => props.color};
-  font-size: 24px;
+const Margin = styled.View`
+  margin: 20px 20px 20px 20px;
 `
