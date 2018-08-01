@@ -16,31 +16,33 @@ class PublicRoute extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState);
-    if (prevState.authenticationComplete === false) {
+    if (this.state.authenticationComplete === false) {
       this.authenticate();
     }
   }
 
   authenticate() {
-    console.log('public route auth');
-    Auth.currentUserInfo()
-      .then(user => {
-        if (user) {
-          console.log('redirecting to home')
-          this.props.history.replace({
-            pathname: '/home',
-            state: { user }
-          });
-        }
-        else {
-          this.setState({ authenticationComplete: true });
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        Auth.signOut();
-      });
+    if(!this.props.user) {
+      Auth.currentUserInfo()
+        .then(user => {
+          if (user) {
+            this.setState({ authenticationComplete: true });
+            this.props.setuser(user);
+            this.props.history.replace({
+              pathname: '/home',
+              state: { user }
+            });
+          }
+          else {
+            this.setState({ authenticationComplete: true });
+          }
+        })
+        .catch(err => {
+          Auth.signOut();
+        });
+    } else {
+      this.setState({ authenticationComplete: true });
+    }
   }
 
   render() {

@@ -20,24 +20,36 @@ import Search           from './containers/search.js';
 import Settings         from './containers/settings.js';
 
 export default class Router extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: null
+    };
+  }
+
+  updateUser(user) {
+    this.setState({ user });
+  }
+
   render() {
     return(
       <NativeRouter>
         <BottomNavigation>
-          <Route path="/" render={() => <Public component={Login} /> } />
-          <Route path="/new-password" render={() => <Public component={NewPassword} /> } />
-          <Route path="/forgot-password" render={() => <Public component={ForgotPassword} /> }  />
-          <Route path="/register" render={() => <Public component={Register} /> }  />
-          <Route path="/camera" render={() => <Private component={Camera} /> } />
-          <Route path="/home" render={() => <Private component={Home} /> } />
-          <Route path="/messages" render={() => <Private component={Messages} /> } />
-          <Route path="/notifications" render={() => <Private component={Notifications} /> } />
-          <Route path="/profile" render={() => <Private component={Profile} /> } />
-          <Route path="/shopping" render={() => <Private component={Shopping} /> } />
-          <Route path="/search" render={() => <Private component={Search} /> } />
-          <Route path="/hive" render={() => <Private component={Hive} /> } />
-          <Route path="/projects" render={() => <Private component={Projects} /> } />
-          <Route path="/settings" render={() => <Private component={Settings} /> } />
+          <Route path="/" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Login} /> } />
+          <Route path="/new-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={NewPassword} /> } />
+          <Route path="/forgot-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={ForgotPassword} /> }  />
+          <Route path="/register" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Register} /> }  />
+          <Route path="/camera" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Camera} /> } />
+          <Route path="/home" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Home} /> } />
+          <Route path="/messages" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Messages} /> } />
+          <Route path="/notifications" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Notifications} /> } />
+          <Route path="/profile" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Profile} /> } />
+          <Route path="/shopping" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Shopping} /> } />
+          <Route path="/search" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Search} /> } />
+          <Route path="/hive" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Hive} /> } />
+          <Route path="/projects" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Projects} /> } />
+          <Route path="/settings" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Settings} /> } />
         </BottomNavigation>
       </NativeRouter>
     );

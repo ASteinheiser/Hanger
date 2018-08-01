@@ -6,14 +6,8 @@ class PrivateRoute extends Component {
   constructor(props) {
     super(props);
 
-    let user = null;
-    if(props.history.location.state && props.history.location.state.user) {
-      user = props.history.location.state.user;
-    }
-
     this.state = {
-      authenticationComplete: user ? true : false,
-      user: user
+      authenticationComplete: false
     };
   }
 
@@ -22,29 +16,25 @@ class PrivateRoute extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.authenticationComplete === false) {
+    if (this.state.authenticationComplete === false) {
       this.authenticate();
     }
   }
 
   authenticate() {
-    console.log('private route auth');
-    console.log(this.state.user)
-    if(!this.state.user) {
+    if(!this.props.user) {
       Auth.currentUserInfo()
         .then(user => {
-          console.log('got user:')
-          console.log(user)
           if (!user) {
+            this.setState({ authenticationComplete: true });
             this.props.history.replace('/');
           }
           else {
-            this.setState({ authenticationComplete: true, user: user });
+            this.setState({ authenticationComplete: true });
+            this.props.setuser(user);
           }
         })
         .catch(err => {
-          console.log('got an err: ', err);
-          console.error(err);
           Auth.signOut();
           this.props.history.replace('/');
         });
