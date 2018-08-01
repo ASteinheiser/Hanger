@@ -48,7 +48,8 @@ class BottomNav extends Component {
 
   shouldHideNav(route) {
     if(route === '/' || route === '/register' || route === '/camera'
-      || route === '/forgot-password' || route === '/check-email') {
+      || route === '/forgot-password' || route === '/check-email'
+      || route === '/new-password') {
       return true;
     } else {
       return false;

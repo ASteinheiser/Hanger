@@ -13,6 +13,9 @@ export const validateField = function(field, value, state) {
     case 'passwordMatch':
       valid = (value === state.password.value)
       break;
+    case 'code':
+      valid = (value.length === 6)
+      break;
     default:
       valid = value.length > 1;
       break;

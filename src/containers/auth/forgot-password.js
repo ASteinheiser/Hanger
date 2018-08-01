@@ -18,7 +18,8 @@ export default class ForgotPassword extends React.Component {
 
     this.state = {
       email: { value: '', valid: true },
-      alertMessage: ''
+      alertMessage: '',
+      loading: false
     };
   }
 
@@ -37,17 +38,24 @@ export default class ForgotPassword extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.clearAlert();
+      this.setState({ loading: true }, () => {
+        this.clearAlert();
 
-      Auth.forgotPassword(this.state.email.value)
-       .then(response => {
-         console.log(response);
-         this.props.history.push(`/new-password?email=${this.state.email.value}`);
-       })
-       .catch(err => {
-         console.log(err);
-         this.setState({ alertMessage: err.message });
-       });
+        const email = this.state.email.value.toLowerCase();
+
+        Auth.forgotPassword(email)
+         .then(response => {
+           this.setState({ loading: false });
+           this.props.history.push({
+             pathname: '/new-password',
+             state: { email }
+           });
+         })
+         .catch(err => {
+           console.log(err);
+           this.setState({ alertMessage: err.message, loading: false });
+         });
+     });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
@@ -85,6 +93,7 @@ export default class ForgotPassword extends React.Component {
           <Margin>
             <Button
               primary
+              disabled={this.state.loading}
               icon="subdirectory-arrow-right"
               text="Reset Password"
               onPress={this.handleSubmit.bind(this)} />

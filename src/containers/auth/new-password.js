@@ -16,12 +16,18 @@ export default class NewPassword extends React.Component {
   constructor(props) {
     super(props);
 
+    let email = '';
+    if(props.location && props.location.state && props.location.state.email) {
+      email = props.location.state.email;
+    }
+
     this.state = {
-      email: '',
+      email: email,
       code:          { value: '', valid: true },
       password:      { value: '', valid: true },
       passwordMatch: { value: '', valid: true },
-      alertMessage: ''
+      alertMessage: '',
+      loading: false
     };
   }
 
@@ -44,16 +50,18 @@ export default class NewPassword extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.clearAlert();
+      this.setState({ loading: true }, () => {
+        this.clearAlert();
 
-      Auth.forgotPasswordSubmit(this.state.email, this.state.code.value, this.state.password.value)
-        .then(response => {
-          console.log(response);
-          this.props.history.push('/');
-        })
-        .catch(err => {
-          this.setState({ alertMessage: err.message });
-        });
+        Auth.forgotPasswordSubmit(this.state.email, this.state.code.value, this.state.password.value)
+          .then(response => {
+            this.setState({ loading: false });
+            this.props.history.push('/');
+          })
+          .catch(err => {
+            this.setState({ alertMessage: err.message, loading: false });
+          });
+      });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
@@ -77,14 +85,19 @@ export default class NewPassword extends React.Component {
 
           <HeaderText text='New Password' />
 
+          <Subheader color={theme.palette.primaryTextColor}>
+            {'Check your email for a reset code'}
+          </Subheader>
+
           <Alert message={this.state.alertMessage} />
 
           <Input
+            keyboardType={'numeric'}
             onChange={this.onChange.bind(this, 'code')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Code'}
             value={this.state.code.value}
-            error={!this.state.code.valid ? 'Enter a code.' : ''}
+            error={!this.state.code.valid ? 'Enter a valid code.' : ''}
             />
           <Input
             secureTextEntry={true}
@@ -106,6 +119,7 @@ export default class NewPassword extends React.Component {
           <Margin>
             <Button
               primary
+              disabled={this.state.loading}
               icon="subdirectory-arrow-right"
               text="Set New Password"
               onPress={this.handleSubmit.bind(this)} />
@@ -123,6 +137,14 @@ const Height = styled.View`
 const Container = styled.ScrollView`
   background-color: ${props => props.color};
   flex: 1;
+`
+
+const Subheader = styled.Text`
+  font-size: 20px;
+  color: ${props => props.color};
+
+  text-align: center;
+  padding-bottom: 10px;
 `
 
 const Margin = styled.View`

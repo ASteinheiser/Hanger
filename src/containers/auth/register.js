@@ -60,6 +60,7 @@ export default class Register extends React.Component {
 
         Auth.signUp(params)
           .then((response) => {
+            this.setState({ loading: false });
             this.props.history.replace('/check-email');
           })
           .catch((err) => {

@@ -45,7 +45,8 @@ export default class Login extends React.Component {
 
         Auth.signIn(this.state.email.value.toLowerCase(), this.state.password.value)
           .then(response => {
-            this.props.history.replace('/home');
+            this.setState({ loading: false });
+            this.handleNavigation('/home');
           })
           .catch(err => {
             this.setState({ alertMessage: err.message, loading: false });
@@ -60,6 +61,16 @@ export default class Login extends React.Component {
 
   closeAlert() {
     this.setState({ alertMessage: '' });
+  }
+
+  handleNavigation(route) {
+    this.setState({
+      email:    { value: '', valid: true },
+      password: { value: '', valid: true },
+      alertMessage: '',
+      loading: false
+    });
+    this.props.history.push(route);
   }
 
   render() {
@@ -106,14 +117,14 @@ export default class Login extends React.Component {
               accent
               icon="assignment"
               text="Register"
-              onPress={()=> { this.props.history.push('/register') }} />
+              onPress={this.handleNavigation.bind(this, '/register')} />
           </Margin>
           <Margin>
             <Button
               accent
               icon="help-outline"
               text="Forgot Password"
-              onPress={()=> { this.props.history.push('/forgot-password') }} />
+              onPress={this.handleNavigation.bind(this, '/forgot-password')} />
           </Margin>
         </Container>
       </Flex>
