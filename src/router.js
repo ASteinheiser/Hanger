@@ -3,6 +3,7 @@ import { NativeRouter, Route } from 'react-router-native';
 
 import BottomNavigation from './components/bottom-navigation.js';
 import Camera           from './containers/upload/camera.js';
+import CheckEmail       from './containers/auth/check-email.js';
 import ForgotPassword   from './containers/auth/forgot-password.js';
 import Hive             from './containers/hive.js';
 import Home             from './containers/home.js';
@@ -39,6 +40,7 @@ export default class Router extends React.Component {
           <Route path="/" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Login} /> } />
           <Route path="/new-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={NewPassword} /> } />
           <Route path="/forgot-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={ForgotPassword} /> }  />
+          <Route path="/check-email" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={CheckEmail} /> }  />
           <Route path="/register" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Register} /> }  />
           <Route path="/camera" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Camera} /> } />
           <Route path="/home" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Home} /> } />

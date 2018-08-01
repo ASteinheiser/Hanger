@@ -11,19 +11,18 @@ import TopNavigation     from '../../components/top-navigation.js';
 import theme             from '../../theme.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
+import { uuidv4 }        from '../../functions/uuid-v4.js';
 
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userName:      { value: '', valid: true },
-      firstName:     { value: '', valid: true },
-      lastName:      { value: '', valid: true },
       email:         { value: '', valid: true },
       password:      { value: '', valid: true },
       passwordMatch: { value: '', valid: true },
-      alertMessage: ''
+      alertMessage: '',
+      loading: false
     };
   }
 
@@ -39,9 +38,6 @@ export default class Register extends React.Component {
 
   handleSubmit() {
     const formObject = {
-      userName: this.state.userName,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
       passwordMatch: this.state.passwordMatch
@@ -49,26 +45,28 @@ export default class Register extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.clearAlert();
+      this.setState({ loading: true }, () => {
+        this.clearAlert();
 
-      let params = {
-        username: this.state.userName.value,
-        password: this.state.password.value,
-        attributes: {
-          given_name: this.state.firstName.value,
-          family_name: this.state.lastName.value,
-          email: this.state.email.value.toLowerCase()
-        }
-      };
+        let username = uuidv4();
 
-      Auth.signUp(params)
-        .then((response) => {
-          this.props.history.replace('/');
-        })
-        .catch((err) => {
-          console.log(err);
-          this.setState({ alertMessage: err.message });
-        });
+        let params = {
+          username: username,
+          password: this.state.password.value,
+          attributes: {
+            email: this.state.email.value.toLowerCase()
+          }
+        };
+
+        Auth.signUp(params)
+          .then((response) => {
+            this.props.history.replace('/check-email');
+          })
+          .catch((err) => {
+            console.log(err);
+            this.setState({ alertMessage: err.message, loading: false });
+          });
+      });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
@@ -95,27 +93,6 @@ export default class Register extends React.Component {
           <Alert message={this.state.alertMessage} />
 
           <Input
-            onChange={this.onChange.bind(this, 'userName')}
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'Username'}
-            value={this.state.userName.value}
-            error={!this.state.userName.valid ? 'Enter a username.' : ''}
-            />
-          <Input
-            onChange={this.onChange.bind(this, 'firstName')}
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'First Name'}
-            value={this.state.firstName.value}
-            error={!this.state.firstName.valid ? 'Enter your first name.' : ''}
-            />
-          <Input
-            onChange={this.onChange.bind(this, 'lastName')}
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'Last Name'}
-            value={this.state.lastName.value}
-            error={!this.state.lastName.valid ? 'Enter your last name.' : ''}
-            />
-          <Input
             keyboardType={'email-address'}
             onChange={this.onChange.bind(this, 'email')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
@@ -129,7 +106,7 @@ export default class Register extends React.Component {
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Password'}
             value={this.state.password.value}
-            error={!this.state.password.valid ? 'Enter a valid password.' : ''}
+            error={!this.state.password.valid ? 'Must be longer than 12 and contain: number, lowercase, uppercase' : ''}
             />
           <Input
             secureTextEntry={true}
@@ -145,6 +122,7 @@ export default class Register extends React.Component {
               primary
               icon="subdirectory-arrow-right"
               text="Register"
+              disabled={this.state.loading}
               onPress={this.handleSubmit.bind(this)} />
           </Margin>
         </Container>
