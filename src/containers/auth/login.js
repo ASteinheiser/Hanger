@@ -20,7 +20,8 @@ export default class Login extends React.Component {
     this.state = {
       email:    { value: '', valid: true },
       password: { value: '', valid: true },
-      alertMessage: ''
+      alertMessage: '',
+      loading: false
     };
   }
 
@@ -39,15 +40,17 @@ export default class Login extends React.Component {
     const { formValid, emptyFields } = validateForm(formObject);
 
     if (formValid) {
-      this.closeAlert();
+      this.setState({ loading: true}, () => {
+        this.closeAlert();
 
-      Auth.signIn(this.state.email.value, this.state.password.value)
-        .then(response => {
-          this.props.history.replace('/home');
-        })
-        .catch(err => {
-          this.setState({ alertMessage: err.message });
-        });
+        Auth.signIn(this.state.email.value.toLowerCase(), this.state.password.value)
+          .then(response => {
+            this.props.history.replace('/home');
+          })
+          .catch(err => {
+            this.setState({ alertMessage: err.message, loading: false });
+          });
+      });
     } else {
       emptyFields.forEach(fieldName => {
         this.setState({[fieldName]: {value: '', valid: false}});
@@ -90,6 +93,7 @@ export default class Login extends React.Component {
           <TopMargin>
             <Button
               primary
+              disabled={this.state.loading}
               icon="subdirectory-arrow-right"
               text="Login"
               onPress={this.handleLogin.bind(this)} />
