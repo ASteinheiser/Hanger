@@ -18,7 +18,7 @@ export default class Drawer extends Component {
     return(
       <StyledView color={theme.palette.primaryColor}>
         <Touchable onPress={this.handleNavigation.bind(this, '/notifications')}>
-          <StyledText color={theme.palette.accentColor}>
+          <StyledText color={theme.palette.accentColor} top>
             {'Notifications'}
           </StyledText>
         </Touchable>
@@ -33,7 +33,7 @@ export default class Drawer extends Component {
           </StyledText>
         </Touchable>
         <Touchable onPress={this.handleNavigation.bind(this, '/settings')}>
-          <StyledText color={theme.palette.accentColor}>
+          <StyledText color={theme.palette.accentColor} bottom>
             {'Settings'}
           </StyledText>
         </Touchable>
@@ -42,17 +42,17 @@ export default class Drawer extends Component {
   }
 }
 
-const StyledView = styled.View`
+const StyledView = styled.ScrollView`
   background: ${props => props.color};
-
-  padding: 25px 0px;
 `
 
 const StyledText = styled.Text`
   font-size: 24px;
   color: ${props => props.color};
 
-  padding: 15px 25px;
+  padding-left: 25px;
+  padding-top: ${props => props.top ? '50px' : '20px'};
+  padding-bottom: ${props => props.bottom ? '50px' : '20px'};
 `
 
 const Touchable = styled.TouchableOpacity`

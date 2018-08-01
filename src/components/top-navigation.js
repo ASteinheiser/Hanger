@@ -9,6 +9,7 @@ import Drawer          from './drawer.js';
 import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
 import BackLogo        from '../../assets/icons/back-white.png';
 import HangerTextLogo  from '../../assets/logos/hanger-text-only-white.png';
+import CloseIcon       from '../../assets/icons/close-white.png';
 import theme           from '../theme.js';
 
 let toolbarStyle = { container: {} };
@@ -82,7 +83,12 @@ class TopNavigation extends Component {
               :
               <MarginLeft>
                 <Touchable onPress={this.toggleDrawer.bind(this)}>
-                  <StyledIconImage source={HangerWhiteLogo} />
+                  {
+                    this.state.showDrawer ?
+                      <StyledIconImage small source={CloseIcon} />
+                      :
+                      <StyledIconImage source={HangerWhiteLogo} />
+                  }
                 </Touchable>
               </MarginLeft>
           } />
@@ -129,8 +135,8 @@ const StyledText = styled.Text`
 `
 
 const StyledIconImage = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: ${props => props.small ? '30px' : '40px'};
+  height: ${props => props.small ? '30px' : '40px'};
 `
 
 export default withRouter(TopNavigation);
