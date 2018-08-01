@@ -56,11 +56,11 @@ class TopNavigation extends Component {
               this.props['back-button'] ?
                 <EmptyWidth />
                 :
-                null
+                <EmptyWidth />
               :
               <MarginRight>
                 <Touchable onPress={() => this.props.history.push('/profile')}>
-                  <Avatar icon='person' iconColor='gray' size={35} iconSize={25} />
+                  <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
                 </Touchable>
               </MarginRight>
           }
@@ -75,11 +75,11 @@ class TopNavigation extends Component {
                         this.props.history.push('/home');
                       }
                     } }>
-                    <StyledIconImage source={BackLogo} />
+                    <StyledIconImage source={BackLogo} small />
                   </Touchable>
                 </MarginLeft>
                 :
-                null
+                <EmptyWidth />
               :
               <MarginLeft>
                 <Touchable onPress={this.toggleDrawer.bind(this)}>
@@ -135,8 +135,10 @@ const StyledText = styled.Text`
 `
 
 const StyledIconImage = styled.Image`
-  width: ${props => props.small ? '30px' : '40px'};
-  height: ${props => props.small ? '30px' : '40px'};
+  width: ${props => props.small ? 25 : 40};
+  height: ${props => props.small ? 25 : 40};
+  margin-right: ${props => props.small ? 10 : 0 };
+  margin-left: ${props => props.small ? 5 : 0 };
 `
 
 export default withRouter(TopNavigation);
