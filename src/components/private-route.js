@@ -45,9 +45,14 @@ class PrivateRoute extends Component {
 
   render() {
     let Comp = this.props.component;
+    let { user } = this.state;
+
+    if(!user && this.props.user) {
+      user = this.props.user;
+    }
 
     return (
-      <Comp {...this.props} user={this.state.user} />
+      <Comp {...this.props} user={user} />
     );
   }
 }

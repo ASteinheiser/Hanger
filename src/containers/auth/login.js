@@ -73,6 +73,11 @@ export default class Login extends React.Component {
     this.props.history.push(route);
   }
 
+  handleViewPublicFeed() {
+    this.props.setuser('viewPublicFeed');
+    this.props.history.push('/home');
+  }
+
   render() {
     return (
       <Flex>
@@ -111,6 +116,14 @@ export default class Login extends React.Component {
           </TopMargin>
 
           <Divider />
+
+          <Margin>
+            <Button
+              accent
+              icon="supervisor-account"
+              text="Public Feed"
+              onPress={this.handleViewPublicFeed.bind(this)} />
+          </Margin>
 
           <Margin>
             <Button

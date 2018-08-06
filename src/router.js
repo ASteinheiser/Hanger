@@ -36,7 +36,7 @@ export default class Router extends React.Component {
   render() {
     return(
       <NativeRouter>
-        <BottomNavigation>
+        <BottomNavigation user={this.state.user} setuser={this.updateUser.bind(this)}>
           <Route path="/" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Login} /> } />
           <Route path="/new-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={NewPassword} /> } />
           <Route path="/forgot-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={ForgotPassword} /> }  />

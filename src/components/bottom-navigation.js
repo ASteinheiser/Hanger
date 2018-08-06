@@ -3,12 +3,15 @@ import { Image, View, TouchableOpacity } from 'react-native';
 import { withRouter }                    from 'react-router-native';
 import styled                            from 'styled-components/native';
 
-import HomeLogo     from '../../assets/icons/home-white.png';
-import SearchLogo   from '../../assets/icons/search-white.png';
-import PlusLogo     from '../../assets/icons/plus-white.png';
-import MessageLogo  from '../../assets/icons/messages-white.png';
-import ShoppingLogo from '../../assets/icons/shopping-cart-white.png';
-import UploadMenu   from './upload-menu.js';
+import Button        from '../components/button.js';
+import Header        from '../components/header-text.js';
+import TopNavigation from '../components/top-navigation.js';
+import HomeLogo      from '../../assets/icons/home-white.png';
+import SearchLogo    from '../../assets/icons/search-white.png';
+import PlusLogo      from '../../assets/icons/plus-white.png';
+import MessageLogo   from '../../assets/icons/messages-white.png';
+import ShoppingLogo  from '../../assets/icons/shopping-cart-white.png';
+import UploadMenu    from './upload-menu.js';
 
 import theme from '../theme.js';
 
@@ -60,11 +63,35 @@ class BottomNav extends Component {
     this.setState({ showUploadMenu: !this.state.showUploadMenu });
   }
 
+  handleBackToLogin() {
+    let route = '/';
+    this.props.setuser(null);
+    this.setState({ active: route, shouldHideNav: this.shouldHideNav(route) });
+    this.props.history.push(route);
+  }
+
   render() {
     return (
       <FullScreen>
 
-        { this.props.children }
+        {
+          this.props.user === 'viewPublicFeed' && this.props.location.pathname !== '/home' ?
+            <Height>
+              <TopNavigation navigation={this.props.navigation} />
+
+              <Header text='Please login to use this feature' />
+
+              <Margin>
+                <Button
+                  primary
+                  icon='subdirectory-arrow-right'
+                  text='Login'
+                  onPress={this.handleBackToLogin.bind(this)} />
+              </Margin>
+            </Height>
+            :
+            this.props.children
+        }
 
         <UploadMenu
           open={this.state.showUploadMenu}
@@ -125,6 +152,15 @@ const StyledImage = styled.Image`
 const Touchable = styled.TouchableOpacity`
   z-index: 101;
   padding: 15px 20px;
+`
+
+const Height = styled.View`
+  height: 100%;
+  padding-bottom: 60px;
+`
+
+const Margin = styled.View`
+  margin: 20px 20px 20px 20px;
 `
 
 export default withRouter(BottomNav);

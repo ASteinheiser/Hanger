@@ -23,6 +23,5 @@ const StyledText = styled.Text`
   color: ${props => props.color};
 
   text-align: center;
-  padding-top: 25px;
-  padding-bottom: 10px;
+  padding: 25px 50px 10px 50px;
 `
