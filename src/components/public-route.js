@@ -103,6 +103,7 @@ const StyledText = styled.Text`
   color: ${props => props.color};
 
   margin-bottom: 50px;
+  margin-top: 50px;
 `
 
 export default withRouter(PublicRoute);
