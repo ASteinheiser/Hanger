@@ -1,6 +1,5 @@
 import React                from 'react';
 import { Auth }             from 'aws-amplify';
-import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 
 import Alert             from '../../components/alert.js';
