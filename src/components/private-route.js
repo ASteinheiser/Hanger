@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AsyncStorage }     from 'react-native';
 import { withRouter }       from 'react-router-native';
 import { Auth }             from 'aws-amplify';
 
@@ -23,21 +24,31 @@ class PrivateRoute extends Component {
 
   authenticate() {
     if(!this.props.user) {
-      Auth.currentUserInfo()
-        .then(user => {
-          if (!user) {
-            this.setState({ authenticationComplete: true });
-            this.props.history.replace('/');
-          }
-          else {
-            this.setState({ authenticationComplete: true });
-            this.props.setuser(user);
-          }
-        })
-        .catch(err => {
-          Auth.signOut();
-          this.props.history.replace('/');
-        });
+      AsyncStorage.getItem('@user', (error, result) => {
+
+        if(result) {
+          this.setState({ authenticationComplete: true });
+          this.props.setuser(result);
+        }
+        else {
+          Auth.currentUserInfo()
+            .then(user => {
+              if (!user) {
+                this.setState({ authenticationComplete: true });
+                this.props.history.replace('/');
+              }
+              else {
+                this.setState({ authenticationComplete: true });
+                this.props.setuser(user);
+              }
+            })
+            .catch(err => {
+              Auth.signOut();
+              this.props.setuser(null);
+              this.props.history.replace('/');
+            });
+        }
+      });
     } else {
       this.setState({ authenticationComplete: true });
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AsyncStorage }     from 'react-native';
 import { Auth }             from 'aws-amplify';
 import { withRouter }       from 'react-router-native';
 import { DotIndicator }     from 'react-native-indicators';
@@ -27,23 +28,35 @@ class PublicRoute extends Component {
 
   authenticate() {
     if(!this.props.user) {
-      Auth.currentUserInfo()
-        .then(user => {
-          if (user) {
-            this.setState({ authenticationComplete: true });
-            this.props.setuser(user);
-            this.props.history.replace({
-              pathname: '/home',
-              state: { user }
+      AsyncStorage.getItem('@user', (error, result) => {
+
+        if(result) {
+          this.setState({ authenticationComplete: true });
+          this.props.setuser(result);
+          this.props.history.replace('/home');
+        }
+        else {
+          Auth.currentUserInfo()
+            .then(user => {
+              if (user) {
+                this.setState({ authenticationComplete: true });
+                this.props.setuser(user);
+                this.props.history.replace({
+                  pathname: '/home',
+                  state: { user }
+                });
+              }
+              else {
+                this.setState({ authenticationComplete: true });
+              }
+            })
+            .catch(err => {
+              Auth.signOut();
+              this.props.setuser(null);
+              this.setState({ authenticationComplete: true });
             });
-          }
-          else {
-            this.setState({ authenticationComplete: true });
-          }
-        })
-        .catch(err => {
-          Auth.signOut();
-        });
+        }
+      });
     } else {
       this.setState({ authenticationComplete: true });
     }

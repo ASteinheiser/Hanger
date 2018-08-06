@@ -1,4 +1,5 @@
 import React, { Component }    from 'react';
+import { AsyncStorage }        from 'react-native';
 import { NativeRouter, Route } from 'react-router-native';
 
 import BottomNavigation from './components/bottom-navigation.js';
@@ -30,7 +31,12 @@ export default class Router extends React.Component {
   }
 
   updateUser(user) {
-    this.setState({ user });
+    if(!user) {
+      AsyncStorage.removeItem('@user');
+    } else {
+      AsyncStorage.setItem('@user', user);
+    }
+    this.setState({ user: user });
   }
 
   render() {
