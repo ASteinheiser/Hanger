@@ -1,0 +1,134 @@
+import React   from 'react';
+// import { API } from 'aws-amplify';
+import styled  from 'styled-components/native';
+
+import Alert             from '../components/alert.js';
+import Button            from '../components/button.js';
+import HeaderText        from '../components/header-text.js';
+import Input             from '../components/input.js';
+import TopNavigation     from '../components/top-navigation.js';
+import theme             from '../theme.js';
+import { validateField } from '../functions/validate-field.js';
+import { validateForm }  from '../functions/validate-form.js';
+
+export default class PostRegistration extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name:      { value: '', valid: true },
+      user_name: { value: '', valid: true },
+      location:  { value: '', valid: true },
+      alertMessage: '',
+      loading: false
+    };
+  }
+
+  onChange(field, e) {
+    if(e.nativeEvent) {
+      let { value, valid } = validateField(field, e.nativeEvent.text, this.state);
+
+      this.setState({
+        [field]: { value, valid }
+      });
+    }
+  }
+
+  handleSubmit() {
+    const formObject = {
+      name: this.state.name,
+      user_name: this.state.user_name
+    };
+    const { formValid, emptyFields } = validateForm(formObject);
+
+    if (formValid) {
+      this.setState({ loading: true }, () => {
+        this.clearAlert();
+
+        this.props.history.replace('/home');
+
+        // let params = {
+        //   name: this.state.name.value
+        //   user_name: this.state.user_name.value
+        // };
+        // if (this.state.location.value) params.location = this.state.location.value;
+        //
+        // API.signUp('', '', params)
+        //   .then((response) => {
+        //   })
+        //   .catch((err) => {
+        //   });
+      });
+    } else {
+      emptyFields.forEach(fieldName => {
+        this.setState({[fieldName]: {value: '', valid: false}});
+      });
+    }
+  }
+
+  clearAlert() {
+    this.setState({ alert: '' });
+  }
+
+  render() {
+    return (
+      <Height>
+        <TopNavigation
+          back-button
+          route='/'
+          history={this.props.history} />
+
+        <Container color={theme.palette.canvasColor}>
+
+          <HeaderText text='Tell Us More' />
+
+          <Alert message={this.state.alertMessage} />
+
+          <Input
+            onChange={this.onChange.bind(this, 'name')}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Full Name'}
+            value={this.state.name.value}
+            error={!this.state.name.valid ? 'Enter a name.' : ''}
+            />
+          <Input
+            onChange={this.onChange.bind(this, 'user_name')}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'User Name'}
+            value={this.state.user_name.value}
+            error={!this.state.user_name.valid ? 'Enter a user name.' : ''}
+            />
+          <Input
+            onChange={this.onChange.bind(this, 'location')}
+            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+            label={'Location (Optional)'}
+            value={this.state.location.value}
+            error={false}
+            />
+
+          <Margin>
+            <Button
+              primary
+              icon="person"
+              text="Create Profile"
+              disabled={this.state.loading}
+              onPress={this.handleSubmit.bind(this)} />
+          </Margin>
+        </Container>
+      </Height>
+    )
+  }
+}
+
+const Height = styled.View`
+  height: 100%;
+`
+
+const Container = styled.ScrollView`
+  background-color: ${props => props.color};
+  flex: 1;
+`
+
+const Margin = styled.View`
+  margin: 30px 20px 20px 20px;
+`
