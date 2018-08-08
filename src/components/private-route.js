@@ -27,8 +27,15 @@ class PrivateRoute extends Component {
       AsyncStorage.getItem('@user', (error, result) => {
 
         if(result) {
+          let user = result;
           this.setState({ authenticationComplete: true });
-          this.props.setuser(result);
+          this.props.setuser(user);
+          // take them to fill out info if they need to finish profile
+          if(user && user.attributes
+            && user.attributes['custom:registration_step'] === 'additional_info'
+            && this.props.location.pathname !== '/post-registration') {
+            this.props.history.replace('/post-registration');
+          }
         }
         else {
           Auth.currentUserInfo()
@@ -40,6 +47,12 @@ class PrivateRoute extends Component {
               else {
                 this.setState({ authenticationComplete: true });
                 this.props.setuser(user);
+                // take them to fill out info if they need to finish profile
+                if(user.attributes
+                  && user.attributes['custom:registration_step'] === 'additional_info'
+                  && this.props.location.pathname !== '/post-registration') {
+                  this.props.history.replace('/post-registration');
+                }
               }
             })
             .catch(err => {
@@ -51,6 +64,12 @@ class PrivateRoute extends Component {
       });
     } else {
       this.setState({ authenticationComplete: true });
+      // take them to fill out info if they need to finish profile
+      if(this.props.user && this.props.user.attributes
+        && this.props.user.attributes['custom:registration_step'] === 'additional_info'
+        && this.props.location.pathname !== '/post-registration') {
+        this.props.history.replace('/post-registration');
+      }
     }
   }
 

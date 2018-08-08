@@ -52,7 +52,7 @@ class BottomNav extends Component {
   shouldHideNav(route) {
     if(route === '/' || route === '/register' || route === '/camera'
       || route === '/forgot-password' || route === '/check-email'
-      || route === '/new-password') {
+      || route === '/new-password' || route === '/post-registration') {
       return true;
     } else {
       return false;

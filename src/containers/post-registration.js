@@ -1,5 +1,5 @@
 import React   from 'react';
-// import { API } from 'aws-amplify';
+import { API } from 'aws-amplify';
 import styled  from 'styled-components/native';
 
 import Alert             from '../components/alert.js';
@@ -45,19 +45,22 @@ export default class PostRegistration extends React.Component {
       this.setState({ loading: true }, () => {
         this.clearAlert();
 
-        this.props.history.replace('/home');
+        let params = {
+          name: this.state.name.value,
+          user_name: this.state.user_name.value
+        };
+        if (this.state.location.value) params.location = this.state.location.value;
 
-        // let params = {
-        //   name: this.state.name.value
-        //   user_name: this.state.user_name.value
-        // };
-        // if (this.state.location.value) params.location = this.state.location.value;
-        //
-        // API.signUp('', '', params)
-        //   .then((response) => {
-        //   })
-        //   .catch((err) => {
-        //   });
+        API.post('HangerAPI', '/v1/user/profile', params)
+          .then(response => {
+            console.log(response);
+            this.setState({ loading: false });
+            this.props.history.replace('/home');
+          })
+          .catch(err => {
+            console.log(err);
+            this.setState({ loading: false, alertMessage: err.message });
+          });
       });
     } else {
       emptyFields.forEach(fieldName => {
@@ -67,7 +70,7 @@ export default class PostRegistration extends React.Component {
   }
 
   clearAlert() {
-    this.setState({ alert: '' });
+    this.setState({ alertMessage: '' });
   }
 
   render() {
@@ -103,7 +106,7 @@ export default class PostRegistration extends React.Component {
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
             label={'Location (Optional)'}
             value={this.state.location.value}
-            error={false}
+            error={''}
             />
 
           <Margin>
