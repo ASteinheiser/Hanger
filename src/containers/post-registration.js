@@ -1,6 +1,6 @@
-import React   from 'react';
-import { API } from 'aws-amplify';
-import styled  from 'styled-components/native';
+import React         from 'react';
+import { API, Auth } from 'aws-amplify';
+import styled        from 'styled-components/native';
 
 import Alert             from '../components/alert.js';
 import Button            from '../components/button.js';
@@ -73,12 +73,19 @@ export default class PostRegistration extends React.Component {
     this.setState({ alertMessage: '' });
   }
 
+  handleBackButton() {
+    this.props.setuser();
+    Auth.signOut();
+    this.props.history.push('/');
+  }
+
   render() {
     return (
       <Height>
         <TopNavigation
           back-button
           route='/'
+          onpress={this.handleBackButton.bind(this)}
           history={this.props.history} />
 
         <Container color={theme.palette.canvasColor}>

@@ -65,7 +65,7 @@ class BottomNav extends Component {
 
   handleBackToLogin() {
     let route = '/';
-    this.props.setuser(null);
+    this.props.setuser();
     this.setState({ active: route, shouldHideNav: this.shouldHideNav(route) });
     this.props.history.push(route);
   }

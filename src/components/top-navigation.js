@@ -69,7 +69,10 @@ class TopNavigation extends Component {
               this.props['back-button'] ?
                 <MarginLeft>
                   <Touchable onPress={() => {
-                      if(this.props.route !== 'back') {
+                      if(this.props.onpress) {
+                        this.props.onpress();
+                      }
+                      else if(this.props.route !== 'back') {
                         this.props.history.push(this.props.route);
                       } else {
                         this.props.history.push('/home');

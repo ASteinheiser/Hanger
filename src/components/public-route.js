@@ -52,7 +52,7 @@ class PublicRoute extends Component {
             })
             .catch(err => {
               Auth.signOut();
-              this.props.setuser(null);
+              this.props.setuser();
               this.setState({ authenticationComplete: true });
             });
         }
