@@ -16,9 +16,9 @@ export default class PostRegistration extends React.Component {
     super(props);
 
     this.state = {
-      name:      { value: '', valid: true },
-      user_name: { value: '', valid: true },
-      location:  { value: '', valid: true },
+      name:         { value: '', valid: true },
+      display_name: { value: '', valid: true },
+      location:     { value: '', valid: true },
       alertMessage: '',
       loading: false
     };
@@ -37,7 +37,7 @@ export default class PostRegistration extends React.Component {
   handleSubmit() {
     const formObject = {
       name: this.state.name,
-      user_name: this.state.user_name
+      display_name: this.state.display_name
     };
     const { formValid, emptyFields } = validateForm(formObject);
 
@@ -46,12 +46,15 @@ export default class PostRegistration extends React.Component {
         this.clearAlert();
 
         let params = {
-          name: this.state.name.value,
-          user_name: this.state.user_name.value
+          body: {
+            name: this.state.name.value,
+            display_name: this.state.display_name.value,
+            Username: this.props.user.username
+          }
         };
-        if (this.state.location.value) params.location = this.state.location.value;
+        if (this.state.location.value) params.body.location = this.state.location.value;
 
-        API.post('HangerAPI', '/v1/user/profile', params)
+        API.post('HangerAPI', '/v1/user/post-registration', params)
           .then(response => {
             console.log(response);
             this.setState({ loading: false });
@@ -102,11 +105,11 @@ export default class PostRegistration extends React.Component {
             error={!this.state.name.valid ? 'Enter a name.' : ''}
             />
           <Input
-            onChange={this.onChange.bind(this, 'user_name')}
+            onChange={this.onChange.bind(this, 'display_name')}
             containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'User Name'}
-            value={this.state.user_name.value}
-            error={!this.state.user_name.valid ? 'Enter a user name.' : ''}
+            label={'Public Username'}
+            value={this.state.display_name.value}
+            error={!this.state.display_name.valid ? 'Enter a user name.' : ''}
             />
           <Input
             onChange={this.onChange.bind(this, 'location')}
