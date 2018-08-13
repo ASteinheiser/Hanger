@@ -154,9 +154,8 @@ const Touchable = styled.TouchableOpacity`
   padding: 15px 20px;
 `
 
-const Height = styled.View`
+const Height = styled.ScrollView`
   height: 100%;
-  padding-bottom: 60px;
 `
 
 const Margin = styled.View`
