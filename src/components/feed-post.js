@@ -1,9 +1,11 @@
-import React                 from 'react';
-import { View, Text, Image } from 'react-native';
-import { Avatar }            from 'react-native-material-ui';
-import styled                from 'styled-components/native';
+import React      from 'react';
+import { Avatar } from 'react-native-material-ui';
+import styled     from 'styled-components/native';
 
-import theme from '../theme.js';
+import CommentIcon   from '../../assets/icons/chat.png';
+import HexHeart      from '../../assets/icons/hex-heart.png';
+import ClothesHanger from '../../assets/icons/clothes-hanger.png';
+import theme         from '../theme.js';
 
 export default class FeedPost extends React.Component {
   render() {
@@ -23,6 +25,23 @@ export default class FeedPost extends React.Component {
 
         <StyledImage source={{ uri: this.props.image }} alt='feed_post' />
 
+        <ButtonsContainer>
+          <FlexRow>
+            <ButtonPadding onPress={() => {}}>
+              <ButtonIcon source={HexHeart} />
+            </ButtonPadding>
+            <ButtonPadding onPress={() => {}}>
+              <ButtonIcon source={CommentIcon} />
+            </ButtonPadding>
+            <ButtonPadding onPress={() => {}}>
+              <ButtonIcon source={ClothesHanger} />
+            </ButtonPadding>
+          </FlexRow>
+          <LikesText>
+            {'14 Likes'}
+          </LikesText>
+        </ButtonsContainer>
+
         <StyledText color={theme.palette.primaryTextColor}>
           { this.props.title }
         </StyledText>
@@ -41,7 +60,7 @@ const StyledText = styled.Text`
   font-size: 16px;
   color: ${props => props.color};
 
-  margin: 15px;
+  margin: 20px 25px 15px 25px;
 `
 
 const StyledImage = styled.Image`
@@ -69,4 +88,32 @@ const UsernameText = styled.Text`
 
 const Touchable = styled.TouchableOpacity`
   z-index: 101;
+`
+
+const ButtonsContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  margin-left: 15px;
+  margin-top: 15px;
+`
+
+const ButtonIcon = styled.Image`
+  width: 30px;
+  height: 30px;
+`
+
+const ButtonPadding = styled.TouchableOpacity`
+  padding: 0 10px 0 10px;
+`
+
+const FlexRow = styled.View`
+  display: flex;
+  flex-direction: row;
+`
+
+const LikesText = styled.Text`
+  margin: auto 25px auto 0;
 `
