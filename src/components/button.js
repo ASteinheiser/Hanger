@@ -7,11 +7,18 @@ export default class StyledButton extends Component {
   render() {
     var buttonStyle = {
       container: {
-        height: 50
+        height: 50,
+        borderWidth: 2,
+        borderColor: this.props.accent ? theme.palette.primaryColor : theme.palette.primaryColor,
+        borderRadius: 50,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 25,
+        paddingRight: 25
       },
       text: {
         fontFamily: theme.fontFamily ? theme.fontFamily : 'Roboto',
-        color: this.props.accent ? theme.palette.secondaryTextColor : white,
+        color: this.props.accent ? white : theme.palette.secondaryTextColor,
         fontWeight: 'bold',
         fontSize: 16
       }
@@ -22,9 +29,13 @@ export default class StyledButton extends Component {
       buttonStyle.text.fontSize = 14;
     }
 
+    if (this.props.large) {
+      buttonStyle.container.height = 60;
+      buttonStyle.text.fontSize = 18;
+    }
+
     return (
       <Button
-        raised
         style={buttonStyle}
         {...this.props}
       />

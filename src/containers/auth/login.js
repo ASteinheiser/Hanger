@@ -1,6 +1,7 @@
-import React                from 'react';
-import { Auth }             from 'aws-amplify';
-import styled               from 'styled-components/native';
+import React            from 'react';
+import { AsyncStorage } from 'react-native';
+import { Auth }         from 'aws-amplify';
+import styled           from 'styled-components/native';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -12,6 +13,10 @@ import theme             from '../../theme.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 
+import HangerTextLogo from '../../../assets/logos/hanger-text-only-white.png';
+import HangerLogo     from '../../../assets/icons/hanger-white.png';
+import Runway         from '../../../assets/splash-screens/registration/runway.jpeg';
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +25,33 @@ export default class Login extends React.Component {
       email:    { value: '', valid: true },
       password: { value: '', valid: true },
       alertMessage: '',
-      loading: false
+      loading: false,
+      firstLaunch: null
     };
   }
+
+  componentDidMount(){
+    AsyncStorage.getItem('alreadyLaunched')
+      .then(value => {
+        if(value === null) {
+          AsyncStorage.setItem('alreadyLaunched', 'true')
+            .then(res => {
+              this.setState({ firstLaunch: true });
+            })
+            .catch(err => {
+              console.log(err);
+              this.setState({ firstLaunch: true });
+            });
+        }
+        else {
+          this.setState({ firstLaunch: false });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ firstLaunch: true });
+      });
+    }
 
   onChange(field, e) {
     if(e.nativeEvent) {
@@ -77,70 +106,101 @@ export default class Login extends React.Component {
     this.props.history.push('/home');
   }
 
+  handleGetStarted() {
+    this.setState({ firstLaunch: false });
+  }
+
   render() {
-    return (
-      <Flex>
-        <TopNavigation no-buttons />
+    if(this.state.firstLaunch === null) {
+      return null; // wait for asyncStorage call to finish
+    } else if (this.state.firstLaunch === true) {
+      return (
+        <Flex>
+          <BackgroundImage source={Runway} />
+          <BackgroundFilter />
 
-        <Container color={theme.palette.canvasColor}>
+          <WelcomeContainer>
+            <FullWidth>
+              <HangerImage source={HangerLogo} />
+            </FullWidth>
+            <FullWidth>
+              <HangerImageText source={HangerTextLogo} />
+            </FullWidth>
+            <MarginAuto>
+              <Button
+                accent
+                large
+                text="Get Started"
+                onPress={this.handleGetStarted.bind(this)} />
+            </MarginAuto>
+          </WelcomeContainer>
+        </Flex>
+      );
+    } else {
+      return (
+        <Flex>
+          <TopNavigation no-buttons />
 
-          <HeaderText text='Login' />
+          <Container color={theme.palette.canvasColor}>
 
-          <Alert message={this.state.alertMessage} />
+            <HeaderText text='Login' />
 
-          <Input
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            keyboardType={'email-address'}
-            onChange={this.onChange.bind(this, 'email')}
-            label={'Email Address'}
-            value={this.state.email.value}
-            error={!this.state.email.valid ? 'Enter a valid email.' : ''}
-            />
-          <Input
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            secureTextEntry={true}
-            onChange={this.onChange.bind(this, 'password')}
-            label={'Password'}
-            value={this.state.password.value}
-            error={!this.state.password.valid ? 'Enter a valid password.' : ''}
-            />
+            <Alert message={this.state.alertMessage} />
 
-          <TopMargin>
-            <Button
-              primary
-              disabled={this.state.loading}
-              icon="subdirectory-arrow-right"
-              text="Login"
-              onPress={this.handleLogin.bind(this)} />
-          </TopMargin>
+            <Input
+              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              keyboardType={'email-address'}
+              onChange={this.onChange.bind(this, 'email')}
+              label={'Email Address'}
+              value={this.state.email.value}
+              error={!this.state.email.valid ? 'Enter a valid email.' : ''}
+              />
+            <Input
+              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              secureTextEntry={true}
+              onChange={this.onChange.bind(this, 'password')}
+              label={'Password'}
+              value={this.state.password.value}
+              error={!this.state.password.valid ? 'Enter a valid password.' : ''}
+              />
 
-          <Divider />
+            <TopMargin>
+              <Button
+                primary
+                disabled={this.state.loading}
+                icon="subdirectory-arrow-right"
+                text="Login"
+                onPress={this.handleLogin.bind(this)} />
+            </TopMargin>
 
-          <Margin>
-            <Button
-              accent
-              icon="supervisor-account"
-              text="Public Feed"
-              onPress={this.handleViewPublicFeed.bind(this)} />
-          </Margin>
+            <Divider />
 
-          <Margin>
-            <Button
-              accent
-              icon="assignment"
-              text="Register"
-              onPress={this.handleNavigation.bind(this, '/register')} />
-          </Margin>
-          <Margin>
-            <Button
-              accent
-              icon="help-outline"
-              text="Forgot Password"
-              onPress={this.handleNavigation.bind(this, '/forgot-password')} />
-          </Margin>
-        </Container>
-      </Flex>
-    );
+            <Margin>
+              <Button
+                accent
+                icon="supervisor-account"
+                text="Public Feed"
+                onPress={this.handleViewPublicFeed.bind(this)} />
+            </Margin>
+
+            <Margin>
+              <Button
+                accent
+                icon="assignment"
+                text="Register"
+                onPress={this.handleNavigation.bind(this, '/register')} />
+            </Margin>
+            <Margin>
+              <Button
+                accent
+                icon="help-outline"
+                text="Forgot Password"
+                onPress={this.handleNavigation.bind(this, '/forgot-password')} />
+            </Margin>
+          </Container>
+        </Flex>
+      );
+    }
   }
 }
 
@@ -159,4 +219,54 @@ const Margin = styled.View`
 
 const TopMargin = styled.View`
   margin: 30px 20px 0 20px;
+`
+
+const HangerImage = styled.Image`
+  width: 150px;
+  height: 150px;
+
+  margin: 0 auto;
+`
+
+const HangerImageText = styled.Image`
+  width: 250px;
+  height: 75px;
+
+  margin: 0 auto 50px auto;
+`
+
+const BackgroundImage = styled.Image`
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  z-index: 1;
+`
+
+const BackgroundFilter = styled.View`
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 2;
+`
+
+const WelcomeContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  justify-content: center;
+`
+
+const FullWidth = styled.View`
+  width: 100%;
+`
+
+const MarginAuto = styled.View`
+  margin: 0 auto;
 `
