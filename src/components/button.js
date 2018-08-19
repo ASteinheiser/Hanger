@@ -9,7 +9,7 @@ export default class StyledButton extends Component {
       container: {
         height: 50,
         borderWidth: 2,
-        borderColor: this.props.accent ? theme.palette.primaryColor : theme.palette.primaryColor,
+        borderColor: theme.palette.primaryColor,
         borderRadius: 50,
         paddingTop: 10,
         paddingBottom: 10,
@@ -18,7 +18,7 @@ export default class StyledButton extends Component {
       },
       text: {
         fontFamily: theme.fontFamily ? theme.fontFamily : 'Roboto',
-        color: this.props.accent ? white : theme.palette.secondaryTextColor,
+        color: white,
         fontWeight: 'bold',
         fontSize: 16
       }

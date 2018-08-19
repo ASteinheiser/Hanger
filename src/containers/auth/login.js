@@ -8,14 +8,13 @@ import Button            from '../../components/button.js';
 import Divider           from '../../components/divider.js';
 import HeaderText        from '../../components/header-text.js';
 import Input             from '../../components/input.js';
-import TopNavigation     from '../../components/top-navigation.js';
-import theme             from '../../theme.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 
 import HangerTextLogo from '../../../assets/logos/hanger-text-only-white.png';
 import HangerLogo     from '../../../assets/icons/hanger-white.png';
 import Runway         from '../../../assets/splash-screens/registration/runway.jpeg';
+import Photographer   from '../../../assets/splash-screens/registration/photographer.jpeg';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ export default class Login extends React.Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     AsyncStorage.getItem('alreadyLaunched')
       .then(value => {
         if(value === null) {
@@ -110,6 +109,10 @@ export default class Login extends React.Component {
     this.setState({ firstLaunch: false });
   }
 
+  handleFacebookLogin() {
+    // do something
+  }
+
   render() {
     if(this.state.firstLaunch === null) {
       return null; // wait for asyncStorage call to finish
@@ -128,7 +131,7 @@ export default class Login extends React.Component {
             </FullWidth>
             <MarginAuto>
               <Button
-                accent
+                primary
                 large
                 text="Get Started"
                 onPress={this.handleGetStarted.bind(this)} />
@@ -139,30 +142,43 @@ export default class Login extends React.Component {
     } else {
       return (
         <Flex>
-          <TopNavigation no-buttons />
+          <BackgroundImage source={Photographer} />
+          <BackgroundFilter />
 
-          <Container color={theme.palette.canvasColor}>
+          <Container>
+            <TopPadding>
+              <FullWidth>
+                <HangerImage small source={HangerLogo} />
+              </FullWidth>
+            </TopPadding>
 
-            <HeaderText text='Login' />
+            <HeaderText small
+              text='Welcome to Hanger'
+              body='Manage your social media to share your style and connect with other fashion lovers!' />
 
             <Alert message={this.state.alertMessage} />
 
-            <Input
-              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-              keyboardType={'email-address'}
-              onChange={this.onChange.bind(this, 'email')}
-              label={'Email Address'}
-              value={this.state.email.value}
-              error={!this.state.email.valid ? 'Enter a valid email.' : ''}
-              />
-            <Input
-              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-              secureTextEntry={true}
-              onChange={this.onChange.bind(this, 'password')}
-              label={'Password'}
-              value={this.state.password.value}
-              error={!this.state.password.valid ? 'Enter a valid password.' : ''}
-              />
+            <InputMargin>
+              <Input
+                containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+                keyboardType={'email-address'}
+                onChange={this.onChange.bind(this, 'email')}
+                label={'Email Address'}
+                value={this.state.email.value}
+                error={!this.state.email.valid ? 'Enter a valid email.' : ''}
+                />
+            </InputMargin>
+
+            <InputMargin>
+              <Input
+                containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+                secureTextEntry={true}
+                onChange={this.onChange.bind(this, 'password')}
+                label={'Password'}
+                value={this.state.password.value}
+                error={!this.state.password.valid ? 'Enter a valid password.' : ''}
+                />
+            </InputMargin>
 
             <TopMargin>
               <Button
@@ -173,26 +189,34 @@ export default class Login extends React.Component {
                 onPress={this.handleLogin.bind(this)} />
             </TopMargin>
 
+            <Margin>
+              <Button
+                primary
+                icon="face"
+                text="Facebook Login"
+                onPress={this.handleFacebookLogin.bind(this)} />
+              </Margin>
+
             <Divider />
 
             <Margin>
               <Button
-                accent
+                primary
                 icon="supervisor-account"
-                text="Public Feed"
+                text="Skip Login"
                 onPress={this.handleViewPublicFeed.bind(this)} />
             </Margin>
 
             <Margin>
               <Button
-                accent
-                icon="assignment"
+                primary
+                icon="email"
                 text="Register"
                 onPress={this.handleNavigation.bind(this, '/register')} />
             </Margin>
             <Margin>
               <Button
-                accent
+                primary
                 icon="help-outline"
                 text="Forgot Password"
                 onPress={this.handleNavigation.bind(this, '/forgot-password')} />
@@ -209,21 +233,20 @@ const Flex = styled.View`
 `
 
 const Container = styled.ScrollView`
-  background-color: ${props => props.color};
   flex: 1;
 `
 
 const Margin = styled.View`
-  margin: 20px 20px 20px 20px;
+  margin: 20px 20% 20px 20%;
 `
 
 const TopMargin = styled.View`
-  margin: 30px 20px 0 20px;
+  margin: 30px 20% 20px 20%;
 `
 
 const HangerImage = styled.Image`
-  width: 150px;
-  height: 150px;
+  width: ${props => props.small ? '100px' : '150px'};
+  height: ${props => props.small ? '100px' : '150px'};
 
   margin: 0 auto;
 `
@@ -269,4 +292,12 @@ const FullWidth = styled.View`
 
 const MarginAuto = styled.View`
   margin: 0 auto;
+`
+
+const InputMargin = styled.View`
+  margin: 0 5%;
+`
+
+const TopPadding = styled.View`
+  padding-top: 25px;
 `

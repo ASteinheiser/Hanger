@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Text }             from 'react-native';
+import { View }             from 'react-native';
 import styled               from 'styled-components/native';
-
-import theme from '../theme.js';
 
 export default class HeaderText extends Component {
   render() {
@@ -11,17 +9,35 @@ export default class HeaderText extends Component {
       fontSize = '28px';
     }
     return (
-      <StyledText color={theme.palette.secondaryTextColor} size={fontSize}>
-        { this.props.text }
-      </StyledText>
+      <View>
+        <StyledText size={fontSize}>
+          { this.props.text }
+        </StyledText>
+        {
+          this.props.body ?
+            <BodyText>
+              { this.props.body }
+            </BodyText>
+            :
+            ''
+        }
+      </View>
     )
   }
 }
 
 const StyledText = styled.Text`
   font-size: ${props => props.size};
-  color: ${props => props.color};
+  color: white;
 
   text-align: center;
-  padding: 25px 50px 10px 50px;
+  padding: 15px 5% 0 5%;
+`
+
+const BodyText = styled.Text`
+  font-size: 16px;
+  color: white;
+
+  text-align: center;
+  padding: 15px 10% 15px 10%;
 `

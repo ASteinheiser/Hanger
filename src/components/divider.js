@@ -9,7 +9,7 @@ export default class StyledDivider extends Component {
           container: {
             marginLeft: 20,
             marginRight: 20,
-            marginTop: 30,
+            marginTop: 10,
             marginBottom: 10
           }
         }}

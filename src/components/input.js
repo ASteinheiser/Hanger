@@ -5,15 +5,17 @@ import theme from '../theme.js';
 
 export default class Input extends React.Component {
   render() {
-    const MAIN_COLOR = this.props.accent ? theme.palette.accentColor : theme.palette.primaryColor;
-    const DISABLED_COLOR = this.props.accent ? theme.palette.accentColor : theme.palette.primaryColor;
-    const TEXT_COLOR = this.props.accent ? theme.palette.accentColor : theme.palette.primaryTextColor;
+    const MAIN_COLOR = this.props.accent ? theme.palette.accentColor : 'white';
+    const DISABLED_COLOR = this.props.accent ? theme.palette.accentColor : 'white';
+    const TEXT_COLOR = this.props.accent ? theme.palette.accentColor : 'white';
 
     return (
       <TextField
         baseColor={ DISABLED_COLOR }
         tintColor={ MAIN_COLOR }
         textColor={ TEXT_COLOR }
+        errorColor={ '#ff273d' }
+        fontSize={18}
         onChangeText={(event) => this.props.onChange(event)}
         {...this.props}
       />
