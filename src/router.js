@@ -1,8 +1,8 @@
 import React, { Component }    from 'react';
-import { AsyncStorage }        from 'react-native';
+import { AsyncStorage, View }  from 'react-native';
 import { NativeRouter, Route } from 'react-router-native';
+import styled                  from 'styled-components/native';
 
-import BottomNavigation from './components/bottom-navigation.js';
 import Camera           from './containers/upload/camera.js';
 import CheckEmail       from './containers/auth/check-email.js';
 import ForgotPassword   from './containers/auth/forgot-password.js';
@@ -43,7 +43,7 @@ export default class Router extends React.Component {
   render() {
     return(
       <NativeRouter>
-        <BottomNavigation user={this.state.user} setuser={this.updateUser.bind(this)}>
+        <StyledView>
           <Route path="/" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Login} /> } />
           <Route path="/new-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={NewPassword} /> } />
           <Route path="/forgot-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={ForgotPassword} /> }  />
@@ -60,8 +60,13 @@ export default class Router extends React.Component {
           <Route path="/hive" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Hive} /> } />
           <Route path="/projects" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Projects} /> } />
           <Route path="/settings" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Settings} /> } />
-        </BottomNavigation>
+        </StyledView>
       </NativeRouter>
     );
   }
 }
+
+const StyledView = styled.View`
+  display: flex;
+  flex: 1;
+`
