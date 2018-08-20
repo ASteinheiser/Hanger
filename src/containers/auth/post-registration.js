@@ -17,7 +17,8 @@ export default class PostRegistration extends React.Component {
     super(props);
 
     this.state = {
-      name:         { value: '', valid: true },
+      first_name:   { value: '', valid: true },
+      last_name:    { value: '', valid: true },
       display_name: { value: '', valid: true },
       location:     { value: '', valid: true },
       alertMessage: '',
@@ -37,7 +38,8 @@ export default class PostRegistration extends React.Component {
 
   handleSubmit() {
     const formObject = {
-      name: this.state.name,
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
       display_name: this.state.display_name
     };
     const { formValid, emptyFields } = validateForm(formObject);
@@ -48,9 +50,9 @@ export default class PostRegistration extends React.Component {
 
         let params = {
           body: {
-            name: this.state.name.value,
+            first_name: this.state.first_name.value,
+            last_name: this.state.last_name.value,
             display_name: this.state.display_name.value,
-            Username: this.props.user.username
           }
         };
         if (this.state.location.value) params.body.location = this.state.location.value;
@@ -58,7 +60,10 @@ export default class PostRegistration extends React.Component {
         API.post('HangerAPI', '/v1/user/post-registration', params)
           .then(response => {
             this.setState({ loading: false });
-            this.props.history.replace('/home');
+            var self = this;
+            setTimeout(function() {
+              self.props.history.replace('/home');
+            }, 500);
           })
           .catch(err => {
             console.log(err);
@@ -103,11 +108,18 @@ export default class PostRegistration extends React.Component {
 
           <InputMargin>
             <Input
-              onChange={this.onChange.bind(this, 'name')}
+              onChange={this.onChange.bind(this, 'first_name')}
               containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-              label={'Full Name'}
-              value={this.state.name.value}
-              error={!this.state.name.valid ? 'Enter a name.' : ''}
+              label={'First Name'}
+              value={this.state.first_name.value}
+              error={!this.state.first_name.valid ? 'Enter a first name.' : ''}
+              />
+            <Input
+              onChange={this.onChange.bind(this, 'last_name')}
+              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              label={'Last Name'}
+              value={this.state.last_name.value}
+              error={!this.state.last_name.valid ? 'Enter a last name.' : ''}
               />
             <Input
               onChange={this.onChange.bind(this, 'display_name')}
