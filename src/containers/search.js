@@ -43,7 +43,8 @@ export default class Search extends React.Component {
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
           <Container color={theme.palette.canvasColor}>
 
-            <HeaderText text='Explore Events, Gigs, etc!' small />
+            <HeaderText blue small
+              text='Explore Events, Gigs, etc!' />
 
             <FeedPost
               title={'Phoenix Fashion Week 2018'}
