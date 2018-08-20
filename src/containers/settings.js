@@ -11,6 +11,7 @@ import theme            from '../theme.js';
 export default class Settings extends React.Component {
 
   handleSignout() {
+    this.props.setuser();
     Auth.signOut();
     this.props.history.replace('/');
   }
