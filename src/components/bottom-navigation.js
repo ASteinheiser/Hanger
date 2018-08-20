@@ -4,7 +4,7 @@ import { withRouter }       from 'react-router-native';
 import styled               from 'styled-components/native';
 
 import Button        from '../components/button.js';
-import Header        from '../components/header-text.js';
+import HeaderText    from '../components/header-text.js';
 import HomeLogo      from '../../assets/icons/home-white.png';
 import SearchLogo    from '../../assets/icons/search-white.png';
 import PlusLogo      from '../../assets/icons/plus-white.png';
@@ -45,7 +45,9 @@ class BottomNav extends Component {
   }
 
   handleToggleUploadMenu() {
-    this.setState({ showUploadMenu: !this.state.showUploadMenu });
+    if(this.props.user !== 'viewPublicFeed') {
+      this.setState({ showUploadMenu: !this.state.showUploadMenu });
+    }
   }
 
   handleBackToLogin() {
@@ -63,7 +65,8 @@ class BottomNav extends Component {
           this.props.user === 'viewPublicFeed' && this.props.location.pathname !== '/home' ?
             <Padding>
 
-              <Header text='Please create an account to use this feature...' blue small />
+              <HeaderText blue small
+                text='Please create an account to use this feature...'/>
 
               <Margin>
                 <Button

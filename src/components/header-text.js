@@ -25,7 +25,7 @@ export default class HeaderText extends Component {
               { this.props.body }
             </BodyText>
             :
-            ''
+            <View></View>
         }
       </View>
     )
