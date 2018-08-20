@@ -234,6 +234,8 @@ const Flex = styled.View`
 
 const Container = styled.ScrollView`
   flex: 1;
+
+  z-index: 3;
 `
 
 const Margin = styled.View`
@@ -284,6 +286,7 @@ const WelcomeContainer = styled.View`
   flex-direction: column;
 
   justify-content: center;
+  z-index: 3;
 `
 
 const FullWidth = styled.View`

@@ -56,7 +56,6 @@ export default class PostRegistration extends React.Component {
 
         API.post('HangerAPI', '/v1/user/post-registration', params)
           .then(response => {
-            console.log(response);
             this.setState({ loading: false });
             this.props.history.replace('/home');
           })
