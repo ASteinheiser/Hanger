@@ -6,10 +6,11 @@ import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
 import HeaderText        from '../../components/header-text.js';
 import Input             from '../../components/input.js';
-import TopNavigation     from '../../components/top-navigation.js';
-import theme             from '../../theme.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
+
+import HangerLogo     from '../../../assets/icons/hanger-white.png';
+import Photographer   from '../../../assets/splash-screens/registration/photographer.jpeg';
 
 export default class PostRegistration extends React.Component {
   constructor(props) {
@@ -83,64 +84,122 @@ export default class PostRegistration extends React.Component {
 
   render() {
     return (
-      <Height>
-        <TopNavigation
-          back-button
-          route='/'
-          onpress={this.handleBackButton.bind(this)}
-          history={this.props.history} />
+      <Flex>
+        <BackgroundImage source={Photographer} />
+        <BackgroundFilter />
 
-        <Container color={theme.palette.canvasColor}>
+        <Container>
+          <TopPadding>
+            <FullWidth>
+              <HangerImage small source={HangerLogo} />
+            </FullWidth>
+          </TopPadding>
 
-          <HeaderText text='Tell Us More' />
+          <HeaderText small
+            text='Tell Us More'
+            body='Finish filling out your account details.' />
 
           <Alert message={this.state.alertMessage} />
 
-          <Input
-            onChange={this.onChange.bind(this, 'name')}
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'Full Name'}
-            value={this.state.name.value}
-            error={!this.state.name.valid ? 'Enter a name.' : ''}
-            />
-          <Input
-            onChange={this.onChange.bind(this, 'display_name')}
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'Public Username'}
-            value={this.state.display_name.value}
-            error={!this.state.display_name.valid ? 'Enter a user name.' : ''}
-            />
-          <Input
-            onChange={this.onChange.bind(this, 'location')}
-            containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-            label={'Location (Optional)'}
-            value={this.state.location.value}
-            error={''}
-            />
+          <InputMargin>
+            <Input
+              onChange={this.onChange.bind(this, 'name')}
+              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              label={'Full Name'}
+              value={this.state.name.value}
+              error={!this.state.name.valid ? 'Enter a name.' : ''}
+              />
+            <Input
+              onChange={this.onChange.bind(this, 'display_name')}
+              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              label={'Public Username'}
+              value={this.state.display_name.value}
+              error={!this.state.display_name.valid ? 'Enter a user name.' : ''}
+              />
+            <Input
+              onChange={this.onChange.bind(this, 'location')}
+              containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+              label={'Location (Optional)'}
+              value={this.state.location.value}
+              error={''}
+              />
+          </InputMargin>
 
-          <Margin>
+          <TopMargin>
             <Button
               primary
               icon="person"
               text="Create Profile"
               disabled={this.state.loading}
               onPress={this.handleSubmit.bind(this)} />
+          </TopMargin>
+
+          <Margin>
+            <Button
+              primary
+              icon="arrow-back"
+              text="Go Back"
+              onPress={() => this.props.history.replace('/')} />
           </Margin>
         </Container>
-      </Height>
+      </Flex>
     )
   }
 }
 
-const Height = styled.View`
+const Flex = styled.View`
   height: 100%;
 `
 
 const Container = styled.ScrollView`
-  background-color: ${props => props.color};
   flex: 1;
+
+  z-index: 3;
 `
 
 const Margin = styled.View`
-  margin: 30px 20px 20px 20px;
+  margin: 20px 20% 20px 20%;
+`
+
+const TopMargin = styled.View`
+  margin: 30px 20% 20px 20%;
+`
+
+const HangerImage = styled.Image`
+  width: ${props => props.small ? '100px' : '150px'};
+  height: ${props => props.small ? '100px' : '150px'};
+
+  margin: 0 auto;
+`
+
+const BackgroundImage = styled.Image`
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  z-index: 1;
+`
+
+const BackgroundFilter = styled.View`
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 2;
+`
+
+const FullWidth = styled.View`
+  width: 100%;
+`
+
+const InputMargin = styled.View`
+  margin: 0 5%;
+`
+
+const TopPadding = styled.View`
+  padding-top: 25px;
 `

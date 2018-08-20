@@ -6,8 +6,6 @@ import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
 import HeaderText        from '../../components/header-text.js';
 import Input             from '../../components/input.js';
-import TopNavigation     from '../../components/top-navigation.js';
-import theme             from '../../theme.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 import { uuidv4 }        from '../../functions/uuid-v4.js';
