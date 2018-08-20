@@ -2,14 +2,14 @@ import React         from 'react';
 import { API, Auth } from 'aws-amplify';
 import styled        from 'styled-components/native';
 
-import Alert             from '../components/alert.js';
-import Button            from '../components/button.js';
-import HeaderText        from '../components/header-text.js';
-import Input             from '../components/input.js';
-import TopNavigation     from '../components/top-navigation.js';
-import theme             from '../theme.js';
-import { validateField } from '../functions/validate-field.js';
-import { validateForm }  from '../functions/validate-form.js';
+import Alert             from '../../components/alert.js';
+import Button            from '../../components/button.js';
+import HeaderText        from '../../components/header-text.js';
+import Input             from '../../components/input.js';
+import TopNavigation     from '../../components/top-navigation.js';
+import theme             from '../../theme.js';
+import { validateField } from '../../functions/validate-field.js';
+import { validateForm }  from '../../functions/validate-form.js';
 
 export default class PostRegistration extends React.Component {
   constructor(props) {

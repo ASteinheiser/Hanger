@@ -46,9 +46,9 @@ class TopNavigation extends Component {
               </Centered>
               :
               <Centered>
-                <PaddingLeft>
+                <PaddingRight>
                   <ScaledImage source={HangerTextLogo} height={40} />
-                </PaddingLeft>
+                </PaddingRight>
               </Centered>
           }
           rightElement={
@@ -119,8 +119,8 @@ const MarginLeft = styled.View`
   margin-left: 10px;
 `
 
-const PaddingLeft = styled.View`
-  padding-left: 25px;
+const PaddingRight = styled.View`
+  padding-right: 15px;
 `
 
 const Touchable = styled.TouchableOpacity`

@@ -3,9 +3,10 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
-import FavoritesItem from '../components/favorites-item.js';
-import TopNavigation from '../components/top-navigation.js';
-import theme         from '../theme.js';
+import BottomNavigation from '../components/bottom-navigation.js';
+import FavoritesItem    from '../components/favorites-item.js';
+import TopNavigation    from '../components/top-navigation.js';
+import theme            from '../theme.js';
 
 import SAMPLE_FAVORITES from '../../assets/data/favorites.json';
 
@@ -24,11 +25,13 @@ export default class Shopping extends React.Component {
           title='Hanger Closet'
           navigation={this.props.navigation} />
 
-        <Container color={theme.palette.canvasColor}>
+        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
+          <Container color={theme.palette.canvasColor}>
 
-          { FavoritesItems }
+            { FavoritesItems }
 
-        </Container>
+          </Container>
+        </BottomNavigation>
       </Height>
     )
   }
@@ -36,7 +39,6 @@ export default class Shopping extends React.Component {
 
 const Height = styled.View`
   height: 100%;
-  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

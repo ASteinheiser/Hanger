@@ -12,7 +12,7 @@ import Login            from './containers/auth/login.js';
 import Messages         from './containers/messages.js';
 import NewPassword      from './containers/auth/new-password.js';
 import Notifications    from './containers/notifications';
-import PostRegistration from './containers/post-registration.js';
+import PostRegistration from './containers/auth/post-registration.js';
 import Projects         from './containers/projects.js';
 import Profile          from './containers/profile';
 import Public           from './components/public-route.js';

@@ -3,9 +3,10 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
-import FeedPost      from '../components/feed-post.js';
-import TopNavigation from '../components/top-navigation.js';
-import theme         from '../theme.js';
+import BottomNavigation from '../components/bottom-navigation.js';
+import FeedPost         from '../components/feed-post.js';
+import TopNavigation    from '../components/top-navigation.js';
+import theme            from '../theme.js';
 
 import SAMPLE_POSTS from '../../assets/data/posts.json';
 
@@ -22,11 +23,13 @@ export default class Home extends React.Component {
       <Height>
         <TopNavigation navigation={this.props.navigation} />
 
-        <Container color={theme.palette.canvasColor}>
+        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
+          <Container color={theme.palette.canvasColor}>
 
-          { FeedPosts }
+            { FeedPosts }
 
-        </Container>
+          </Container>
+        </BottomNavigation>
       </Height>
     );
   }
@@ -34,7 +37,6 @@ export default class Home extends React.Component {
 
 const Height = styled.View`
   height: 100%;
-  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
+import BottomNavigation        from '../components/bottom-navigation.js';
 import ProfileHeader           from '../components/profile-header.js';
 import ProfileContentThumbnail from '../components/profile-content-thumbnail.js';
 import TopNavigation           from '../components/top-navigation.js';
@@ -25,15 +26,17 @@ export default class Profile extends React.Component {
           title='Profile'
           navigation={this.props.navigation} />
 
-        <Container color={theme.palette.canvasColor}>
+        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
+          <Container color={theme.palette.canvasColor}>
 
-          <ProfileHeader user={SAMPLE_USER}/>
+            <ProfileHeader user={SAMPLE_USER}/>
 
-          <ProfileContentContainer>
-            { ProfileContent }
-          </ProfileContentContainer>
+            <ProfileContentContainer>
+              { ProfileContent }
+            </ProfileContentContainer>
 
-        </Container>
+          </Container>
+        </BottomNavigation>
       </Height>
     )
   }
@@ -41,7 +44,6 @@ export default class Profile extends React.Component {
 
 const Height = styled.View`
   height: 100%;
-  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

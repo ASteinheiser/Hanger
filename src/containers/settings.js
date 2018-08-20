@@ -2,10 +2,11 @@ import React    from 'react';
 import { Auth } from 'aws-amplify';
 import styled   from 'styled-components/native';
 
-import Button        from '../components/button.js';
-import IconWithText  from '../components/icon-with-text.js';
-import TopNavigation from '../components/top-navigation.js';
-import theme         from '../theme.js';
+import BottomNavigation from '../components/bottom-navigation.js';
+import Button           from '../components/button.js';
+import IconWithText     from '../components/icon-with-text.js';
+import TopNavigation    from '../components/top-navigation.js';
+import theme            from '../theme.js';
 
 export default class Settings extends React.Component {
 
@@ -19,22 +20,24 @@ export default class Settings extends React.Component {
       <Height>
         <TopNavigation navigation={this.props.navigation} />
 
-        <Container color={theme.palette.canvasColor}>
+        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
+          <Container color={theme.palette.canvasColor}>
 
-          <IconWithText
-            text='Account Settings'
-            icon='settings'
-            />
+            <IconWithText
+              text='Account Settings'
+              icon='settings'
+              />
 
-          <Margin>
-            <Button
-              primary
-              icon="subdirectory-arrow-left"
-              text="Logout"
-              onPress={this.handleSignout.bind(this)} />
-          </Margin>
+            <Margin>
+              <Button
+                primary
+                icon="subdirectory-arrow-left"
+                text="Logout"
+                onPress={this.handleSignout.bind(this)} />
+            </Margin>
 
-        </Container>
+          </Container>
+        </BottomNavigation>
       </Height>
     );
   }
@@ -42,7 +45,6 @@ export default class Settings extends React.Component {
 
 const Height = styled.View`
   height: 100%;
-  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

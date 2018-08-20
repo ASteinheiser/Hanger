@@ -3,9 +3,10 @@ import { View, ScrollView } from 'react-native';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
-import MessageItem   from '../components/message-item.js';
-import TopNavigation from '../components/top-navigation.js';
-import theme         from '../theme.js';
+import BottomNavigation from '../components/bottom-navigation.js';
+import MessageItem      from '../components/message-item.js';
+import TopNavigation    from '../components/top-navigation.js';
+import theme            from '../theme.js';
 
 import SAMPLE_MESSAGES from '../../assets/data/messages.json';
 
@@ -25,11 +26,13 @@ export default class Messages extends React.Component {
           title='Messages'
           navigation={this.props.navigation} />
 
-        <Container color={theme.palette.canvasColor}>
+        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
+          <Container color={theme.palette.canvasColor}>
 
-          { Messages }
+            { Messages }
 
-        </Container>
+          </Container>
+        </BottomNavigation>
       </Height>
     )
   }
@@ -37,7 +40,6 @@ export default class Messages extends React.Component {
 
 const Height = styled.View`
   height: 100%;
-  padding-bottom: 60px;
 `
 
 const Container = styled.ScrollView`

@@ -18,7 +18,7 @@ export default class StyledButton extends Component {
       },
       text: {
         fontFamily: theme.fontFamily ? theme.fontFamily : 'Roboto',
-        color: white,
+        color: this.props.primary ? white : theme.palette.primaryColor,
         fontWeight: 'bold',
         fontSize: 16
       }

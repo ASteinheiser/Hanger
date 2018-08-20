@@ -1,11 +1,10 @@
-import React, { Component }              from 'react';
-import { Image, View, TouchableOpacity } from 'react-native';
-import { withRouter }                    from 'react-router-native';
-import styled                            from 'styled-components/native';
+import React, { Component } from 'react';
+import { Image, View }      from 'react-native';
+import { withRouter }       from 'react-router-native';
+import styled               from 'styled-components/native';
 
 import Button        from '../components/button.js';
 import Header        from '../components/header-text.js';
-import TopNavigation from '../components/top-navigation.js';
 import HomeLogo      from '../../assets/icons/home-white.png';
 import SearchLogo    from '../../assets/icons/search-white.png';
 import PlusLogo      from '../../assets/icons/plus-white.png';
@@ -23,7 +22,6 @@ class BottomNav extends Component {
 
     this.state = {
       active: currentRoute,
-      shouldHideNav: this.shouldHideNav(currentRoute),
       showUploadMenu: false
     };
   }
@@ -32,10 +30,7 @@ class BottomNav extends Component {
     let currentRoute = nextProps.location.pathname;
 
     if (currentRoute !== this.state.active) {
-      this.setState({
-        active: currentRoute,
-        shouldHideNav: this.shouldHideNav(currentRoute)
-      });
+      this.setState({ active: currentRoute });
       return true;
     } else if (nextProps.showUploadMenu !== this.state.showUploadMenu) {
       return true;
@@ -45,18 +40,8 @@ class BottomNav extends Component {
   }
 
   handleNavigation(route) {
-    this.setState({ active: route, shouldHideNav: this.shouldHideNav(route) });
+    this.setState({ active: route });
     this.props.history.push(route);
-  }
-
-  shouldHideNav(route) {
-    if(route === '/' || route === '/register' || route === '/camera'
-      || route === '/forgot-password' || route === '/check-email'
-      || route === '/new-password' || route === '/post-registration') {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   handleToggleUploadMenu() {
@@ -66,7 +51,7 @@ class BottomNav extends Component {
   handleBackToLogin() {
     let route = '/';
     this.props.setuser();
-    this.setState({ active: route, shouldHideNav: this.shouldHideNav(route) });
+    this.setState({ active: route });
     this.props.history.push(route);
   }
 
@@ -76,21 +61,22 @@ class BottomNav extends Component {
 
         {
           this.props.user === 'viewPublicFeed' && this.props.location.pathname !== '/home' ?
-            <Height>
-              <TopNavigation navigation={this.props.navigation} />
+            <Padding>
 
-              <Header text='Please login to use this feature' />
+              <Header text='Please create an account to use this feature...' blue small />
 
               <Margin>
                 <Button
-                  primary
+                  accent
                   icon='subdirectory-arrow-right'
                   text='Login'
                   onPress={this.handleBackToLogin.bind(this)} />
               </Margin>
-            </Height>
+            </Padding>
             :
-            this.props.children
+            <Padding>
+              { this.props.children }
+            </Padding>
         }
 
         <UploadMenu
@@ -98,28 +84,24 @@ class BottomNav extends Component {
           history={this.props.history}
           close={this.handleToggleUploadMenu.bind(this)} />
 
-        {
-          this.state.shouldHideNav ?
-            null
-            :
-            <BottomNavContainer color={theme.palette.primaryColor}>
-              <Touchable onPress={this.handleNavigation.bind(this, '/home')}>
-                <StyledImage source={HomeLogo} />
-              </Touchable>
-              <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
-                <StyledImage source={SearchLogo} />
-              </Touchable>
-              <Touchable onPress={this.handleToggleUploadMenu.bind(this)}>
-                <StyledImage source={PlusLogo} />
-              </Touchable>
-              <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
-                <StyledImage source={MessageLogo} />
-              </Touchable>
-              <Touchable onPress={this.handleNavigation.bind(this, '/shopping')}>
-                <StyledImage source={ShoppingLogo} />
-              </Touchable>
-            </BottomNavContainer>
-        }
+        <BottomNavContainer color={theme.palette.primaryColor}>
+          <Touchable onPress={this.handleNavigation.bind(this, '/home')}>
+            <StyledImage source={HomeLogo} />
+          </Touchable>
+          <Touchable onPress={this.handleNavigation.bind(this, '/search')}>
+            <StyledImage source={SearchLogo} />
+          </Touchable>
+          <Touchable onPress={this.handleToggleUploadMenu.bind(this)}>
+            <StyledImage source={PlusLogo} />
+          </Touchable>
+          <Touchable onPress={this.handleNavigation.bind(this, '/messages')}>
+            <StyledImage source={MessageLogo} />
+          </Touchable>
+          <Touchable onPress={this.handleNavigation.bind(this, '/shopping')}>
+            <StyledImage source={ShoppingLogo} />
+          </Touchable>
+        </BottomNavContainer>
+
       </FullScreen>
     );
   }
@@ -154,12 +136,13 @@ const Touchable = styled.TouchableOpacity`
   padding: 15px 20px;
 `
 
-const Height = styled.ScrollView`
-  height: 100%;
+const Margin = styled.View`
+  margin: 20px 20% 20px 20%;
 `
 
-const Margin = styled.View`
-  margin: 20px 20px 20px 20px;
+const Padding = styled.View`
+  height: 100%;
+  padding-bottom: 60px;
 `
 
 export default withRouter(BottomNav);
