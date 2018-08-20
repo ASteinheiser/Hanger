@@ -59,7 +59,7 @@ export default class PostRegistration extends React.Component {
 
         API.post('HangerAPI', '/v1/user/post-registration', params)
           .then(response => {
-            this.setuser(); // clean out old user so auth routes will update with new info
+            this.props.setuser(); // clean out old user so auth routes will update with new info
             this.setState({ loading: false });
             this.props.history.replace('/home');
           })
