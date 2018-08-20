@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { AsyncStorage }     from 'react-native';
+import { DotIndicator }     from 'react-native-indicators';
 import { withRouter }       from 'react-router-native';
-import { Auth }             from 'aws-amplify';
+import { Auth, API }        from 'aws-amplify';
+import styled               from 'styled-components/native';
 
 class PrivateRoute extends Component {
   constructor(props) {
@@ -31,31 +33,24 @@ class PrivateRoute extends Component {
           this.setState({ authenticationComplete: true });
           this.props.setuser(user);
           // take them to fill out info if they need to finish profile
-          if(user && user.attributes
-            && user.attributes['custom:registration_step'] === 'additional_info'
-            && this.props.location.pathname !== '/post-registration') {
+          if(user.registration_step === 'additional_info'
+              && this.props.location.pathname !== '/post-registration') {
             this.props.history.replace('/post-registration');
           }
         }
         else {
-          Auth.currentUserInfo()
-            .then(user => {
-              if (!user) {
-                this.setState({ authenticationComplete: true });
-                this.props.history.replace('/');
-              }
-              else {
-                this.setState({ authenticationComplete: true });
-                this.props.setuser(user);
-                // take them to fill out info if they need to finish profile
-                if(user.attributes
-                  && user.attributes['custom:registration_step'] === 'additional_info'
+          API.get('HangerAPI', '/v1/user')
+            .then(response => {
+              this.setState({ authenticationComplete: true });
+              this.props.setuser(response);
+              // take them to fill out info if they need to finish profile
+              if(response.registration_step === 'additional_info'
                   && this.props.location.pathname !== '/post-registration') {
-                  this.props.history.replace('/post-registration');
-                }
+                this.props.history.replace('/post-registration');
               }
             })
             .catch(err => {
+              console.log(err);
               Auth.signOut();
               this.props.setuser();
               this.props.history.replace('/');
@@ -65,9 +60,8 @@ class PrivateRoute extends Component {
     } else {
       this.setState({ authenticationComplete: true });
       // take them to fill out info if they need to finish profile
-      if(this.props.user && this.props.user.attributes
-        && this.props.user.attributes['custom:registration_step'] === 'additional_info'
-        && this.props.location.pathname !== '/post-registration') {
+      if(this.props.user.registration_step === 'additional_info'
+          && this.props.location.pathname !== '/post-registration') {
         this.props.history.replace('/post-registration');
       }
     }
@@ -81,10 +75,45 @@ class PrivateRoute extends Component {
       user = this.props.user;
     }
 
+    if(!this.state.authenticationComplete) {
+      return(
+        <StyledView color={theme.palette.canvasColor}>
+          <Container>
+
+            <StyledText color={theme.palette.primaryColor}>
+              {'Checking Credentials...'}
+            </StyledText>
+
+            <DotIndicator color={theme.palette.primaryColor}/>
+
+          </Container>
+        </StyledView>
+      )
+    }
+
     return (
       <Comp {...this.props} user={user} />
     );
   }
 }
+
+const StyledView = styled.View`
+  background: ${props => props.color};
+
+  height: 100%;
+`
+
+const Container = styled.View`
+  margin: 50px auto;
+`
+
+const StyledText = styled.Text`
+  font-size: 28px;
+
+  color: ${props => props.color};
+
+  margin-bottom: 50px;
+  margin-top: 50px;
+`
 
 export default withRouter(PrivateRoute);

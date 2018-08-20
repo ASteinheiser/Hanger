@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AsyncStorage }     from 'react-native';
-import { Auth }             from 'aws-amplify';
+import { Auth, API }        from 'aws-amplify';
 import { withRouter }       from 'react-router-native';
 import { DotIndicator }     from 'react-native-indicators';
 import styled               from 'styled-components/native';
@@ -36,21 +36,17 @@ class PublicRoute extends Component {
           this.props.history.replace('/home');
         }
         else {
-          Auth.currentUserInfo()
-            .then(user => {
-              if (user) {
-                this.setState({ authenticationComplete: true });
-                this.props.setuser(user);
-                this.props.history.replace({
-                  pathname: '/home',
-                  state: { user }
-                });
-              }
-              else {
-                this.setState({ authenticationComplete: true });
-              }
+          API.get('HangerAPI', '/v1/user')
+            .then(response => {
+              this.setState({ authenticationComplete: true });
+              this.props.setuser(response);
+              this.props.history.replace({
+                pathname: '/home',
+                state: { response }
+              });
             })
             .catch(err => {
+              console.log(err);
               Auth.signOut();
               this.props.setuser();
               this.setState({ authenticationComplete: true });
