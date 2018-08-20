@@ -33,8 +33,10 @@ class PrivateRoute extends Component {
           this.setState({ authenticationComplete: true });
           this.props.setuser(user);
           // take them to fill out info if they need to finish profile
-          if(user.registration_step === 'additional_info'
+          if(typeof user !== 'string'
+              && user.registration_step === 'additional_info'
               && this.props.location.pathname !== '/post-registration') {
+
             this.props.history.replace('/post-registration');
           }
         }
@@ -60,7 +62,8 @@ class PrivateRoute extends Component {
     } else {
       this.setState({ authenticationComplete: true });
       // take them to fill out info if they need to finish profile
-      if(this.props.user.registration_step === 'additional_info'
+      if(typeof this.props.user !== 'string'
+          && this.props.user.registration_step === 'additional_info'
           && this.props.location.pathname !== '/post-registration') {
         this.props.history.replace('/post-registration');
       }
