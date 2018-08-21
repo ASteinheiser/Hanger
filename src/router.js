@@ -33,9 +33,22 @@ export default class Router extends React.Component {
 
   updateUser(user) {
     if(!user) {
-      AsyncStorage.removeItem('@user');
+      AsyncStorage.removeItem('@user')
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
-      AsyncStorage.setItem('@user', user);
+      if(typeof user !== 'string') user = JSON.stringify(user);
+      AsyncStorage.setItem('@user', user)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
     this.setState({ user: user });
   }

@@ -149,7 +149,7 @@ export default class PostRegistration extends React.Component {
               primary
               icon="arrow-back"
               text="Go Back"
-              onPress={() => this.props.history.replace('/')} />
+              onPress={this.handleBackButton.bind(this)} />
           </Margin>
         </Container>
       </Flex>

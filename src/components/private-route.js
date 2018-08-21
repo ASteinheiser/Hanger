@@ -29,12 +29,14 @@ class PrivateRoute extends Component {
       AsyncStorage.getItem('@user', (error, result) => {
 
         if(result) {
+          if(typeof result === 'string' && result !== 'viewPublicFeed') {
+            result = JSON.parse(result);
+          }
           let user = result;
           this.setState({ authenticationComplete: true });
           this.props.setuser(user);
           // take them to fill out info if they need to finish profile
-          if(typeof user !== 'string'
-              && user.registration_step === 'additional_info'
+          if(user.registration_step === 'additional_info'
               && this.props.location.pathname !== '/post-registration') {
 
             this.props.history.replace('/post-registration');
@@ -53,17 +55,20 @@ class PrivateRoute extends Component {
             })
             .catch(err => {
               console.log(err);
-              Auth.signOut();
               this.props.setuser();
+              Auth.signOut();
               this.props.history.replace('/');
             });
         }
       });
     } else {
+      let user = this.props.user;
+      if(typeof user === 'string' && user !== 'viewPublicFeed') {
+        user = JSON.parse(user);
+      }
       this.setState({ authenticationComplete: true });
       // take them to fill out info if they need to finish profile
-      if(typeof this.props.user !== 'string'
-          && this.props.user.registration_step === 'additional_info'
+      if(user.registration_step === 'additional_info'
           && this.props.location.pathname !== '/post-registration') {
         this.props.history.replace('/post-registration');
       }
@@ -72,11 +77,7 @@ class PrivateRoute extends Component {
 
   render() {
     let Comp = this.props.component;
-    let { user } = this.state;
-
-    if(!user && this.props.user) {
-      user = this.props.user;
-    }
+    let { user } = this.props;
 
     if(!this.state.authenticationComplete) {
       return(
