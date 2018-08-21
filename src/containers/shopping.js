@@ -21,17 +21,17 @@ export default class Shopping extends React.Component {
 
     return (
       <Height>
-        <TopNavigation
-          title='Hanger Closet'
-          navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation title='Hanger Closet' navigation={this.props.navigation}>
+            <Container color={theme.palette.canvasColor}>
 
-            { FavoritesItems }
+              { FavoritesItems }
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     )
   }

@@ -21,15 +21,17 @@ export default class Home extends React.Component {
 
     return (
       <Height>
-        <TopNavigation navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation navigation={this.props.navigation}>
 
-            { FeedPosts }
+            <Container color={theme.palette.canvasColor}>
+              { FeedPosts }
+            </Container>
 
-          </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     );
   }

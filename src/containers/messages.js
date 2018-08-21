@@ -22,17 +22,17 @@ export default class Messages extends React.Component {
 
     return (
       <Height>
-        <TopNavigation
-          title='Messages'
-          navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation title='Messages' navigation={this.props.navigation}>
+            <Container color={theme.palette.canvasColor}>
 
-            { Messages }
+              { Messages }
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     )
   }

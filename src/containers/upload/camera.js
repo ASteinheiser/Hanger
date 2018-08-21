@@ -13,15 +13,17 @@ export default class StyledCamera extends React.Component {
           back-button
           route='back'
           title='Camera'
-          navigation={this.props.navigation} />
+          navigation={this.props.navigation}>
 
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          captureTarget={Camera.constants.CaptureTarget.temp}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill} />
+          <Camera
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            captureTarget={Camera.constants.CaptureTarget.temp}
+            style={styles.preview}
+            aspect={Camera.constants.Aspect.fill} />
+
+        </TopNavigation>
 
       </View>
     )

@@ -22,17 +22,17 @@ export default class Notifications extends React.Component {
 
     return (
       <Height>
-        <TopNavigation
-          title='Notifications'
-          navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation title='Notifications' navigation={this.props.navigation}>
+            <Container color={theme.palette.canvasColor}>
 
-            { Notifications }
+              { Notifications }
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     )
   }

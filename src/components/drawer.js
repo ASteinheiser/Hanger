@@ -44,6 +44,13 @@ export default class Drawer extends Component {
 
 const StyledView = styled.ScrollView`
   background: ${props => props.color};
+
+  position: absolute;
+  top: 60;
+  bottom: 0;
+  left: 0;
+  border-bottom-color: white;
+  border-bottom-width: 1px;
 `
 
 const StyledText = styled.Text`
@@ -51,6 +58,7 @@ const StyledText = styled.Text`
   color: ${props => props.color};
 
   padding-left: 25px;
+  padding-right: 50px;
   padding-top: ${props => props.top ? '50px' : '20px'};
   padding-bottom: ${props => props.bottom ? '50px' : '20px'};
 `

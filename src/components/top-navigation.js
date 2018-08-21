@@ -35,7 +35,7 @@ class TopNavigation extends Component {
 
   render() {
     return (
-      <View>
+      <StyledView>
         <Toolbar style={ toolbarStyle }
           centerElement={
             this.props.title ?
@@ -96,15 +96,21 @@ class TopNavigation extends Component {
               </MarginLeft>
           } />
 
+        { this.props.children }
+
         <Drawer
           history={this.props.history}
           open={this.state.showDrawer}
           close={this.toggleDrawer.bind(this)} />
 
-      </View>
+      </StyledView>
     );
   }
 }
+
+const StyledView = styled.View`
+  height: 100%;
+`
 
 const Centered = styled.View`
   margin: 0 auto;

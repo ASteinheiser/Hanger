@@ -22,21 +22,21 @@ export default class Profile extends React.Component {
 
     return (
       <Height>
-        <TopNavigation
-          title='Profile'
-          navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation title='Profile' navigation={this.props.navigation}>
+            <Container color={theme.palette.canvasColor}>
 
-            <ProfileHeader user={SAMPLE_USER}/>
+              <ProfileHeader user={SAMPLE_USER}/>
 
-            <ProfileContentContainer>
-              { ProfileContent }
-            </ProfileContentContainer>
+              <ProfileContentContainer>
+                { ProfileContent }
+              </ProfileContentContainer>
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     )
   }

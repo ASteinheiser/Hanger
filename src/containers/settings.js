@@ -19,26 +19,28 @@ export default class Settings extends React.Component {
   render() {
     return (
       <Height>
-        <TopNavigation navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation navigation={this.props.navigation}>
+            <Container color={theme.palette.canvasColor}>
 
-            <IconWithText
-              text='Account Settings'
-              icon='settings'
-              />
+              <IconWithText
+                text='Account Settings'
+                icon='settings'
+                />
 
-            <Margin>
-              <Button
-                primary
-                icon="subdirectory-arrow-left"
-                text="Logout"
-                onPress={this.handleSignout.bind(this)} />
-            </Margin>
+              <Margin>
+                <Button
+                  primary
+                  icon="subdirectory-arrow-left"
+                  text="Logout"
+                  onPress={this.handleSignout.bind(this)} />
+              </Margin>
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     );
   }

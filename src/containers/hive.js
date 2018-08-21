@@ -9,17 +9,19 @@ export default class Hive extends React.Component {
   render() {
     return (
       <Height>
-        <TopNavigation navigation={this.props.navigation} />
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation navigation={this.props.navigation}>
+            <Container color={theme.palette.canvasColor}>
 
-            <StyledText color={theme.palette.primaryColor}>
-              { 'Hive Page' }
-            </StyledText>
+              <StyledText color={theme.palette.primaryColor}>
+                { 'Hive Page' }
+              </StyledText>
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
+
       </Height>
     );
   }
