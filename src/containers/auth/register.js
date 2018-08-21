@@ -1,6 +1,7 @@
-import React                from 'react';
-import { Auth }             from 'aws-amplify';
-import styled               from 'styled-components/native';
+import React            from 'react';
+import { Auth }         from 'aws-amplify';
+import styled           from 'styled-components/native';
+import { DotIndicator } from 'react-native-indicators';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -126,12 +127,17 @@ export default class Register extends React.Component {
           </InputMargin>
 
           <TopMargin>
-            <Button
-              primary
-              icon="subdirectory-arrow-right"
-              text="Register"
-              disabled={this.state.loading}
-              onPress={this.handleSubmit.bind(this)} />
+            {
+              this.state.loading ?
+                <DotIndicator size={18} count={3} color={'#ffffff'}/>
+                :
+                <Button
+                  primary
+                  icon="subdirectory-arrow-right"
+                  text="Register"
+                  disabled={this.state.loading}
+                  onPress={this.handleSubmit.bind(this)} />
+            }
           </TopMargin>
 
           <Margin>

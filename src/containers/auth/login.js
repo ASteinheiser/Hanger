@@ -2,6 +2,7 @@ import React            from 'react';
 import { AsyncStorage } from 'react-native';
 import { Auth }         from 'aws-amplify';
 import styled           from 'styled-components/native';
+import { DotIndicator } from 'react-native-indicators';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -181,12 +182,17 @@ export default class Login extends React.Component {
             </InputMargin>
 
             <TopMargin>
-              <Button
-                primary
-                disabled={this.state.loading}
-                icon="subdirectory-arrow-right"
-                text="Login"
-                onPress={this.handleLogin.bind(this)} />
+              {
+                this.state.loading ?
+                  <DotIndicator size={18} count={3} color={'#ffffff'}/>
+                  :
+                  <Button
+                    primary
+                    disabled={this.state.loading}
+                    icon="subdirectory-arrow-right"
+                    text="Login"
+                    onPress={this.handleLogin.bind(this)} />
+              }
             </TopMargin>
 
             <Margin>

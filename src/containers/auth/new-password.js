@@ -1,6 +1,7 @@
-import React                from 'react';
-import { Auth }             from 'aws-amplify';
-import styled               from 'styled-components/native';
+import React            from 'react';
+import { Auth }         from 'aws-amplify';
+import styled           from 'styled-components/native';
+import { DotIndicator } from 'react-native-indicators';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -120,12 +121,17 @@ export default class NewPassword extends React.Component {
           </InputMargin>
 
           <TopMargin>
-            <Button
-              primary
-              disabled={this.state.loading}
-              icon="subdirectory-arrow-right"
-              text="Set New Password"
-              onPress={this.handleSubmit.bind(this)} />
+            {
+              this.state.loading ?
+                <DotIndicator size={18} count={3} color={'#ffffff'}/>
+                :
+                <Button
+                  primary
+                  disabled={this.state.loading}
+                  icon="subdirectory-arrow-right"
+                  text="Set New Password"
+                  onPress={this.handleSubmit.bind(this)} />
+            }
           </TopMargin>
 
           <Margin>

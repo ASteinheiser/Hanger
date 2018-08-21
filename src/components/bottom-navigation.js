@@ -5,6 +5,7 @@ import styled               from 'styled-components/native';
 
 import Button        from '../components/button.js';
 import HeaderText    from '../components/header-text.js';
+import TopNavigation from '../components/top-navigation.js';
 import HomeLogo      from '../../assets/icons/home-white.png';
 import SearchLogo    from '../../assets/icons/search-white.png';
 import PlusLogo      from '../../assets/icons/plus-white.png';
@@ -64,17 +65,18 @@ class BottomNav extends Component {
         {
           this.props.user === 'viewPublicFeed' && this.props.location.pathname !== '/home' ?
             <Padding>
+              <TopNavigation navigation={this.props.navigation}>
+                <HeaderText blue small
+                  text='Please create an account to use this feature...'/>
 
-              <HeaderText blue small
-                text='Please create an account to use this feature...'/>
-
-              <Margin>
-                <Button
-                  accent
-                  icon='subdirectory-arrow-right'
-                  text='Login'
-                  onPress={this.handleBackToLogin.bind(this)} />
-              </Margin>
+                <Margin>
+                  <Button
+                    accent
+                    icon='subdirectory-arrow-right'
+                    text='Login'
+                    onPress={this.handleBackToLogin.bind(this)} />
+                </Margin>
+              </TopNavigation>
             </Padding>
             :
             <Padding>

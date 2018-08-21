@@ -1,6 +1,7 @@
-import React         from 'react';
-import { API, Auth } from 'aws-amplify';
-import styled        from 'styled-components/native';
+import React            from 'react';
+import { API, Auth }    from 'aws-amplify';
+import styled           from 'styled-components/native';
+import { DotIndicator } from 'react-native-indicators';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -136,12 +137,17 @@ export default class PostRegistration extends React.Component {
           </InputMargin>
 
           <TopMargin>
-            <Button
-              primary
-              icon="person"
-              text="Create Profile"
-              disabled={this.state.loading}
-              onPress={this.handleSubmit.bind(this)} />
+            {
+              this.state.loading ?
+                <DotIndicator size={18} count={3} color={'#ffffff'}/>
+                :
+                <Button
+                  primary
+                  icon="person"
+                  text="Create Profile"
+                  disabled={this.state.loading}
+                  onPress={this.handleSubmit.bind(this)} />
+            }
           </TopMargin>
 
           <Margin>
