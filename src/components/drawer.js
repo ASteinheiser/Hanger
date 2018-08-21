@@ -21,46 +21,70 @@ export default class Drawer extends Component {
     }
 
     return(
-      <StyledView color={theme.palette.primaryColor}>
-        <Touchable onPress={this.handleNavigation.bind(this, '/notifications')}>
-          <DrawerContainer top_pad>
-            <ButtonIcon source={Notifications} />
-            <StyledText color={theme.palette.accentColor}>
-              {'Notifications'}
-            </StyledText>
-          </DrawerContainer>
-        </Touchable>
-        <Touchable onPress={this.handleNavigation.bind(this, '/hive')}>
-          <DrawerContainer>
-            <ButtonIcon source={HiveLogo} />
-            <StyledText color={theme.palette.accentColor}>
-              {'Hive'}
-            </StyledText>
-          </DrawerContainer>
-        </Touchable>
-        <Touchable onPress={this.handleNavigation.bind(this, '/projects')}>
-          <DrawerContainer>
-            <ButtonIcon source={ProjectsLogo} />
-            <StyledText color={theme.palette.accentColor}>
-              {'Projects'}
-            </StyledText>
-          </DrawerContainer>
-        </Touchable>
-        <Touchable onPress={this.handleNavigation.bind(this, '/settings')}>
-          <DrawerContainer bottom_pad>
-            <ButtonIcon source={SettingsLogo} />
-            <StyledText color={theme.palette.accentColor}>
-              {'Settings'}
-            </StyledText>
-          </DrawerContainer>
-        </Touchable>
-      </StyledView>
+      <FullScreen disabled={true}>
+        <StyledView color={theme.palette.primaryColor}>
+          <Touchable onPress={this.handleNavigation.bind(this, '/notifications')}>
+            <DrawerContainer top_pad>
+              <ButtonIcon source={Notifications} />
+              <StyledText color={theme.palette.accentColor}>
+                {'Notifications'}
+              </StyledText>
+            </DrawerContainer>
+          </Touchable>
+          <Touchable onPress={this.handleNavigation.bind(this, '/hive')}>
+            <DrawerContainer>
+              <ButtonIcon source={HiveLogo} />
+              <StyledText color={theme.palette.accentColor}>
+                {'Hive'}
+              </StyledText>
+            </DrawerContainer>
+          </Touchable>
+          <Touchable onPress={this.handleNavigation.bind(this, '/projects')}>
+            <DrawerContainer>
+              <ButtonIcon source={ProjectsLogo} />
+              <StyledText color={theme.palette.accentColor}>
+                {'Projects'}
+              </StyledText>
+            </DrawerContainer>
+          </Touchable>
+          <Touchable onPress={this.handleNavigation.bind(this, '/settings')}>
+            <DrawerContainer bottom_pad>
+              <ButtonIcon source={SettingsLogo} />
+              <StyledText color={theme.palette.accentColor}>
+                {'Settings'}
+              </StyledText>
+            </DrawerContainer>
+          </Touchable>
+        </StyledView>
+
+        <TouchableBackground onPress={() => this.props.close()}/>
+      </FullScreen>
     )
   }
 }
 
+const FullScreen = styled.TouchableOpacity`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+`
+
+const TouchableBackground = styled.TouchableOpacity`
+  z-index: 99;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`
+
 const StyledView = styled.ScrollView`
   background: ${props => props.color};
+
+  z-index: 1000;
 
   position: absolute;
   top: 60;
