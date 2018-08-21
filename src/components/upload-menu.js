@@ -67,6 +67,9 @@ const CircleContainer = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-width: 2px;
+  border-color: white;
 `
 
 const StyledImage = styled.Image`
