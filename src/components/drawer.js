@@ -21,7 +21,7 @@ export default class Drawer extends Component {
     }
 
     return(
-      <FullScreen disabled={true}>
+      <FullScreen>
         <StyledView color={theme.palette.primaryColor}>
           <Touchable onPress={this.handleNavigation.bind(this, '/notifications')}>
             <DrawerContainer top_pad>
