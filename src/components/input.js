@@ -5,9 +5,9 @@ import theme from '../theme.js';
 
 export default class Input extends React.Component {
   render() {
-    const MAIN_COLOR = this.props.accent ? theme.palette.accentColor : 'white';
-    const DISABLED_COLOR = this.props.accent ? theme.palette.accentColor : 'white';
-    const TEXT_COLOR = this.props.accent ? theme.palette.accentColor : 'white';
+    const MAIN_COLOR = this.props.accent ? theme.palette.primaryColor : 'white';
+    const DISABLED_COLOR = this.props.accent ? theme.palette.primaryColor : 'white';
+    const TEXT_COLOR = this.props.accent ? theme.palette.primaryColor : 'white';
 
     return (
       <TextField
