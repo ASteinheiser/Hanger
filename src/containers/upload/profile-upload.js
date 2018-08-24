@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 
-import BottomNavigation from '../../components/bottom-navigation.js';
 import TopNavigation    from '../../components/top-navigation.js';
 import theme            from '../../theme.js';
 
@@ -10,17 +9,19 @@ export default class ProfileUpload extends Component {
     return(
       <Height>
 
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation navigation={this.props.navigation}>
-            <Container color={theme.palette.canvasColor}>
+        <TopNavigation
+          back-button
+          route='/profile'
+          title='New Profile Picture'
+          navigation={this.props.navigation}>
+          <Container color={theme.palette.canvasColor}>
 
-              <StyledText color={theme.palette.primaryColor}>
-                { 'Profile Upload' }
-              </StyledText>
+            <StyledText color={theme.palette.primaryColor}>
+              { 'Profile Upload' }
+            </StyledText>
 
-            </Container>
-          </TopNavigation>
-        </BottomNavigation>
+          </Container>
+        </TopNavigation>
 
       </Height>
     );
