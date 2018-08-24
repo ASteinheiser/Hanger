@@ -16,11 +16,26 @@ export default class EditProfile extends Component {
   constructor(props) {
     super(props);
 
+    let user = props.user;
+    if(user && typeof user === 'string') user = JSON.parse(user);
+
     this.state = {
-      first_name:   { value: '', valid: true },
-      last_name:    { value: '', valid: true },
-      display_name: { value: '', valid: true },
-      location:     { value: '', valid: true },
+      first_name: {
+        value: user.first_name ? user.first_name : '',
+        valid: true
+      },
+      last_name: {
+        value: user.last_name ? user.last_name : '',
+        valid: true
+      },
+      display_name: {
+        value: user.display_name ? user.display_name : '',
+        valid: true
+      },
+      location: {
+        value: user.location ? user.location : '',
+        valid: true
+      },
       alertMessage: '',
       loading: false
     };

@@ -20,14 +20,17 @@ export default class Profile extends React.Component {
         link={content.link} />
     );
 
+    let user = this.props.user;
+    if(typeof user === 'string') user = JSON.parse(user);
+
     return (
       <Height>
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation edit_icon title='Profile' navigation={this.props.navigation}>
+          <TopNavigation edit_icon title={user && user.display_name ? user.display_name : 'Profile'} navigation={this.props.navigation}>
             <Container color={theme.palette.canvasColor}>
 
-              <ProfileHeader user={SAMPLE_USER} history={this.props.history}/>
+              <ProfileHeader user={user} history={this.props.history}/>
 
               <ProfileContentContainer>
                 { ProfileContent }

@@ -17,22 +17,37 @@ export default class ProfileHeader extends React.Component {
 
         <FlexRow>
           <UsernameText color={theme.palette.secondaryTextColor}>
-            { this.props.user.username }
+            {
+              this.props.user && this.props.user.first_name && this.props.user.last_name ?
+                this.props.user.first_name + ' ' + this.props.user.last_name
+                :
+                null
+            }
           </UsernameText>
 
           <Button
             small
-            primary
+            accent
             text="Follow"
             onPress={()=> { console.log('followed user!') }} />
         </FlexRow>
 
         <HeaderText color={theme.palette.disabledColor}>
-          { this.props.user.category + ' in ' + this.props.user.location }
+          {
+            this.props.user && this.props.user.location ?
+              'From ' + this.props.user.location
+              :
+              null
+          }
         </HeaderText>
 
         <BodyText color={theme.palette.primaryTextColor}>
-          { this.props.user.description }
+          {
+            this.props.user && this.props.user.description ?
+              this.props.user.description
+              :
+              null
+          }
         </BodyText>
       </Container>
     )
