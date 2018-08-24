@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Avatar }           from 'react-native-material-ui';
 import styled               from 'styled-components/native';
 
 import TopNavigation    from '../../components/top-navigation.js';
@@ -11,14 +12,18 @@ export default class ProfileUpload extends Component {
 
         <TopNavigation
           back-button
-          route='/edit-profile'
-          title='New Profile Picture'
+          route='/profile'
+          title='Edit Profile Info'
           navigation={this.props.navigation}>
           <Container color={theme.palette.canvasColor}>
 
             <StyledText color={theme.palette.primaryColor}>
-              { 'Profile Upload' }
+              { 'Edit Profile' }
             </StyledText>
+
+            <Touchable onPress={() => this.props.history.push('/profile-upload')}>
+              <Avatar icon='person' iconColor='gray' size={80} iconSize={60} />
+            </Touchable>
 
           </Container>
         </TopNavigation>
@@ -40,4 +45,8 @@ const Container = styled.ScrollView`
 const StyledText = styled.Text`
   color: ${props => props.color};
   font-size: 24px;
+`
+
+const Touchable = styled.TouchableOpacity`
+  z-index: 100;
 `

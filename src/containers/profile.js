@@ -24,7 +24,7 @@ export default class Profile extends React.Component {
       <Height>
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation title='Profile' navigation={this.props.navigation}>
+          <TopNavigation edit_icon title='Profile' navigation={this.props.navigation}>
             <Container color={theme.palette.canvasColor}>
 
               <ProfileHeader user={SAMPLE_USER} history={this.props.history}/>

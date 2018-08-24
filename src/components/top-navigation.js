@@ -6,6 +6,7 @@ import ScaledImage          from 'react-native-scalable-image';
 import styled               from 'styled-components/native';
 
 import Drawer          from './drawer.js';
+import EditLogo        from '../../assets/icons/edit-pencil-white.png';
 import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
 import BackLogo        from '../../assets/icons/back-white.png';
 import HangerTextLogo  from '../../assets/logos/hanger-text-only-white.png';
@@ -52,11 +53,15 @@ class TopNavigation extends Component {
               </Centered>
           }
           rightElement={
-            this.props['no-buttons'] || this.props['back-button'] ?
-              this.props['back-button'] ?
-                <EmptyWidth />
+            this.props['no-buttons'] || this.props['back-button'] || this.props.edit_icon ?
+              this.props.edit_icon ?
+                <EditLogoPadding>
+                  <Touchable onPress={() => this.props.history.push('/edit-profile')}>
+                    <ScaledImage source={EditLogo} height={25} />
+                  </Touchable>
+                </EditLogoPadding>
                 :
-                <EmptyWidth />
+                <Width />
               :
               <MarginRight>
                 <Touchable onPress={() => this.props.history.push('/profile')}>
@@ -82,7 +87,7 @@ class TopNavigation extends Component {
                   </Touchable>
                 </MarginLeft>
                 :
-                <EmptyWidth />
+                <Width />
               :
               <MarginLeft>
                 <Touchable onPress={this.toggleDrawer.bind(this)}>
@@ -133,7 +138,7 @@ const Touchable = styled.TouchableOpacity`
   z-index: 101;
 `
 
-const EmptyWidth = styled.View`
+const Width = styled.View`
   width: 40px;
 `
 
@@ -148,6 +153,14 @@ const StyledIconImage = styled.Image`
   height: ${props => props.small ? 25 : 40};
   margin-right: ${props => props.small ? 10 : 0 };
   margin-left: ${props => props.small ? 5 : 0 };
+`
+
+const EditLogoPadding = styled.View`
+  width: 40px;
+  margin-right: 15px;
+
+  display: flex;
+  align-items: flex-end;
 `
 
 export default withRouter(TopNavigation);
