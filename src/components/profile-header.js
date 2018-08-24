@@ -8,11 +8,18 @@ import Button from './button.js';
 import theme from '../theme.js';
 
 export default class ProfileHeader extends React.Component {
+
+  handleProfilePictureClick() {
+    this.props.history.push('/profile-upload');
+  }
+
   render() {
     return (
       <Container color={theme.palette.disabledColor}>
         <ProfileContainer>
-          <Avatar icon='person' iconColor='gray' size={80} iconSize={60} />
+          <Touchable onPress={this.handleProfilePictureClick.bind(this)}>
+            <Avatar icon='person' iconColor='gray' size={80} iconSize={60} />
+          </Touchable>
         </ProfileContainer>
 
         <FlexRow>
@@ -77,4 +84,8 @@ const BodyText = styled.Text`
 const FlexRow = styled.View`
   flex-direction: row;
   justify-content: center;
+`
+
+const Touchable = styled.TouchableOpacity`
+  z-index: 100;
 `

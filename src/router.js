@@ -13,6 +13,7 @@ import Messages         from './containers/messages.js';
 import NewPassword      from './containers/auth/new-password.js';
 import Notifications    from './containers/notifications';
 import PostRegistration from './containers/auth/post-registration.js';
+import ProfileUpload    from './containers/upload/profile-upload.js';
 import Projects         from './containers/projects.js';
 import Profile          from './containers/profile';
 import Public           from './components/public-route.js';
@@ -65,6 +66,7 @@ export default class Router extends React.Component {
           <Route path="/camera" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Camera} /> } />
           <Route path="/home" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Home} /> } />
           <Route path="/post-registration" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={PostRegistration} /> } />
+          <Route path="/profile-upload" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={ProfileUpload} /> } />
           <Route path="/messages" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Messages} /> } />
           <Route path="/notifications" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Notifications} /> } />
           <Route path="/profile" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Profile} /> } />

@@ -27,7 +27,7 @@ export default class Profile extends React.Component {
           <TopNavigation title='Profile' navigation={this.props.navigation}>
             <Container color={theme.palette.canvasColor}>
 
-              <ProfileHeader user={SAMPLE_USER}/>
+              <ProfileHeader user={SAMPLE_USER} history={this.props.history}/>
 
               <ProfileContentContainer>
                 { ProfileContent }
