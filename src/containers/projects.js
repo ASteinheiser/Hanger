@@ -1,9 +1,10 @@
 import React  from 'react';
 import styled from 'styled-components/native';
 
-import BottomNavigation from '../components/bottom-navigation.js';
-import TopNavigation    from '../components/top-navigation.js';
-import theme            from '../theme.js';
+import BottomNavigation  from '../components/bottom-navigation.js';
+import TopNavigation     from '../components/top-navigation.js';
+import UnderConstruction from '../components/under-construction.js';
+import theme             from '../theme.js';
 
 export default class Projects extends React.Component {
   render() {
@@ -14,9 +15,7 @@ export default class Projects extends React.Component {
           <TopNavigation navigation={this.props.navigation}>
             <Container color={theme.palette.canvasColor}>
 
-              <StyledText color={theme.palette.primaryColor}>
-                { 'Projects Page' }
-              </StyledText>
+              <UnderConstruction title='Projects' />
 
             </Container>
           </TopNavigation>
@@ -34,9 +33,4 @@ const Height = styled.View`
 const Container = styled.ScrollView`
   background-color: ${props => props.color};
   flex: 1;
-`
-
-const StyledText = styled.Text`
-  color: ${props => props.color};
-  font-size: 24px;
 `
