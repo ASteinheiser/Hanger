@@ -1,25 +1,15 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
-import styled               from 'styled-components/native';
-import _map                 from 'lodash.map';
+import React  from 'react';
+import styled from 'styled-components/native';
+import _map   from 'lodash.map';
 
-import BottomNavigation        from '../components/bottom-navigation.js';
-import ProfileHeader           from '../components/profile-header.js';
-import ProfileContentThumbnail from '../components/profile-content-thumbnail.js';
-import TopNavigation           from '../components/top-navigation.js';
+import BottomNavigation from '../components/bottom-navigation.js';
+import ProfileHeader    from '../components/profile-header.js';
+import TopNavigation    from '../components/top-navigation.js';
 
-import SAMPLE_CONTENT from '../../assets/data/user-content.json';
-import SAMPLE_USER    from '../../assets/data/user.json';
-import theme          from '../theme.js';
+import theme from '../theme.js';
 
 export default class Profile extends React.Component {
   render() {
-    const ProfileContent = _map(SAMPLE_CONTENT, content =>
-      <ProfileContentThumbnail
-        key={content.id}
-        link={content.link} />
-    );
-
     let user = this.props.user;
     if(typeof user === 'string') user = JSON.parse(user);
 
@@ -31,10 +21,6 @@ export default class Profile extends React.Component {
             <Container color={theme.palette.canvasColor}>
 
               <ProfileHeader user={user} history={this.props.history}/>
-
-              <ProfileContentContainer>
-                { ProfileContent }
-              </ProfileContentContainer>
 
             </Container>
           </TopNavigation>
@@ -56,8 +42,5 @@ const Container = styled.ScrollView`
 
 const ProfileContentContainer = styled.View`
   flex: 1;
-  flex-wrap: wrap;
   flex-direction: row;
-
-  justify-content: space-between;
 `

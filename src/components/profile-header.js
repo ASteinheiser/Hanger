@@ -1,81 +1,72 @@
-import React          from 'react';
-import { Text, View } from 'react-native';
-import { Avatar }     from 'react-native-material-ui';
-import styled         from 'styled-components/native';
-
-import Button from './button.js';
+import React      from 'react';
+import { Avatar } from 'react-native-material-ui';
+import styled     from 'styled-components/native';
 
 import theme from '../theme.js';
 
 export default class ProfileHeader extends React.Component {
   render() {
     return (
-      <Container color={theme.palette.disabledColor}>
-        <ProfileContainer>
-          <Avatar icon='person' iconColor='gray' size={80} iconSize={60} />
-        </ProfileContainer>
+      <ProfileView color={theme.palette.disabledColor}>
+        <ProfileImageView>
+          <Avatar icon='person' iconColor='gray' size={100} iconSize={80} />
+        </ProfileImageView>
 
-        <FlexRow>
-          <UsernameText color={theme.palette.secondaryTextColor}>
-            {
-              this.props.user && this.props.user.first_name && this.props.user.last_name ?
-                this.props.user.first_name + ' ' + this.props.user.last_name
-                :
-                null
-            }
-          </UsernameText>
+        <FullNameText color={theme.palette.secondaryTextColor}>
+          {
+            this.props.user && this.props.user.first_name && this.props.user.last_name ?
+              this.props.user.first_name + ' ' + this.props.user.last_name
+              :
+              ''
+          }
+        </FullNameText>
 
-          <Button
-            small
-            accent
-            text="Follow"
-            onPress={()=> { console.log('followed user!') }} />
-        </FlexRow>
-
-        <HeaderText color={theme.palette.disabledColor}>
+        <LocationText color={theme.palette.disabledColor}>
           {
             this.props.user && this.props.user.location ?
               'From ' + this.props.user.location
               :
-              null
+              ''
           }
-        </HeaderText>
+        </LocationText>
 
-        <BodyText color={theme.palette.primaryTextColor}>
-          {
-            this.props.user && this.props.user.description ?
-              this.props.user.description
-              :
-              null
-          }
-        </BodyText>
-      </Container>
+        <HangerStatsView color={theme.palette.primaryColor}>
+          <ConnectionsText>
+            {'Connections'}
+          </ConnectionsText>
+          <ProjectsText color={theme.palette.primaryColor}>
+            {'Projects'}
+          </ProjectsText>
+          <PointsEarnedText>
+            {'Points Earned'}
+          </PointsEarnedText>
+        </HangerStatsView>
+      </ProfileView>
     )
   }
 }
 
-const Container = styled.View`
+const ProfileView = styled.View`
   flex: 1;
   flex-direction: column;
 
   padding: 15px;
-  border-color: ${props => props.color};
-  border-bottom-width: 1px;
 `
 
-const ProfileContainer = styled.View`
+const ProfileImageView = styled.View`
   margin: 0 auto;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 `
 
-const UsernameText = styled.Text`
-  font-size: 16px;
+const FullNameText = styled.Text`
+  font-size: 22px;
   color: ${props => props.color};
 
-  padding: 0 5px 0 5px;
+  padding: 0 5px 5px 5px;
+  text-align: center;
 `
 
-const HeaderText = styled.Text`
+const LocationText = styled.Text`
   font-size: 16px;
   color: ${props => props.color};
 
@@ -83,13 +74,37 @@ const HeaderText = styled.Text`
   text-align: center;
 `
 
-const BodyText = styled.Text`
-  font-size: 14px;
-  text-align: center;
-  color: ${props => props.color};
+const HangerStatsView = styled.View`
+  border-top-color: ${props => props.color};
+  border-top-width: 3px;
+  border-bottom-color: ${props => props.color};
+  border-bottom-width: 3px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `
 
-const FlexRow = styled.View`
-  flex-direction: row;
-  justify-content: center;
+const PointsEarnedText = styled.Text`
+  font-size: 14px;
+  text-align: center;
+  color: black;
+`
+
+const ProjectsText = styled.Text`
+  border-left-color: ${props => props.color};
+  border-left-width: 3px;
+  border-right-color: ${props => props.color};
+  border-right-width: 3px;
+
+  font-size: 14px;
+  text-align: center;
+  color: black;
+`
+
+const ConnectionsText = styled.Text`
+  font-size: 14px;
+  text-align: center;
+  color: black;
 `
