@@ -2,9 +2,10 @@ import React  from 'react';
 import styled from 'styled-components/native';
 import _map   from 'lodash.map';
 
-import BottomNavigation from '../components/bottom-navigation.js';
-import ProfileHeader    from '../components/profile-header.js';
-import TopNavigation    from '../components/top-navigation.js';
+import BottomNavigation   from '../components/bottom-navigation.js';
+import ProfileHeader      from '../components/profile-header.js';
+import ProfileInformation from '../components/profile-information.js';
+import TopNavigation      from '../components/top-navigation.js';
 
 import theme from '../theme.js';
 
@@ -17,10 +18,12 @@ export default class Profile extends React.Component {
       <Height>
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation edit_icon title={user && user.display_name ? user.display_name : 'Profile'} navigation={this.props.navigation}>
+          <TopNavigation edit_icon navigation={this.props.navigation}>
             <Container color={theme.palette.canvasColor}>
 
               <ProfileHeader user={user} history={this.props.history}/>
+
+              <ProfileInformation user={user} history={this.props.history}/>
 
             </Container>
           </TopNavigation>

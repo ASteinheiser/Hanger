@@ -56,7 +56,7 @@ const ProfileView = styled.View`
   flex: 1;
   flex-direction: column;
 
-  padding: 15px;
+  padding: 15px 15px 0 15px;
 `
 
 const ProfileImageView = styled.View`
@@ -69,14 +69,6 @@ const FullNameText = styled.Text`
   color: ${props => props.color};
 
   padding: 0 5px 5px 5px;
-  text-align: center;
-`
-
-const LocationText = styled.Text`
-  font-size: 16px;
-  color: ${props => props.color};
-
-  padding-bottom: 5px;
   text-align: center;
 `
 
