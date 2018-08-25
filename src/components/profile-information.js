@@ -61,7 +61,7 @@ export default class ProfileInformation extends React.Component {
             }
           </InfoText>
         </InfoRowView>
-        <InfoRowView color={theme.palette.disabledColor}>
+        <InfoRowView no_border color={theme.palette.disabledColor}>
           <InfoText color={theme.palette.primaryTextColor}>
             {'Bio'}
           </InfoText>
@@ -99,6 +99,6 @@ const InfoRowView = styled.View`
 
   padding: 15px 10px 15px 10px;
 
-  border-bottom-width: 1px;
+  border-bottom-width: ${props => props.no_border ? '0px' : '1px'};
   border-bottom-color: ${props => props.color};
 `

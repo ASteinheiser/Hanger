@@ -6,6 +6,8 @@ import theme from '../theme.js';
 
 export default class ProfileHeader extends React.Component {
   render() {
+    const { user } = this.props;
+
     return (
       <ProfileView color={theme.palette.disabledColor}>
         <ProfileImageView>
@@ -14,8 +16,8 @@ export default class ProfileHeader extends React.Component {
 
         <FullNameText color={theme.palette.secondaryTextColor}>
           {
-            this.props.user && this.props.user.first_name && this.props.user.last_name ?
-              this.props.user.first_name + ' ' + this.props.user.last_name
+            user && user.first_name && user.last_name ?
+              user.first_name + ' ' + user.last_name
               :
               ''
           }
@@ -27,7 +29,12 @@ export default class ProfileHeader extends React.Component {
               {'Connections'}
             </StatsText>
             <StatsValueText color={theme.palette.primaryColor}>
-              {'147'}
+              {
+                user && user.connections ?
+                  user.connections
+                  :
+                  '-'
+              }
             </StatsValueText>
           </StatsColumnView>
           <StatsColumnView border color={theme.palette.primaryColor}>
@@ -35,7 +42,12 @@ export default class ProfileHeader extends React.Component {
               {'Projects'}
             </StatsText>
             <StatsValueText color={theme.palette.primaryColor}>
-              {'8'}
+              {
+                user && user.projects ?
+                  user.projects
+                  :
+                  '-'
+              }
             </StatsValueText>
           </StatsColumnView>
           <StatsColumnView>
@@ -43,7 +55,12 @@ export default class ProfileHeader extends React.Component {
               {'Points Earned'}
             </StatsText>
             <StatsValueText color={theme.palette.primaryColor}>
-              {'2,730'}
+              {
+                user && user.total_points ?
+                  user.total_points
+                  :
+                  '-'
+              }
             </StatsValueText>
           </StatsColumnView>
         </HangerStatsView>

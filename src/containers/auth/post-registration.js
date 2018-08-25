@@ -10,8 +10,8 @@ import Input             from '../../components/input.js';
 import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 
-import HangerLogo     from '../../../assets/icons/hanger-white.png';
-import Photographer   from '../../../assets/splash-screens/registration/photographer.jpeg';
+import HangerLogo       from '../../../assets/icons/hanger-white.png';
+import JacketBackground from '../../../assets/splash-screens/registration/leather-jacket.jpg';
 
 export default class PostRegistration extends React.Component {
   constructor(props) {
@@ -89,7 +89,7 @@ export default class PostRegistration extends React.Component {
   render() {
     return (
       <Flex>
-        <BackgroundImage source={Photographer} />
+        <BackgroundImage source={JacketBackground} />
         <BackgroundFilter />
 
         <Container>
