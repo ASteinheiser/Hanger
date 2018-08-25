@@ -11,7 +11,7 @@ import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 
 import HangerLogo     from '../../../assets/icons/hanger-white.png';
-import Photographer   from '../../../assets/splash-screens/registration/photographer.jpeg';
+import Photographer   from '../../../assets/images/photographer.jpeg';
 
 export default class NewPassword extends React.Component {
   constructor(props) {

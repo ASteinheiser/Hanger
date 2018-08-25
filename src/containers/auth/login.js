@@ -14,8 +14,8 @@ import { validateForm }  from '../../functions/validate-form.js';
 
 import HangerTextLogo from '../../../assets/logos/hanger-text-only-white.png';
 import HangerLogo     from '../../../assets/icons/hanger-white.png';
-import Runway         from '../../../assets/splash-screens/registration/runway.jpeg';
-import Photographer   from '../../../assets/splash-screens/registration/photographer.jpeg';
+import Runway         from '../../../assets/images/runway.jpeg';
+import Photographer   from '../../../assets/images/photographer.jpeg';
 
 export default class Login extends React.Component {
   constructor(props) {

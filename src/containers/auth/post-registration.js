@@ -11,7 +11,7 @@ import { validateField } from '../../functions/validate-field.js';
 import { validateForm }  from '../../functions/validate-form.js';
 
 import HangerLogo       from '../../../assets/icons/hanger-white.png';
-import JacketBackground from '../../../assets/splash-screens/registration/leather-jacket.jpg';
+import JacketBackground from '../../../assets/images/leather-jacket.jpg';
 
 export default class PostRegistration extends React.Component {
   constructor(props) {

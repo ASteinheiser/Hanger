@@ -12,7 +12,7 @@ import { validateForm }  from '../../functions/validate-form.js';
 import { uuidv4 }        from '../../functions/uuid-v4.js';
 
 import HangerLogo     from '../../../assets/icons/hanger-white.png';
-import Photographer   from '../../../assets/splash-screens/registration/photographer.jpeg';
+import Photographer   from '../../../assets/images/photographer.jpeg';
 
 export default class Register extends React.Component {
   constructor(props) {

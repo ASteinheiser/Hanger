@@ -5,7 +5,7 @@ import Button     from '../../components/button.js';
 import HeaderText from '../../components/header-text.js';
 
 import HangerLogo   from '../../../assets/icons/hanger-white.png';
-import Photographer from '../../../assets/splash-screens/registration/photographer.jpeg';
+import Photographer from '../../../assets/images/photographer.jpeg';
 
 export default class CheckEmail extends React.Component {
   render() {
