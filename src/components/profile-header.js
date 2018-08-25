@@ -21,7 +21,7 @@ export default class ProfileHeader extends React.Component {
           }
         </FullNameText>
 
-        <LocationText color={theme.palette.disabledColor}>
+        <LocationText color={theme.palette.primaryTextColor}>
           {
             this.props.user && this.props.user.location ?
               'From ' + this.props.user.location
@@ -31,15 +31,30 @@ export default class ProfileHeader extends React.Component {
         </LocationText>
 
         <HangerStatsView color={theme.palette.primaryColor}>
-          <ConnectionsText>
-            {'Connections'}
-          </ConnectionsText>
-          <ProjectsText color={theme.palette.primaryColor}>
-            {'Projects'}
-          </ProjectsText>
-          <PointsEarnedText>
-            {'Points Earned'}
-          </PointsEarnedText>
+          <StatsColumnView>
+            <StatsText color={theme.palette.primaryTextColor}>
+              {'Connections'}
+            </StatsText>
+            <StatsValueText color={theme.palette.primaryColor}>
+              {'147'}
+            </StatsValueText>
+          </StatsColumnView>
+          <StatsColumnView border color={theme.palette.primaryColor}>
+            <StatsText color={theme.palette.primaryTextColor}>
+              {'Projects'}
+            </StatsText>
+            <StatsValueText color={theme.palette.primaryColor}>
+              {'8'}
+            </StatsValueText>
+          </StatsColumnView>
+          <StatsColumnView>
+            <StatsText color={theme.palette.primaryTextColor}>
+              {'Points Earned'}
+            </StatsText>
+            <StatsValueText color={theme.palette.primaryColor}>
+              {'2,730'}
+            </StatsValueText>
+          </StatsColumnView>
         </HangerStatsView>
       </ProfileView>
     )
@@ -80,31 +95,38 @@ const HangerStatsView = styled.View`
   border-bottom-color: ${props => props.color};
   border-bottom-width: 3px;
 
-  padding-top: 20px;
-  padding-bottom: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
-const PointsEarnedText = styled.Text`
-  font-size: 14px;
+const StatsText = styled.Text`
+  color: ${props => props.color};
+  font-size: 16px;
   text-align: center;
-  color: black;
+
+  padding-bottom: 10px;
 `
 
-const ProjectsText = styled.Text`
-  border-left-color: ${props => props.color};
-  border-left-width: 3px;
-  border-right-color: ${props => props.color};
-  border-right-width: 3px;
-
-  font-size: 14px;
+const StatsValueText = styled.Text`
+  color: ${props => props.color};
+  font-size: 22px;
   text-align: center;
-  color: black;
 `
 
-const ConnectionsText = styled.Text`
-  font-size: 14px;
-  text-align: center;
-  color: black;
+const StatsColumnView = styled.View`
+  border-left-color: ${props => props.color ? props.color : '#eee'};
+  border-left-width: ${props => props.border ? '3px' : '0px'};
+  border-right-color: ${props => props.color ? props.color : '#eee'};
+  border-right-width: ${props => props.border ? '3px' : '0px'};
+
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
 `
