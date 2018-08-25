@@ -32,8 +32,20 @@ export default class EditProfile extends Component {
         value: user.display_name ? user.display_name : '',
         valid: true
       },
+      job: {
+        value: user.job ? user.job : '',
+        valid: true
+      },
       location: {
         value: user.location ? user.location : '',
+        valid: true
+      },
+      website: {
+        value: user.website ? user.website : '',
+        valid: true
+      },
+      bio: {
+        value: user.bio ? user.bio : '',
         valid: true
       },
       alertMessage: '',
@@ -70,7 +82,10 @@ export default class EditProfile extends Component {
             display_name: this.state.display_name.value,
           }
         };
+        if (this.state.job.value) params.body.job = this.state.job.value;
         if (this.state.location.value) params.body.location = this.state.location.value;
+        if (this.state.website.value) params.body.website = this.state.website.value;
+        if (this.state.bio.value) params.body.bio = this.state.bio.value;
 
         API.post('HangerAPI', '/v1/user', params)
           .then(response => {
@@ -107,7 +122,7 @@ export default class EditProfile extends Component {
 
             <AvatarContainer>
               <Touchable onPress={() => this.props.history.push('/profile-upload')}>
-                <Avatar icon='person' iconColor='gray' size={80} iconSize={60} />
+                <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
               </Touchable>
             </AvatarContainer>
 
@@ -131,15 +146,37 @@ export default class EditProfile extends Component {
               <Input accent
                 onChange={this.onChange.bind(this, 'display_name')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-                label={'Public Username'}
+                label={'Username'}
                 value={this.state.display_name.value}
-                error={!this.state.display_name.valid ? 'Enter a user name.' : ''}
+                error={!this.state.display_name.valid ? 'Enter a username.' : ''}
+                />
+              <Input accent
+                onChange={this.onChange.bind(this, 'job')}
+                containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+                label={'Job'}
+                value={this.state.job.value}
+                error={''}
                 />
               <Input accent
                 onChange={this.onChange.bind(this, 'location')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
-                label={'Location (Optional)'}
+                label={'Location'}
                 value={this.state.location.value}
+                error={''}
+                />
+
+              <Input accent
+                onChange={this.onChange.bind(this, 'website')}
+                containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+                label={'Website'}
+                value={this.state.website.value}
+                error={''}
+                />
+              <Input accent
+                onChange={this.onChange.bind(this, 'bio')}
+                containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
+                label={'Bio'}
+                value={this.state.bio.value}
                 error={''}
                 />
             </InputMargin>
@@ -185,7 +222,7 @@ const Touchable = styled.TouchableOpacity`
 `
 
 const AvatarContainer = styled.View`
-  margin: 30px auto 20px auto;
+  margin: 15px auto 20px auto;
 `
 
 const TopMargin = styled.View`
@@ -194,8 +231,4 @@ const TopMargin = styled.View`
 
 const InputMargin = styled.View`
   margin: 0 5%;
-`
-
-const TopPadding = styled.View`
-  padding-top: 25px;
 `

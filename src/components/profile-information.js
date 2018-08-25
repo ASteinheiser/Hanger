@@ -50,6 +50,19 @@ export default class ProfileInformation extends React.Component {
         </InfoRowView>
         <InfoRowView color={theme.palette.disabledColor}>
           <InfoText color={theme.palette.primaryTextColor}>
+            {'Location'}
+          </InfoText>
+          <InfoText color={theme.palette.primaryTextColor}>
+            {
+              user && user.location ?
+                user.location
+                :
+                '-'
+            }
+          </InfoText>
+        </InfoRowView>
+        <InfoRowView color={theme.palette.disabledColor}>
+          <InfoText color={theme.palette.primaryTextColor}>
             {'Website'}
           </InfoText>
           <InfoText color={theme.palette.primaryTextColor}>
