@@ -9,7 +9,7 @@ export default class ProfileHeader extends React.Component {
     return (
       <ProfileView color={theme.palette.disabledColor}>
         <ProfileImageView>
-          <Avatar icon='person' iconColor='gray' size={100} iconSize={80} />
+          <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
         </ProfileImageView>
 
         <FullNameText color={theme.palette.secondaryTextColor}>
@@ -20,15 +20,6 @@ export default class ProfileHeader extends React.Component {
               ''
           }
         </FullNameText>
-
-        <LocationText color={theme.palette.primaryTextColor}>
-          {
-            this.props.user && this.props.user.location ?
-              'From ' + this.props.user.location
-              :
-              ''
-          }
-        </LocationText>
 
         <HangerStatsView color={theme.palette.primaryColor}>
           <StatsColumnView>
