@@ -31,7 +31,7 @@ export default class Settings extends React.Component {
 
               <Margin>
                 <Button
-                  primary
+                  accent
                   icon="subdirectory-arrow-left"
                   text="Logout"
                   onPress={this.handleSignout.bind(this)} />

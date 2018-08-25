@@ -2,6 +2,7 @@ import React  from 'react';
 import styled from 'styled-components/native';
 import _map   from 'lodash.map';
 
+import Button             from '../components/button.js'
 import BottomNavigation   from '../components/bottom-navigation.js';
 import ProfileHeader      from '../components/profile-header.js';
 import ProfileInformation from '../components/profile-information.js';
@@ -25,6 +26,13 @@ export default class Profile extends React.Component {
 
               <ProfileInformation user={user} history={this.props.history}/>
 
+              <Margin>
+                <Button
+                  accent
+                  text="Try Premium Account"
+                  onPress={() => {console.log('try a premium account!');}} />
+              </Margin>
+
             </Container>
           </TopNavigation>
         </BottomNavigation>
@@ -46,4 +54,8 @@ const Container = styled.ScrollView`
 const ProfileContentContainer = styled.View`
   flex: 1;
   flex-direction: row;
+`
+
+const Margin = styled.View`
+  margin: 20px 20px 20px 20px;
 `
