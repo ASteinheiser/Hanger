@@ -37,6 +37,13 @@ export default class Settings extends React.Component {
                   onPress={this.handleSignout.bind(this)} />
               </Margin>
 
+              <Margin>
+                <Button
+                  accent
+                  text="Try Premium Account"
+                  onPress={() => {console.log('try premium account!')}} />
+              </Margin>
+
             </Container>
           </TopNavigation>
         </BottomNavigation>
@@ -56,5 +63,5 @@ const Container = styled.ScrollView`
 `
 
 const Margin = styled.View`
-  margin: 20px 20px 20px 20px;
+  margin: 10px 20px 10px 20px;
 `
