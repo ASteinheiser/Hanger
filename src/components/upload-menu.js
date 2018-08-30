@@ -1,6 +1,6 @@
-import React, { Component }              from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
-import styled                            from 'styled-components/native';
+import React, { Component } from 'react';
+import ImagePicker          from 'react-native-image-picker';
+import styled               from 'styled-components/native';
 
 import CameraLogo from '../../assets/icons/camera-white.png';
 import TextLogo   from '../../assets/icons/text-white.png';
@@ -12,8 +12,25 @@ export default class UploadMenu extends Component {
 
   handleCameraClick() {
     this.props.close();
-    console.log('camera click!');
-    // this.props.history.push('/camera');
+
+    var pickerOptions = {
+      title: 'Upload a Photo',
+      mediaType: 'photo'
+    };
+    ImagePicker.showImagePicker(pickerOptions, (response) => {
+      if (response.didCancel) {
+        // that's okay, do nothing
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+      }
+    });
   }
 
   render() {

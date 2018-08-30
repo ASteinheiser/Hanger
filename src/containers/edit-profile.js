@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { API }              from 'aws-amplify';
+import ImagePicker          from 'react-native-image-picker';
 import { Avatar }           from 'react-native-material-ui';
 import { DotIndicator }     from 'react-native-indicators';
 import styled               from 'styled-components/native';
 
-import Alert             from '../../components/alert.js';
-import Button            from '../../components/button.js';
-import Input             from '../../components/input.js';
-import TopNavigation     from '../../components/top-navigation.js';
-import theme             from '../../theme.js';
-import { validateField } from '../../functions/validate-field.js';
-import { validateForm }  from '../../functions/validate-form.js';
+import Alert             from '../components/alert.js';
+import Button            from '../components/button.js';
+import Input             from '../components/input.js';
+import TopNavigation     from '../components/top-navigation.js';
+import theme             from '../theme.js';
+import { validateField } from '../functions/validate-field.js';
+import { validateForm }  from '../functions/validate-form.js';
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -111,6 +112,35 @@ export default class EditProfile extends Component {
 
   handleProfileUpload() {
     console.log('profile upload click!');
+  }
+
+  handleShowImageSelect() {
+    var pickerOptions = {
+      title: 'Select a Photo',
+      mediaType: 'photo'
+    };
+
+    ImagePicker.showImagePicker(pickerOptions, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        console.log('It worked: ', source);
+      }
+    });
   }
 
   render() {
