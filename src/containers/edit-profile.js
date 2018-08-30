@@ -111,34 +111,22 @@ export default class EditProfile extends Component {
   }
 
   handleProfileUpload() {
-    console.log('profile upload click!');
-  }
-
-  handleShowImageSelect() {
     var pickerOptions = {
       title: 'Select a Photo',
       mediaType: 'photo'
     };
-
     ImagePicker.showImagePicker(pickerOptions, (response) => {
-      console.log('Response = ', response);
-
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        // that's okay, do nothing
       }
       else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
       }
       else {
         let source = { uri: response.uri };
 
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        console.log('It worked: ', source);
       }
     });
   }
