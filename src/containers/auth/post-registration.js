@@ -62,7 +62,7 @@ export default class PostRegistration extends React.Component {
           .then(response => {
             this.props.setuser(); // clean out old user so auth routes will update with new info
             this.setState({ loading: false });
-            this.props.history.replace('/profile-upload');
+            // this.props.history.replace('/profile-upload');
           })
           .catch(err => {
             console.log(err);

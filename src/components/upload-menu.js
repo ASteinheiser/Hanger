@@ -12,7 +12,8 @@ export default class UploadMenu extends Component {
 
   handleCameraClick() {
     this.props.close();
-    this.props.history.push('/camera');
+    console.log('camera click!');
+    // this.props.history.push('/camera');
   }
 
   render() {

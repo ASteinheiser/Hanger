@@ -109,6 +109,10 @@ export default class EditProfile extends Component {
     this.setState({ alertMessage: '' });
   }
 
+  handleProfileUpload() {
+    console.log('profile upload click!');
+  }
+
   render() {
     return(
       <Height>
@@ -121,7 +125,7 @@ export default class EditProfile extends Component {
           <Container color={theme.palette.canvasColor}>
 
             <AvatarContainer>
-              <Touchable onPress={() => this.props.history.push('/profile-upload')}>
+              <Touchable onPress={this.handleProfileUpload.bind(this)}>
                 <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
               </Touchable>
             </AvatarContainer>
