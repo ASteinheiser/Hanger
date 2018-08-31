@@ -4,7 +4,6 @@ import styled   from 'styled-components/native';
 
 import BottomNavigation from '../components/bottom-navigation.js';
 import Button           from '../components/button.js';
-import IconWithText     from '../components/icon-with-text.js';
 import TopNavigation    from '../components/top-navigation.js';
 import theme            from '../theme.js';
 
@@ -21,27 +20,38 @@ export default class Settings extends React.Component {
       <Height>
 
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation navigation={this.props.navigation}>
+          <TopNavigation title='Settings' navigation={this.props.navigation}>
             <Container color={theme.palette.canvasColor}>
-
-              <IconWithText
-                text='Account Settings'
-                icon='settings'
-                />
+              <Margin>
+                <Button
+                  accent
+                  icon='notifications-active'
+                  text='Notifications'
+                  onPress={() => {console.log('changing notifications!')}} />
+              </Margin>
 
               <Margin>
                 <Button
                   accent
-                  icon="subdirectory-arrow-left"
-                  text="Logout"
+                  icon='stars'
+                  text='Try Premium Account'
+                  onPress={() => {console.log('try premium account!')}} />
+              </Margin>
+
+              <Margin>
+                <Button
+                  accent
+                  icon='subdirectory-arrow-left'
+                  text='Logout'
                   onPress={this.handleSignout.bind(this)} />
               </Margin>
 
               <Margin>
                 <Button
                   accent
-                  text="Try Premium Account"
-                  onPress={() => {console.log('try premium account!')}} />
+                  icon='delete-forever'
+                  text='Delete Account'
+                  onPress={() => {console.log('deleting account!')}} />
               </Margin>
 
             </Container>
@@ -60,6 +70,8 @@ const Height = styled.View`
 const Container = styled.ScrollView`
   background-color: ${props => props.color};
   flex: 1;
+
+  padding-top: 15px;
 `
 
 const Margin = styled.View`
