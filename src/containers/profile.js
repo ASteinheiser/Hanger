@@ -2,11 +2,12 @@ import React  from 'react';
 import styled from 'styled-components/native';
 import _map   from 'lodash.map';
 
-import Button             from '../components/button.js'
-import BottomNavigation   from '../components/bottom-navigation.js';
-import ProfileHeader      from '../components/profile-header.js';
-import ProfileInformation from '../components/profile-information.js';
-import TopNavigation      from '../components/top-navigation.js';
+import Button              from '../components/button.js'
+import BottomNavigation    from '../components/bottom-navigation.js';
+import ProfileHeader       from '../components/profile-header.js';
+import ProfileInformation  from '../components/profile-information.js';
+import SocialMediaAccounts from '../components/social-media-accounts.js';
+import TopNavigation       from '../components/top-navigation.js';
 
 import theme from '../theme.js';
 
@@ -26,10 +27,13 @@ export default class Profile extends React.Component {
 
               <ProfileInformation user={user} history={this.props.history}/>
 
+              <SocialMediaAccounts user={user} />
+
               <Margin>
                 <Button
                   accent
-                  text="Try Premium Account"
+                  icon='stars'
+                  text='Try Premium Account'
                   onPress={() => {console.log('try a premium account!');}} />
               </Margin>
 
