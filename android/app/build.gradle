@@ -147,6 +147,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fbsdk')
+    implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
     compile project(':react-native-image-picker')
     compile project(':amazon-cognito-identity-js')
     compile project(':react-native-vector-icons')
