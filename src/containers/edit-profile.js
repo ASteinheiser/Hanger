@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { API }              from 'aws-amplify';
+import { API, Storage }     from 'aws-amplify';
 import ImagePicker          from 'react-native-image-picker';
 import { Avatar }           from 'react-native-material-ui';
 import { DotIndicator }     from 'react-native-indicators';
@@ -12,6 +12,9 @@ import TopNavigation     from '../components/top-navigation.js';
 import theme             from '../theme.js';
 import { validateField } from '../functions/validate-field.js';
 import { validateForm }  from '../functions/validate-form.js';
+import s3_buckets        from '../s3-buckets.js';
+
+const S3_BUCKET = s3_buckets.staging;
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -50,6 +53,7 @@ export default class EditProfile extends Component {
         valid: true
       },
       alertMessage: '',
+      profileImage: null,
       loading: false
     };
   }
@@ -129,6 +133,35 @@ export default class EditProfile extends Component {
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
       }
     });
+  }
+
+  getImage() {
+    let options = {
+      bucket: S3_BUCKET
+    }
+
+    Storage.get(this.props.user.user_id, options)
+      .then(response => {
+        this.setState({ profileImage: response });
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({ alertMessage: 'Error Loading Profile Picture' });
+      });
+  }
+
+  handleUpload(imageData) {
+    Storage.put(this.props.user.user_id, imageData, {
+      level: 'protected',
+      // identityId: 'some-id' // needed for accessing other user's "protected" images
+    })
+      .then(result => {
+        // console.log(result);
+      })
+      .catch(err => {
+        console.error(err);
+        self.setState({ alertMessage: 'There was a problem uploading your image.' });
+      });
   }
 
   render() {
