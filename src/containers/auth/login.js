@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { Auth }         from 'aws-amplify';
 import styled           from 'styled-components/native';
 import { DotIndicator } from 'react-native-indicators';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -111,7 +112,39 @@ export default class Login extends React.Component {
   }
 
   handleFacebookLogin() {
-    // do something
+    let self = this;
+    // Attempt a login using the Facebook login dialog asking for default permissions.
+    LoginManager.logInWithReadPermissions(['public_profile'])
+    .then(
+      function(result) {
+        if (result.isCancelled) {
+          // do nothing
+        } else {
+          AccessToken.getCurrentAccessToken()
+            .then(data => {
+              let token = data.accessToken;
+              let expires_at = data.expirationTime;
+
+              Auth.federatedSignIn('facebook', { token, expires_at }, data)
+                .then(result => {
+                  self.handleNavigation('/home');
+                })
+                .catch(err => {
+                  console.log(err);
+                });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      },
+      function(error) {
+        console.log('Login fail with error: ' + error);
+      }
+    )
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   render() {

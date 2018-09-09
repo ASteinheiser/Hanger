@@ -65,13 +65,7 @@ class PublicRoute extends Component {
       return(
         <StyledView color={theme.palette.canvasColor}>
           <Container>
-
-            <StyledText color={theme.palette.primaryColor}>
-              {'Checking Credentials...'}
-            </StyledText>
-
             <DotIndicator color={theme.palette.primaryColor}/>
-
           </Container>
         </StyledView>
       )
@@ -90,16 +84,10 @@ const StyledView = styled.View`
 `
 
 const Container = styled.View`
-  margin: 50px auto;
-`
-
-const StyledText = styled.Text`
-  font-size: 28px;
-
-  color: ${props => props.color};
-
-  margin-bottom: 50px;
-  margin-top: 50px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 `
 
 export default withRouter(PublicRoute);
