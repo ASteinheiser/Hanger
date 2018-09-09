@@ -83,7 +83,7 @@ class PrivateRoute extends Component {
       return(
         <StyledView color={theme.palette.canvasColor}>
           <Container>
-            <DotIndicator color={theme.palette.primaryColor}/>
+            <DotIndicator size={18} color={theme.palette.primaryColor}/>
           </Container>
         </StyledView>
       )

@@ -6,6 +6,7 @@ import ScaledImage          from 'react-native-scalable-image';
 import styled               from 'styled-components/native';
 
 import Drawer          from './drawer.js';
+import SearchBar       from './search-bar.js';
 import EditLogo        from '../../assets/icons/edit-pencil-white.png';
 import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
 import BackLogo        from '../../assets/icons/back-white.png';
@@ -35,6 +36,19 @@ class TopNavigation extends Component {
   }
 
   render() {
+    if(this.props.type === 'search') {
+      return (
+        <StyledView>
+          <SearchBar
+            style={ toolbarStyle }
+            {...this.props} />
+
+          { this.props.children }
+
+        </StyledView>
+      );
+    }
+
     return (
       <StyledView>
         <Toolbar style={ toolbarStyle }

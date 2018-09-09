@@ -14,7 +14,9 @@ import theme from '../theme.js';
 export default class Profile extends React.Component {
   render() {
     let user = this.props.user;
-    if(typeof user === 'string') user = JSON.parse(user);
+    if(typeof user === 'string' && user !== 'viewPublicFeed') {
+      user = JSON.parse(user);
+    }
 
     return (
       <Height>

@@ -6,10 +6,10 @@ import _debounce            from 'lodash.debounce';
 import BottomNavigation from '../components/bottom-navigation.js';
 import HeaderText       from '../components/header-text.js';
 import FeedPost         from '../components/feed-post.js';
-import SearchBar        from '../components/search-bar.js';
+import TopNavigation    from '../components/top-navigation.js';
 import theme            from '../theme.js';
 
-const SEARCH_DEBOUNCE_TIME = 2000; // 2 seconds
+const SEARCH_DEBOUNCE_TIME = 1500; // 1.5 seconds
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -35,26 +35,27 @@ export default class Search extends React.Component {
   render() {
     return (
       <Height>
-
-        <SearchBar
-          onChange={this.onChange.bind(this)}
-          value={this.state.searchValue} />
-
         <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <Container color={theme.palette.canvasColor}>
+          <TopNavigation
+            navigation={this.props.navigation}
+            type='search'
+            onChange={this.onChange.bind(this)}
+            value={this.state.searchValue}>
+            <Container color={theme.palette.canvasColor}>
 
-            <HeaderText blue small
-              text='Explore Events, Gigs, etc!' />
+              <HeaderText blue small
+                text='Explore Events, Gigs, etc!' />
 
-            <FeedPost
-              title={'Phoenix Fashion Week 2018'}
-              image={'https://www.zonamedspa.com/wp-content/uploads/PHXFW.16-Silver-Flyer.jpg'} />
+              <FeedPost
+                title={'Phoenix Fashion Week 2018'}
+                image={'https://www.zonamedspa.com/wp-content/uploads/PHXFW.16-Silver-Flyer.jpg'} />
 
-            <FeedPost
-              title={'Photographer and 2 Models needed for Paid Photoshoot'}
-              image={'https://i.pinimg.com/736x/d6/7a/3b/d67a3bac1c2deb60e02dd8373db472a0--behind-the-scenes-shooting.jpg'} />
+              <FeedPost
+                title={'Photographer and 2 Models needed for Paid Photoshoot'}
+                image={'https://i.pinimg.com/736x/d6/7a/3b/d67a3bac1c2deb60e02dd8373db472a0--behind-the-scenes-shooting.jpg'} />
 
-          </Container>
+            </Container>
+          </TopNavigation>
         </BottomNavigation>
       </Height>
     )
