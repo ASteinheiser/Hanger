@@ -1,9 +1,14 @@
 import React            from 'react';
 import { AsyncStorage } from 'react-native';
-import { Auth }         from 'aws-amplify';
+import { API, Auth }    from 'aws-amplify';
 import styled           from 'styled-components/native';
 import { DotIndicator } from 'react-native-indicators';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import {
+  LoginManager,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager
+} from 'react-native-fbsdk';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -114,7 +119,7 @@ export default class Login extends React.Component {
   handleFacebookLogin() {
     let self = this;
     // Attempt a login using the Facebook login dialog asking for default permissions.
-    LoginManager.logInWithReadPermissions(['public_profile'])
+    LoginManager.logInWithReadPermissions(['public_profile', 'email'])
     .then(
       function(result) {
         if (result.isCancelled) {
@@ -124,14 +129,34 @@ export default class Login extends React.Component {
             .then(data => {
               let token = data.accessToken;
               let expires_at = data.expirationTime;
+              let user = data;
 
-              Auth.federatedSignIn('facebook', { token, expires_at }, data)
-                .then(result => {
-                  self.handleNavigation('/home');
-                })
-                .catch(err => {
-                  console.log(err);
-                });
+              let graphParams = { parameters: {} };
+              let infoRequest = new GraphRequest('/me', graphParams, (error, result) => {
+                  if (error) {
+                    console.log('Error fetching data: ' + error.toString());
+                  } else {
+                    let params = { user: result };
+
+                    API.post('HangerAPI', '/v1/auth/fb', params)
+                      .then(response => {
+                        Auth.federatedSignIn('facebook', { token, expires_at }, user)
+                          .then(result => {
+                            self.handleNavigation('/home');
+                          })
+                          .catch(err => {
+                            console.log(err);
+                          });
+                      })
+                      .catch(err => {
+                        console.log(err);
+                      });
+                  }
+                }
+              );
+              infoRequest.addStringParameter('id,name,email', 'fields');
+              // Start the graph request.
+              new GraphRequestManager().addRequest(infoRequest).start();
             })
             .catch(err => {
               console.log(err);
