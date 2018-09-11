@@ -47,7 +47,7 @@ class BottomNav extends Component {
   }
 
   handleToggleUploadMenu() {
-    if(this.props.user !== 'viewPublicFeed') {
+    if(JSON.stringify(this.props.user) !== JSON.stringify({id:'viewPublicFeed'})) {
       this.setState({ showUploadMenu: !this.state.showUploadMenu });
     }
   }
@@ -66,7 +66,7 @@ class BottomNav extends Component {
     return (
       <FullScreen>
         {
-          user === 'viewPublicFeed' && location.pathname !== '/home' ?
+          JSON.stringify(user) === JSON.stringify({id:'viewPublicFeed'}) && location.pathname !== '/home' ?
             <Padding>
               <TopNavigation>
                 <HeaderText blue small

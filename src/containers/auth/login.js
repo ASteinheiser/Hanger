@@ -111,7 +111,7 @@ class Login extends Component {
   }
 
   handleViewPublicFeed() {
-    this.props.setUser('viewPublicFeed');
+    this.props.setUser({ id: 'viewPublicFeed' });
     this.props.history.push('/home');
   }
 
