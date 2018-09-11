@@ -20,7 +20,13 @@
     "react-native-scalable-image": "^0.4.0",
     "react-native-splash-screen": "3.0.6",
     "react-native-vector-icons": "^4.6.0",
+    "react-redux": "^5.0.7",
     "react-router-native": "^4.3.0",
+    "reactotron-react-native": "^2.1.0",
+    "reactotron-redux": "^2.1.0",
+    "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^3.3.2",
     "validator": "^10.4.0"
   },

@@ -1,5 +1,7 @@
 import React, { Component }    from 'react';
-import { AsyncStorage, View }  from 'react-native';
+import { Provider }            from 'react-redux';
+import { PersistGate }         from 'redux-persist/integration/react';
+import { DotIndicator }        from 'react-native-indicators';
 import { NativeRouter, Route } from 'react-router-native';
 import styled                  from 'styled-components/native';
 
@@ -21,60 +23,41 @@ import Register         from './containers/auth/register.js';
 import Shopping         from './containers/shopping.js';
 import Search           from './containers/search.js';
 import Settings         from './containers/settings.js';
+import { blue }         from './theme.js';
+import { store, persistor } from './redux/config';
 
 export default class Router extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      user: null
-    };
-  }
-
-  updateUser(user) {
-    if(!user) {
-      AsyncStorage.removeItem('@user')
-        .then(response => {
-          console.log(response);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else {
-      if(typeof user !== 'string') user = JSON.stringify(user);
-      AsyncStorage.setItem('@user', user)
-        .then(response => {
-          console.log(response);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-    this.setState({ user: user });
-  }
-
   render() {
     return(
-      <NativeRouter>
-        <StyledView>
-          <Route path="/" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Login} /> } />
-          <Route path="/new-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={NewPassword} /> } />
-          <Route path="/forgot-password" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={ForgotPassword} /> }  />
-          <Route path="/check-email" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={CheckEmail} /> }  />
-          <Route path="/register" render={() => <Public user={this.state.user} setuser={this.updateUser.bind(this)} component={Register} /> }  />
-          <Route path="/home" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Home} /> } />
-          <Route path="/post-registration" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={PostRegistration} /> } />
-          <Route path="/edit-profile" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={EditProfile} /> } />
-          <Route path="/messages" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Messages} /> } />
-          <Route path="/notifications" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Notifications} /> } />
-          <Route path="/profile" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Profile} /> } />
-          <Route path="/shopping" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Shopping} /> } />
-          <Route path="/search" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Search} /> } />
-          <Route path="/hive" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Hive} /> } />
-          <Route path="/projects" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Projects} /> } />
-          <Route path="/settings" render={() => <Private user={this.state.user} setuser={this.updateUser.bind(this)} component={Settings} /> } />
-        </StyledView>
-      </NativeRouter>
+      <Provider store={store}>
+        <PersistGate
+          loading={
+            <Centered>
+              <DotIndicator color={blue} size={12} />
+            </Centered>
+          } persistor={persistor}>
+          <NativeRouter>
+            <StyledView>
+              <Route path="/" render={() => <Public component={Login} /> } />
+              <Route path="/new-password" render={() => <Public component={NewPassword} /> } />
+              <Route path="/forgot-password" render={() => <Public component={ForgotPassword} /> }  />
+              <Route path="/check-email" render={() => <Public component={CheckEmail} /> }  />
+              <Route path="/register" render={() => <Public component={Register} /> }  />
+              <Route path="/home" render={() => <Private component={Home} /> } />
+              <Route path="/post-registration" render={() => <Private component={PostRegistration} /> } />
+              <Route path="/edit-profile" render={() => <Private component={EditProfile} /> } />
+              <Route path="/messages" render={() => <Private component={Messages} /> } />
+              <Route path="/notifications" render={() => <Private component={Notifications} /> } />
+              <Route path="/profile" render={() => <Private component={Profile} /> } />
+              <Route path="/shopping" render={() => <Private component={Shopping} /> } />
+              <Route path="/search" render={() => <Private component={Search} /> } />
+              <Route path="/hive" render={() => <Private component={Hive} /> } />
+              <Route path="/projects" render={() => <Private component={Projects} /> } />
+              <Route path="/settings" render={() => <Private component={Settings} /> } />
+            </StyledView>
+          </NativeRouter>
+        </PersistGate>
+      </Provider>
     );
   }
 }
@@ -82,4 +65,11 @@ export default class Router extends React.Component {
 const StyledView = styled.View`
   display: flex;
   flex: 1;
+`
+
+const Centered = styled.View`
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
 `
