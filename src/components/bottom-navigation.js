@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Auth }             from 'aws-amplify';
 import { connect }          from 'react-redux';
 import { withRouter }       from 'react-router-native';
 import styled               from 'styled-components/native';
@@ -14,7 +15,7 @@ import ShoppingLogo  from '../../assets/icons/shopping-cart-white.png';
 import UploadMenu    from './upload-menu.js';
 import theme         from '../theme.js';
 
-import { setUser }    from '../redux/actions/user';
+import { setUser } from '../redux/actions/user';
 
 class BottomNav extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class BottomNav extends Component {
 
   handleBackToLogin() {
     let route = '/';
+    Auth.signOut();
     this.props.setUser();
     this.setState({ active: route });
     this.props.history.push(route);
