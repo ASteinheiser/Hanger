@@ -4,9 +4,9 @@ import { Provider }      from 'react-redux';
 import { PersistGate }   from 'redux-persist/integration/react';
 import { DotIndicator }  from 'react-native-indicators';
 import { AppRegistry }   from 'react-native';
-import { ThemeProvider } from 'react-native-material-ui';
 import SplashScreen      from 'react-native-splash-screen';
 import styled            from 'styled-components/native';
+import { ThemeContext, getTheme } from 'react-native-material-ui';
 
 import aws_config from './src/aws-config.js';
 import Router     from './src/router.js';
@@ -30,9 +30,9 @@ class App extends React.Component {
               <DotIndicator color={blue} size={12} />
             </Centered>
           } persistor={persistor}>
-          <ThemeProvider uiTheme={theme}>
+          <ThemeContext.Provider value={getTheme(theme)}>
             <Router />
-          </ThemeProvider>
+          </ThemeContext.Provider>
         </PersistGate>
       </Provider>
     );
