@@ -43,6 +43,7 @@ class PublicRoute extends Component {
         });
     } else {
       this.setState({ authenticationComplete: true });
+      this.props.history.replace('/home');
     }
   }
 
