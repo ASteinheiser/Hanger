@@ -12,9 +12,6 @@ import TopNavigation     from '../components/top-navigation.js';
 import theme             from '../theme.js';
 import { validateField } from '../functions/validate-field.js';
 import { validateForm }  from '../functions/validate-form.js';
-import s3_buckets        from '../s3-buckets.js';
-
-const S3_BUCKET = s3_buckets.staging;
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -136,13 +133,12 @@ export default class EditProfile extends Component {
   }
 
   getImage() {
-    let options = {
-      bucket: S3_BUCKET
-    }
-
-    Storage.get(this.props.user.user_id, options)
-      .then(response => {
-        this.setState({ profileImage: response });
+    Storage.get('profile-picture.jpeg', {
+      level: 'protected',
+      identityId: this.props.user.id
+    })
+      .then(result => {
+        this.setState({ profileImage: result });
       })
       .catch(err => {
         console.error(err);
@@ -151,16 +147,16 @@ export default class EditProfile extends Component {
   }
 
   handleUpload(imageData) {
-    Storage.put(this.props.user.user_id, imageData, {
+    Storage.put('profile-picture.jpeg', imageData, {
       level: 'protected',
-      // identityId: 'some-id' // needed for accessing other user's "protected" images
+      contentType: 'image/jpeg'
     })
       .then(result => {
-        // console.log(result);
+        this.props.history.reload();
       })
       .catch(err => {
         console.error(err);
-        self.setState({ alertMessage: 'There was a problem uploading your image.' });
+        this.setState({ alertMessage: 'Error Uploading Profile Picture' });
       });
   }
 
