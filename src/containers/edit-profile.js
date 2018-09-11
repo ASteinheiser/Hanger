@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect }          from 'react-redux';
 import { API, Storage }     from 'aws-amplify';
 import ImagePicker          from 'react-native-image-picker';
 import { Avatar }           from 'react-native-material-ui';
@@ -12,16 +13,14 @@ import TopNavigation     from '../components/top-navigation.js';
 import theme             from '../theme.js';
 import { validateField } from '../functions/validate-field.js';
 import { validateForm }  from '../functions/validate-form.js';
-import s3_buckets        from '../s3-buckets.js';
 
-const S3_BUCKET = s3_buckets.staging;
+import { setUser } from '../redux/actions/user';
 
-export default class EditProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     let user = props.user;
-    if(user && typeof user === 'string') user = JSON.parse(user);
 
     this.state = {
       first_name: {
@@ -94,7 +93,7 @@ export default class EditProfile extends Component {
 
         API.post('HangerAPI', '/v1/user', params)
           .then(response => {
-            this.props.setuser(); // clean out old user so auth routes will update with new info
+            this.props.setUser(); // clean out old user so auth routes will update with new info
             this.setState({ loading: false });
             this.props.history.replace('/profile');
           })
@@ -136,13 +135,12 @@ export default class EditProfile extends Component {
   }
 
   getImage() {
-    let options = {
-      bucket: S3_BUCKET
-    }
-
-    Storage.get(this.props.user.user_id, options)
-      .then(response => {
-        this.setState({ profileImage: response });
+    Storage.get('profile-picture.jpeg', {
+      level: 'protected',
+      identityId: this.props.user.id
+    })
+      .then(result => {
+        this.setState({ profileImage: result });
       })
       .catch(err => {
         console.error(err);
@@ -151,28 +149,28 @@ export default class EditProfile extends Component {
   }
 
   handleUpload(imageData) {
-    Storage.put(this.props.user.user_id, imageData, {
+    Storage.put('profile-picture.jpeg', imageData, {
       level: 'protected',
-      // identityId: 'some-id' // needed for accessing other user's "protected" images
+      contentType: 'image/jpeg'
     })
       .then(result => {
-        // console.log(result);
+        this.props.history.reload();
       })
       .catch(err => {
         console.error(err);
-        self.setState({ alertMessage: 'There was a problem uploading your image.' });
+        this.setState({ alertMessage: 'Error Uploading Profile Picture' });
       });
   }
 
   render() {
+    const { first_name, alertMessage, last_name, display_name, job, location, website, bio, loading } = this.state;
+
     return(
       <Height>
-
         <TopNavigation
           back-button
           route='/profile'
-          title='Edit Profile Info'
-          navigation={this.props.navigation}>
+          title='Edit Profile Info'>
           <Container color={theme.palette.canvasColor}>
 
             <AvatarContainer>
@@ -181,42 +179,42 @@ export default class EditProfile extends Component {
               </Touchable>
             </AvatarContainer>
 
-            <Alert message={this.state.alertMessage} />
+            <Alert message={alertMessage} />
 
             <InputMargin>
               <Input accent
                 onChange={this.onChange.bind(this, 'first_name')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'First Name'}
-                value={this.state.first_name.value}
-                error={!this.state.first_name.valid ? 'Enter a first name.' : ''}
+                value={first_name.value}
+                error={!first_name.valid ? 'Enter a first name.' : ''}
                 />
               <Input accent
                 onChange={this.onChange.bind(this, 'last_name')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Last Name'}
-                value={this.state.last_name.value}
-                error={!this.state.last_name.valid ? 'Enter a last name.' : ''}
+                value={last_name.value}
+                error={!last_name.valid ? 'Enter a last name.' : ''}
                 />
               <Input accent
                 onChange={this.onChange.bind(this, 'display_name')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Username'}
-                value={this.state.display_name.value}
-                error={!this.state.display_name.valid ? 'Enter a username.' : ''}
+                value={display_name.value}
+                error={!display_name.valid ? 'Enter a username.' : ''}
                 />
               <Input accent
                 onChange={this.onChange.bind(this, 'job')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Job'}
-                value={this.state.job.value}
+                value={job.value}
                 error={''}
                 />
               <Input accent
                 onChange={this.onChange.bind(this, 'location')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Location'}
-                value={this.state.location.value}
+                value={location.value}
                 error={''}
                 />
 
@@ -224,35 +222,34 @@ export default class EditProfile extends Component {
                 onChange={this.onChange.bind(this, 'website')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Website'}
-                value={this.state.website.value}
+                value={website.value}
                 error={''}
                 />
               <Input accent
                 onChange={this.onChange.bind(this, 'bio')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Bio'}
-                value={this.state.bio.value}
+                value={bio.value}
                 error={''}
                 />
             </InputMargin>
 
             <TopMargin>
               {
-                this.state.loading ?
+                loading ?
                   <DotIndicator size={18} count={3} color={theme.palette.primaryColor}/>
                   :
                   <Button
                     accent
                     icon="person"
                     text="Update Profile"
-                    disabled={this.state.loading}
+                    disabled={loading}
                     onPress={this.handleSubmit.bind(this)} />
               }
             </TopMargin>
 
           </Container>
         </TopNavigation>
-
       </Height>
     );
   }
@@ -287,3 +284,17 @@ const TopMargin = styled.View`
 const InputMargin = styled.View`
   margin: 0 5%;
 `
+
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

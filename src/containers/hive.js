@@ -1,18 +1,17 @@
-import React  from 'react';
-import styled from 'styled-components/native';
+import React, { Component } from 'react';
+import styled               from 'styled-components/native';
 
 import BottomNavigation  from '../components/bottom-navigation.js';
 import TopNavigation     from '../components/top-navigation.js';
 import UnderConstruction from '../components/under-construction.js';
 import theme             from '../theme.js';
 
-export default class Hive extends React.Component {
+export default class Hive extends Component {
   render() {
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation navigation={this.props.navigation}>
+        <BottomNavigation>
+          <TopNavigation>
             <Container color={theme.palette.canvasColor}>
 
               <UnderConstruction title='Hive' />
@@ -20,7 +19,6 @@ export default class Hive extends React.Component {
             </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     );
   }

@@ -1,7 +1,7 @@
-import React            from 'react';
-import { Auth }         from 'aws-amplify';
-import styled           from 'styled-components/native';
-import { DotIndicator } from 'react-native-indicators';
+import React, { Component } from 'react';
+import { Auth }             from 'aws-amplify';
+import styled               from 'styled-components/native';
+import { DotIndicator }     from 'react-native-indicators';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -14,7 +14,7 @@ import { uuidv4 }        from '../../functions/uuid-v4.js';
 import HangerLogo     from '../../../assets/icons/hanger-white.png';
 import Photographer   from '../../../assets/images/photographer.jpeg';
 
-export default class Register extends React.Component {
+export default class Register extends Component {
   constructor(props) {
     super(props);
 

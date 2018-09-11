@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Image, View }      from 'react-native';
+import { Auth }             from 'aws-amplify';
+import { connect }          from 'react-redux';
 import { withRouter }       from 'react-router-native';
 import styled               from 'styled-components/native';
 
@@ -12,8 +13,9 @@ import PlusLogo      from '../../assets/icons/plus-white.png';
 import MessageLogo   from '../../assets/icons/messages-white.png';
 import ShoppingLogo  from '../../assets/icons/shopping-cart-white.png';
 import UploadMenu    from './upload-menu.js';
+import theme         from '../theme.js';
 
-import theme from '../theme.js';
+import { setUser } from '../redux/actions/user';
 
 class BottomNav extends Component {
   constructor(props) {
@@ -46,26 +48,29 @@ class BottomNav extends Component {
   }
 
   handleToggleUploadMenu() {
-    if(this.props.user !== 'viewPublicFeed') {
+    if(JSON.stringify(this.props.user) !== JSON.stringify({id:'viewPublicFeed'})) {
       this.setState({ showUploadMenu: !this.state.showUploadMenu });
     }
   }
 
   handleBackToLogin() {
     let route = '/';
-    this.props.setuser();
+    Auth.signOut();
+    this.props.setUser();
     this.setState({ active: route });
     this.props.history.push(route);
   }
 
   render() {
+    const { user, location, children } = this.props;
+    const { showUploadMenu } = this.state;
+
     return (
       <FullScreen>
-
         {
-          this.props.user === 'viewPublicFeed' && this.props.location.pathname !== '/home' ?
+          JSON.stringify(user) === JSON.stringify({id:'viewPublicFeed'}) && location.pathname !== '/home' ?
             <Padding>
-              <TopNavigation navigation={this.props.navigation}>
+              <TopNavigation>
                 <HeaderText blue small
                   text='Please create an account to use this feature...'/>
 
@@ -80,13 +85,12 @@ class BottomNav extends Component {
             </Padding>
             :
             <Padding>
-              { this.props.children }
+              { children }
             </Padding>
         }
 
         <UploadMenu
-          open={this.state.showUploadMenu}
-          history={this.props.history}
+          open={showUploadMenu}
           close={this.handleToggleUploadMenu.bind(this)} />
 
         <BottomNavContainer color={theme.palette.primaryColor}>
@@ -150,4 +154,16 @@ const Padding = styled.View`
   padding-bottom: 60px;
 `
 
-export default withRouter(BottomNav);
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BottomNav));

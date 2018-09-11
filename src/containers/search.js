@@ -1,5 +1,4 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 import _debounce            from 'lodash.debounce';
 
@@ -11,7 +10,7 @@ import theme            from '../theme.js';
 
 const SEARCH_DEBOUNCE_TIME = 1500; // 1.5 seconds
 
-export default class Search extends React.Component {
+export default class Search extends Component {
   constructor(props) {
     super(props);
 
@@ -35,9 +34,8 @@ export default class Search extends React.Component {
   render() {
     return (
       <Height>
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
+        <BottomNavigation>
           <TopNavigation
-            navigation={this.props.navigation}
             type='search'
             onChange={this.onChange.bind(this)}
             value={this.state.searchValue}>

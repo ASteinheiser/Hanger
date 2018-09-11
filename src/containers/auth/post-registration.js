@@ -1,7 +1,8 @@
-import React            from 'react';
-import { API, Auth }    from 'aws-amplify';
-import styled           from 'styled-components/native';
-import { DotIndicator } from 'react-native-indicators';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+import { API, Auth }        from 'aws-amplify';
+import styled               from 'styled-components/native';
+import { DotIndicator }     from 'react-native-indicators';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -13,7 +14,9 @@ import { validateForm }  from '../../functions/validate-form.js';
 import HangerLogo       from '../../../assets/icons/hanger-white.png';
 import JacketBackground from '../../../assets/images/leather-jacket.jpg';
 
-export default class PostRegistration extends React.Component {
+import { setUser } from '../../redux/actions/user';
+
+class PostRegistration extends Component {
   constructor(props) {
     super(props);
 
@@ -60,9 +63,8 @@ export default class PostRegistration extends React.Component {
 
         API.post('HangerAPI', '/v1/user/post-registration', params)
           .then(response => {
-            this.props.setuser(); // clean out old user so auth routes will update with new info
+            this.props.setUser(); // clean out old user so auth routes will update with new info
             this.setState({ loading: false });
-            // this.props.history.replace('/profile-upload');
           })
           .catch(err => {
             console.log(err);
@@ -81,8 +83,8 @@ export default class PostRegistration extends React.Component {
   }
 
   handleBackButton() {
-    this.props.setuser();
     Auth.signOut();
+    this.props.setUser();
     this.props.history.push('/');
   }
 
@@ -219,3 +221,13 @@ const InputMargin = styled.View`
 const TopPadding = styled.View`
   padding-top: 25px;
 `
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(PostRegistration);

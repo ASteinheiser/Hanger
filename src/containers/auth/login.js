@@ -1,8 +1,9 @@
-import React            from 'react';
-import { AsyncStorage } from 'react-native';
-import { API, Auth }    from 'aws-amplify';
-import styled           from 'styled-components/native';
-import { DotIndicator } from 'react-native-indicators';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+import { AsyncStorage }     from 'react-native';
+import { API, Auth }        from 'aws-amplify';
+import styled               from 'styled-components/native';
+import { DotIndicator }     from 'react-native-indicators';
 import {
   LoginManager,
   AccessToken,
@@ -23,7 +24,9 @@ import HangerLogo     from '../../../assets/icons/hanger-white.png';
 import Runway         from '../../../assets/images/runway.jpeg';
 import Photographer   from '../../../assets/images/photographer.jpeg';
 
-export default class Login extends React.Component {
+import { setUser } from '../../redux/actions/user';
+
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -108,7 +111,7 @@ export default class Login extends React.Component {
   }
 
   handleViewPublicFeed() {
-    this.props.setuser('viewPublicFeed');
+    this.props.setUser({ id: 'viewPublicFeed' });
     this.props.history.push('/home');
   }
 
@@ -368,3 +371,13 @@ const InputMargin = styled.View`
 const TopPadding = styled.View`
   padding-top: 25px;
 `
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login);

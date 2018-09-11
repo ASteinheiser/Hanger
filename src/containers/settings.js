@@ -1,26 +1,28 @@
-import React    from 'react';
-import { Auth } from 'aws-amplify';
-import styled   from 'styled-components/native';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+import { Auth }             from 'aws-amplify';
+import styled               from 'styled-components/native';
 
 import BottomNavigation from '../components/bottom-navigation.js';
 import Button           from '../components/button.js';
 import TopNavigation    from '../components/top-navigation.js';
 import theme            from '../theme.js';
 
-export default class Settings extends React.Component {
+import { setUser } from '../redux/actions/user';
+
+class Settings extends Component {
 
   handleSignout() {
-    this.props.setuser();
     Auth.signOut();
+    this.props.setUser();
     this.props.history.replace('/');
   }
 
   render() {
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation title='Settings' navigation={this.props.navigation}>
+        <BottomNavigation>
+          <TopNavigation title='Settings'>
             <Container color={theme.palette.canvasColor}>
               <Margin>
                 <Button
@@ -57,7 +59,6 @@ export default class Settings extends React.Component {
             </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     );
   }
@@ -77,3 +78,13 @@ const Container = styled.ScrollView`
 const Margin = styled.View`
   margin: 10px 20px 10px 20px;
 `
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Settings);

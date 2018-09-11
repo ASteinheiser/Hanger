@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Platform, View }   from 'react-native';
+import { Platform }         from 'react-native';
 import { withRouter }       from 'react-router-native';
-import { Avatar, Toolbar }  from 'react-native-material-ui';
 import ScaledImage          from 'react-native-scalable-image';
 import styled               from 'styled-components/native';
+import { Avatar, Toolbar, Icon } from 'react-native-material-ui';
 
+import Input           from './input.js';
 import Drawer          from './drawer.js';
-import SearchBar       from './search-bar.js';
 import EditLogo        from '../../assets/icons/edit-pencil-white.png';
 import HangerWhiteLogo from '../../assets/icons/hanger-white.png';
 import BackLogo        from '../../assets/icons/back-white.png';
@@ -36,14 +36,28 @@ class TopNavigation extends Component {
   }
 
   render() {
+    let { children, ...other } = this.props;
+    toolbarStyle.leftElementContainer = {};
+
     if(this.props.type === 'search') {
+      toolbarStyle.leftElementContainer = { paddingLeft: 20 };
+
       return (
         <StyledView>
-          <SearchBar
-            style={ toolbarStyle }
-            {...this.props} />
+          <Toolbar style={ toolbarStyle }
+            leftElement={
+              <Icon name='search' size={30} color={'white'} />
+            }
+            centerElement={
+              <Input
+                {...other}
+                placeholder={'Search Events, Gigs, etc.'}
+                label={''}
+                containerStyle={{ paddingRight: 35, paddingBottom: 25 }}
+                />
+            } />
 
-          { this.props.children }
+          { children }
 
         </StyledView>
       );
@@ -115,7 +129,7 @@ class TopNavigation extends Component {
               </MarginLeft>
           } />
 
-        { this.props.children }
+        { children }
 
         <Drawer
           history={this.props.history}

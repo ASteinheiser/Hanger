@@ -1,5 +1,4 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
@@ -10,7 +9,7 @@ import theme            from '../theme.js';
 
 import SAMPLE_POSTS from '../../assets/data/posts.json';
 
-export default class Home extends React.Component {
+export default class Home extends Component {
   render() {
     const FeedPosts = _map(SAMPLE_POSTS, post =>
       <FeedPost
@@ -21,17 +20,15 @@ export default class Home extends React.Component {
 
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation navigation={this.props.navigation}>
-
+        <BottomNavigation>
+          <TopNavigation>
             <Container color={theme.palette.canvasColor}>
-              { FeedPosts }
-            </Container>
 
+              { FeedPosts }
+
+            </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     );
   }

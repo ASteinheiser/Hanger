@@ -14,6 +14,8 @@ import TwitterColor   from '../../assets/icons/twitter-color.png';
 
 export default class SocialMediaAccounts extends Component {
   render() {
+    const { user } = this.props;
+
     return(
       <SocialContainer>
         <SocialMediaLogo source={Facebook} />
