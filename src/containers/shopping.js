@@ -1,20 +1,17 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import styled               from 'styled-components/native';
-import _map                 from 'lodash.map';
 
 import BottomNavigation  from '../components/bottom-navigation.js';
 import TopNavigation     from '../components/top-navigation.js';
 import UnderConstruction from '../components/under-construction.js';
 import theme             from '../theme.js';
 
-export default class Shopping extends React.Component {
+export default class Shopping extends Component {
   render() {
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation navigation={this.props.navigation}>
+        <BottomNavigation>
+          <TopNavigation>
             <Container color={theme.palette.canvasColor}>
 
               <UnderConstruction title='Shopping' />
@@ -22,7 +19,6 @@ export default class Shopping extends React.Component {
             </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     )
   }

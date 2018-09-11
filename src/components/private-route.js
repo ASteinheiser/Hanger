@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { AsyncStorage }     from 'react-native';
+import { connect }          from 'react-redux';
 import { DotIndicator }     from 'react-native-indicators';
 import { withRouter }       from 'react-router-native';
 import { Auth, API }        from 'aws-amplify';
 import styled               from 'styled-components/native';
+
+import theme       from '../theme.js'
+import { setUser } from '../redux/actions/user';
 
 class PrivateRoute extends Component {
   constructor(props) {
@@ -25,47 +28,26 @@ class PrivateRoute extends Component {
   }
 
   authenticate() {
-    if(!this.props.user) {
-      AsyncStorage.getItem('@user', (error, result) => {
-
-        if(result) {
-          if(typeof result === 'string' && result !== 'viewPublicFeed') {
-            result = JSON.parse(result);
-          }
-          let user = result;
+    if(JSON.stringify(this.props.user) === JSON.stringify({})) {
+      API.get('HangerAPI', '/v1/user')
+        .then(response => {
           this.setState({ authenticationComplete: true });
-          this.props.setuser(user);
+          this.props.setUser(response);
           // take them to fill out info if they need to finish profile
-          if(user.registration_step === 'additional_info'
+          if(response.registration_step === 'additional_info'
               && this.props.location.pathname !== '/post-registration') {
-
             this.props.history.replace('/post-registration');
           }
-        }
-        else {
-          API.get('HangerAPI', '/v1/user')
-            .then(response => {
-              this.setState({ authenticationComplete: true });
-              this.props.setuser(response);
-              // take them to fill out info if they need to finish profile
-              if(response.registration_step === 'additional_info'
-                  && this.props.location.pathname !== '/post-registration') {
-                this.props.history.replace('/post-registration');
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              this.props.setuser();
-              Auth.signOut();
-              this.props.history.replace('/');
-            });
-        }
-      });
+        })
+        .catch(err => {
+          console.log(err);
+          Auth.signOut();
+          this.props.setUser();
+          this.props.history.replace('/');
+        });
     } else {
-      let user = this.props.user;
-      if(typeof user === 'string' && user !== 'viewPublicFeed') {
-        user = JSON.parse(user);
-      }
+      let { user } = this.props;
+
       this.setState({ authenticationComplete: true });
       // take them to fill out info if they need to finish profile
       if(user.registration_step === 'additional_info'
@@ -76,10 +58,10 @@ class PrivateRoute extends Component {
   }
 
   render() {
+    const { authenticationComplete } = this.state;
     let Comp = this.props.component;
-    let { user } = this.props;
 
-    if(!this.state.authenticationComplete) {
+    if(!authenticationComplete) {
       return(
         <StyledView color={theme.palette.canvasColor}>
           <Container>
@@ -90,7 +72,7 @@ class PrivateRoute extends Component {
     }
 
     return (
-      <Comp {...this.props} user={user} />
+      <Comp {...this.props} />
     );
   }
 }
@@ -108,4 +90,16 @@ const Container = styled.View`
   align-items: center;
 `
 
-export default withRouter(PrivateRoute);
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PrivateRoute));

@@ -1,5 +1,5 @@
-import React  from 'react';
-import styled from 'styled-components/native';
+import React, { Component } from 'react';
+import styled               from 'styled-components/native';
 
 import Button     from '../../components/button.js';
 import HeaderText from '../../components/header-text.js';
@@ -7,7 +7,7 @@ import HeaderText from '../../components/header-text.js';
 import HangerLogo   from '../../../assets/icons/hanger-white.png';
 import Photographer from '../../../assets/images/photographer.jpeg';
 
-export default class CheckEmail extends React.Component {
+export default class CheckEmail extends Component {
   render() {
     return (
       <Flex>

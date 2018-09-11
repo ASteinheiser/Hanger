@@ -1,7 +1,7 @@
-import React            from 'react';
-import { Auth }         from 'aws-amplify';
-import styled           from 'styled-components/native';
-import { DotIndicator } from 'react-native-indicators';
+import React, { Component } from 'react';
+import { Auth }             from 'aws-amplify';
+import { DotIndicator }     from 'react-native-indicators';
+import styled               from 'styled-components/native';
 
 import Alert             from '../../components/alert.js';
 import Button            from '../../components/button.js';
@@ -13,7 +13,7 @@ import { validateForm }  from '../../functions/validate-form.js';
 import HangerLogo     from '../../../assets/icons/hanger-white.png';
 import Photographer   from '../../../assets/images/photographer.jpeg';
 
-export default class NewPassword extends React.Component {
+export default class NewPassword extends Component {
   constructor(props) {
     super(props);
 

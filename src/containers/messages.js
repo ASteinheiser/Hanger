@@ -1,5 +1,4 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
@@ -10,7 +9,7 @@ import theme            from '../theme.js';
 
 import SAMPLE_MESSAGES from '../../assets/data/messages.json';
 
-export default class Messages extends React.Component {
+export default class Messages extends Component {
   render() {
     const Messages = _map(SAMPLE_MESSAGES, message =>
       <MessageItem
@@ -22,9 +21,8 @@ export default class Messages extends React.Component {
 
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation title='Messages' navigation={this.props.navigation}>
+        <BottomNavigation>
+          <TopNavigation title='Messages'>
             <Container color={theme.palette.canvasColor}>
 
               { Messages }
@@ -32,7 +30,6 @@ export default class Messages extends React.Component {
             </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     )
   }

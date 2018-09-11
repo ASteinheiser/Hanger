@@ -1,6 +1,6 @@
-import React  from 'react';
-import styled from 'styled-components/native';
-import _map   from 'lodash.map';
+import React, { Component } from 'react';
+import { connect }          from 'react-redux';
+import styled               from 'styled-components/native';
 
 import Button              from '../components/button.js'
 import BottomNavigation    from '../components/bottom-navigation.js';
@@ -8,26 +8,21 @@ import ProfileHeader       from '../components/profile-header.js';
 import ProfileInformation  from '../components/profile-information.js';
 import SocialMediaAccounts from '../components/social-media-accounts.js';
 import TopNavigation       from '../components/top-navigation.js';
+import theme               from '../theme.js';
 
-import theme from '../theme.js';
-
-export default class Profile extends React.Component {
+class Profile extends Component {
   render() {
-    let user = this.props.user;
-    if(typeof user === 'string' && user !== 'viewPublicFeed') {
-      user = JSON.parse(user);
-    }
+    const { user } = this.props;
 
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation edit_icon navigation={this.props.navigation}>
+        <BottomNavigation>
+          <TopNavigation edit_icon>
             <Container color={theme.palette.canvasColor}>
 
-              <ProfileHeader user={user} history={this.props.history}/>
+              <ProfileHeader user={user} />
 
-              <ProfileInformation user={user} history={this.props.history}/>
+              <ProfileInformation user={user} />
 
               <SocialMediaAccounts user={user} />
 
@@ -42,7 +37,6 @@ export default class Profile extends React.Component {
             </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     )
   }
@@ -65,3 +59,9 @@ const ProfileContentContainer = styled.View`
 const Margin = styled.View`
   margin: 20px 20px 20px 20px;
 `
+
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+export default connect(mapStateToProps)(Profile);

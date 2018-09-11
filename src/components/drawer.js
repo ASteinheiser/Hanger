@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter }       from 'react-router-native';
 import styled               from 'styled-components/native';
 
 import ProjectsLogo  from '../../assets/icons/spiral-white.png';
@@ -8,7 +9,7 @@ import Notifications from '../../assets/icons/bullhorn-white.png';
 
 import theme from '../theme.js';
 
-export default class Drawer extends Component {
+class Drawer extends Component {
 
   handleNavigation(route) {
     this.props.close();
@@ -118,3 +119,5 @@ const ButtonIcon = styled.Image`
   width: 30px;
   height: 30px;
 `
+
+export default withRouter(Drawer);

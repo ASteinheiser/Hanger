@@ -1,5 +1,4 @@
-import React                from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 import _map                 from 'lodash.map';
 
@@ -10,7 +9,7 @@ import theme            from '../theme.js';
 
 import SAMPLE_NOTIFICATIONS from '../../assets/data/notifications.json';
 
-export default class Notifications extends React.Component {
+export default class Notifications extends Component {
   render() {
     const Notifications = _map(SAMPLE_NOTIFICATIONS, notif =>
       <NotificationItem
@@ -22,9 +21,8 @@ export default class Notifications extends React.Component {
 
     return (
       <Height>
-
-        <BottomNavigation user={this.props.user} setuser={this.props.setuser}>
-          <TopNavigation title='Notifications' navigation={this.props.navigation}>
+        <BottomNavigation>
+          <TopNavigation title='Notifications'>
             <Container color={theme.palette.canvasColor}>
 
               { Notifications }
@@ -32,7 +30,6 @@ export default class Notifications extends React.Component {
             </Container>
           </TopNavigation>
         </BottomNavigation>
-
       </Height>
     )
   }

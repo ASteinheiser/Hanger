@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { AsyncStorage }     from 'react-native';
+import { connect }          from 'react-redux';
 import { Auth, API }        from 'aws-amplify';
 import { withRouter }       from 'react-router-native';
 import { DotIndicator }     from 'react-native-indicators';
 import styled               from 'styled-components/native';
 
-import theme from '../theme.js';
+import theme       from '../theme.js';
+import { setUser } from '../redux/actions/user';
 
 class PublicRoute extends Component {
   constructor(props) {
@@ -27,32 +28,19 @@ class PublicRoute extends Component {
   }
 
   authenticate() {
-    if(!this.props.user) {
-      AsyncStorage.getItem('@user', (error, result) => {
-
-        if(result) {
+    if(JSON.stringify(this.props.user) === JSON.stringify({})) {
+      API.get('HangerAPI', '/v1/user')
+        .then(response => {
           this.setState({ authenticationComplete: true });
-          this.props.setuser(result);
+          this.props.setUser(response);
           this.props.history.replace('/home');
-        }
-        else {
-          API.get('HangerAPI', '/v1/user')
-            .then(response => {
-              this.setState({ authenticationComplete: true });
-              this.props.setuser(response);
-              this.props.history.replace({
-                pathname: '/home',
-                state: { response }
-              });
-            })
-            .catch(err => {
-              console.log(err);
-              Auth.signOut();
-              this.props.setuser();
-              this.setState({ authenticationComplete: true });
-            });
-        }
-      });
+        })
+        .catch(err => {
+          console.log(err);
+          Auth.signOut();
+          this.props.setUser();
+          this.setState({ authenticationComplete: true });
+        });
     } else {
       this.setState({ authenticationComplete: true });
     }
@@ -60,8 +48,9 @@ class PublicRoute extends Component {
 
   render() {
     let Comp = this.props.component;
+    const { authenticationComplete } = this.state;
 
-    if(!this.state.authenticationComplete) {
+    if(!authenticationComplete) {
       return(
         <StyledView color={theme.palette.canvasColor}>
           <Container>
@@ -90,4 +79,16 @@ const Container = styled.View`
   align-items: center;
 `
 
-export default withRouter(PublicRoute);
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: user => {
+            dispatch(setUser(user))
+        }
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PublicRoute));
