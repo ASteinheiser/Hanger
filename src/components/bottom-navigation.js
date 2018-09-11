@@ -14,7 +14,7 @@ import ShoppingLogo  from '../../assets/icons/shopping-cart-white.png';
 import UploadMenu    from './upload-menu.js';
 import theme         from '../theme.js';
 
-import { setUser }    from '../../redux/actions/user';
+import { setUser }    from '../redux/actions/user';
 
 class BottomNav extends Component {
   constructor(props) {
