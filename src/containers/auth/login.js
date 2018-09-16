@@ -143,9 +143,15 @@ class Login extends Component {
 
                     API.post('HangerAPI', '/v1/auth/fb', params)
                       .then(response => {
-                        Auth.federatedSignIn('facebook', { token, expires_at }, user)
-                          .then(result => {
-                            self.handleNavigation('/home');
+                        Auth.currentCredentials()
+                          .then(info => {
+                            Auth.federatedSignIn('facebook', { token, expires_at, identity_id: info.cognito.config.credentials.identityId }, user)
+                              .then(result => {
+                                self.handleNavigation('/home');
+                              })
+                              .catch(err => {
+                                console.log(err);
+                              });
                           })
                           .catch(err => {
                             console.log(err);
