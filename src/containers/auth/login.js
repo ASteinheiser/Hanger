@@ -82,8 +82,20 @@ class Login extends Component {
 
         Auth.signIn(this.state.email.value.toLowerCase(), this.state.password.value)
           .then(response => {
-            this.setState({ loading: false });
-            this.handleNavigation('/home');
+            let params = {
+              body: {
+                email: this.state.email.value.toLowerCase()
+              }
+            };
+            API.post('HangerAPI', '/v1/user/confirm', params)
+              .then(response => {
+                this.setState({ loading: false });
+                this.handleNavigation('/home');
+              })
+              .catch(err => {
+                console.log(err);
+                this.setState({ alertMessage: err.message, loading: false });
+              });
           })
           .catch(err => {
             this.setState({ alertMessage: err.message, loading: false });
@@ -139,19 +151,16 @@ class Login extends Component {
                   if (error) {
                     console.log('Error fetching data: ' + error.toString());
                   } else {
-                    let params = { user: result };
-
-                    API.post('HangerAPI', '/v1/auth/fb', params)
-                      .then(response => {
-                        Auth.currentCredentials()
-                          .then(info => {
-                            Auth.federatedSignIn('facebook', { token, expires_at, identity_id: info.cognito.config.credentials.identityId }, user)
-                              .then(result => {
-                                self.handleNavigation('/home');
-                              })
-                              .catch(err => {
-                                console.log(err);
-                              });
+                    let params = {
+                      body: {
+                        user: result
+                      }
+                    };
+                    Auth.federatedSignIn('facebook', { token, expires_at }, user)
+                      .then(result => {
+                        API.post('HangerAPI', '/v1/auth/fb', params)
+                          .then(response => {
+                            self.handleNavigation('/home');
                           })
                           .catch(err => {
                             console.log(err);
