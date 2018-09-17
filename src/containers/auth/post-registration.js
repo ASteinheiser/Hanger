@@ -65,6 +65,7 @@ class PostRegistration extends Component {
           .then(response => {
             this.props.setUser(); // clean out old user so auth routes will update with new info
             this.setState({ loading: false });
+            this.props.history.push('/home')
           })
           .catch(err => {
             console.log(err);
