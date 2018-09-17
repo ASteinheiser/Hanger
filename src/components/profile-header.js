@@ -11,7 +11,12 @@ export default class ProfileHeader extends React.Component {
     return (
       <ProfileView color={theme.palette.disabledColor}>
         <ProfileImageView>
-          <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+        {
+          user.profile_img ?
+            <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+            :
+            <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+        }
         </ProfileImageView>
 
         <FullNameText color={theme.palette.secondaryTextColor}>

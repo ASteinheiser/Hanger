@@ -27,7 +27,7 @@ class App extends React.Component {
         <PersistGate
           loading={
             <Centered>
-              <DotIndicator color={blue} size={12} />
+              <DotIndicator color={blue} size={18} />
             </Centered>
           } persistor={persistor}>
           <ThemeContext.Provider value={getTheme(theme)}>

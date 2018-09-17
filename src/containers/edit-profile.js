@@ -124,18 +124,57 @@ class EditProfile extends Component {
       }
       else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
+        this.setState({ alertMessage: 'Error Uploading Profile Picture' });
       }
       else {
-        let source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        let base64 = 'data:image/jpeg;base64,' + response.data;
+        let blob = new Blob();
+        console.log(blob);
+        console.log(typeof blob);
+        Storage.put('profile_img', base64, {
+          level: 'protected',
+          contentType: 'image/jpeg',
+          contentEncoding: 'base64'
+        })
+          .then(result => {
+            Storage.get('profile_img', {
+              level: 'protected',
+              identityId: this.props.user.id
+            })
+              .then(result => {
+                let profileImage = result.split('?')[0];
+                let params = {
+                  body: {
+                    profile_img: profileImage
+                  }
+                }
+                API.post('HangerAPI', '/v1/user/profile-img', params)
+                  .then(response => {
+                    let newUser = Object.assign({}, this.props.user, {
+                      profile_img: profileImage
+                    });
+                    this.props.setUser(newUser);
+                  })
+                  .catch(err => {
+                    console.error(err);
+                    this.setState({ alertMessage: 'Error Uploading Profile Picture' });
+                  });
+              })
+              .catch(err => {
+                console.error(err);
+                this.setState({ alertMessage: 'Error Uploading Profile Picture' });
+              });
+          })
+          .catch(err => {
+            console.error(err);
+            this.setState({ alertMessage: 'Error Uploading Profile Picture' });
+          });
       }
     });
   }
 
   getImage() {
-    Storage.get('profile-picture.jpeg', {
+    Storage.get('profile_img', {
       level: 'protected',
       identityId: this.props.user.id
     })
@@ -145,20 +184,6 @@ class EditProfile extends Component {
       .catch(err => {
         console.error(err);
         this.setState({ alertMessage: 'Error Loading Profile Picture' });
-      });
-  }
-
-  handleUpload(imageData) {
-    Storage.put('profile-picture.jpeg', imageData, {
-      level: 'protected',
-      contentType: 'image/jpeg'
-    })
-      .then(result => {
-        this.props.history.reload();
-      })
-      .catch(err => {
-        console.error(err);
-        this.setState({ alertMessage: 'Error Uploading Profile Picture' });
       });
   }
 
@@ -175,7 +200,12 @@ class EditProfile extends Component {
 
             <AvatarContainer>
               <Touchable onPress={this.handleProfileUpload.bind(this)}>
-                <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+                {
+                  this.props.user.profile_img ?
+                    <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+                    :
+                    <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+                }
               </Touchable>
             </AvatarContainer>
 
