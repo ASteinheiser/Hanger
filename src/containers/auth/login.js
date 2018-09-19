@@ -150,6 +150,7 @@ class Login extends Component {
               let infoRequest = new GraphRequest('/me', graphParams, (error, result) => {
                   if (error) {
                     console.log('Error fetching data: ' + error.toString());
+                    this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
                   } else {
                     let params = {
                       body: {
@@ -164,10 +165,12 @@ class Login extends Component {
                           })
                           .catch(err => {
                             console.log(err);
+                            this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
                           });
                       })
                       .catch(err => {
                         console.log(err);
+                        this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
                       });
                   }
                 }
@@ -178,15 +181,18 @@ class Login extends Component {
             })
             .catch(err => {
               console.log(err);
+              this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
             });
         }
       },
       function(error) {
         console.log('Login fail with error: ' + error);
+        this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
       }
     )
     .catch(err => {
       console.log(err);
+      this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
     });
   }
 
