@@ -1,6 +1,7 @@
-import React      from 'react';
-import { Avatar } from 'react-native-material-ui';
-import styled     from 'styled-components/native';
+import React       from 'react';
+import { Avatar }  from 'react-native-material-ui';
+import ScaledImage from 'react-native-scalable-image';
+import styled      from 'styled-components/native';
 
 import theme from '../theme.js';
 
@@ -12,8 +13,15 @@ export default class ProfileHeader extends React.Component {
       <ProfileView color={theme.palette.disabledColor}>
         <ProfileImageView>
         {
-          user.profile_img ?
-            <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+          this.props.user.profile_img ?
+            <Avatar
+              size={120}
+              image={
+                <ScaledImage
+                  style={{borderRadius: 60}}
+                  height={120}
+                  source={{uri: this.props.user.profile_img}} />
+              } />
             :
             <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
         }

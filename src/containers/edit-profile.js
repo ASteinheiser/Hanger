@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import { API, Storage }     from 'aws-amplify';
+import ScaledImage          from 'react-native-scalable-image';
 import ImagePicker          from 'react-native-image-picker';
 import { Avatar }           from 'react-native-material-ui';
 import { DotIndicator }     from 'react-native-indicators';
@@ -213,7 +214,14 @@ class EditProfile extends Component {
               <Touchable onPress={this.handleProfileUpload.bind(this)}>
                 {
                   this.props.user.profile_img ?
-                    <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
+                    <Avatar
+                      size={120}
+                      image={
+                        <ScaledImage
+                          style={{borderRadius: 60}}
+                          height={120}
+                          source={{uri: this.props.user.profile_img}} />
+                      } />
                     :
                     <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
                 }
