@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect }          from 'react-redux';
 import { Platform }         from 'react-native';
 import { withRouter }       from 'react-router-native';
 import ScaledImage          from 'react-native-scalable-image';
@@ -93,7 +94,19 @@ class TopNavigation extends Component {
               :
               <MarginRight>
                 <Touchable onPress={() => this.props.history.push('/profile')}>
-                  <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
+                {
+                  this.props.user.profile_img ?
+                    <Avatar
+                      size={40}
+                      image={
+                        <ScaledImage
+                          style={{borderRadius: 20}}
+                          height={40}
+                          source={{uri: this.props.user.profile_img}} />
+                      } />
+                    :
+                    <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
+                }
                 </Touchable>
               </MarginRight>
           }
@@ -191,4 +204,8 @@ const EditLogoPadding = styled.View`
   align-items: flex-end;
 `
 
-export default withRouter(TopNavigation);
+const mapStateToProps = ({ user }) => {
+  return { user };
+}
+
+export default withRouter(connect(mapStateToProps)(TopNavigation));
