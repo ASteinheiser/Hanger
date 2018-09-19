@@ -127,33 +127,44 @@ class EditProfile extends Component {
         this.setState({ alertMessage: 'Error Uploading Profile Picture' });
       }
       else {
-        let base64 = 'data:image/jpeg;base64,' + response.data;
-        let blob = new Blob();
-        console.log(blob);
-        console.log(typeof blob);
-        Storage.put('profile_img', base64, {
-          level: 'protected',
-          contentType: 'image/jpeg',
-          contentEncoding: 'base64'
-        })
-          .then(result => {
-            Storage.get('profile_img', {
-              level: 'protected',
-              identityId: this.props.user.id
-            })
-              .then(result => {
-                let profileImage = result.split('?')[0];
-                let params = {
-                  body: {
-                    profile_img: profileImage
-                  }
-                }
-                API.post('HangerAPI', '/v1/user/profile-img', params)
-                  .then(response => {
-                    let newUser = Object.assign({}, this.props.user, {
-                      profile_img: profileImage
-                    });
-                    this.props.setUser(newUser);
+        const { uri } = response;
+
+        fetch(uri)
+          .then(response => {
+            response.blob()
+              .then(blob => {
+                Storage.put('profile-picture.jpeg', blob, {
+                  level: 'protected',
+                  contentType: 'image/jpeg'
+                })
+                  .then(result => {
+                    Storage.get('profile-picture.jpeg', {
+                      level: 'protected',
+                      identityId: this.props.user.id
+                    })
+                      .then(result => {
+                        let profileImage = result.split('?')[0];
+                        let params = {
+                          body: {
+                            profile_img: profileImage
+                          }
+                        }
+                        API.post('HangerAPI', '/v1/user/profile-img', params)
+                          .then(response => {
+                            let newUser = Object.assign({}, this.props.user, {
+                              profile_img: profileImage
+                            });
+                            this.props.setUser(newUser);
+                          })
+                          .catch(err => {
+                            console.error(err);
+                            this.setState({ alertMessage: 'Error Uploading Profile Picture' });
+                          });
+                      })
+                      .catch(err => {
+                        console.error(err);
+                        this.setState({ alertMessage: 'Error Uploading Profile Picture' });
+                      });
                   })
                   .catch(err => {
                     console.error(err);
