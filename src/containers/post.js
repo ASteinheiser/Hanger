@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { API, storage }     from 'aws-amplify';
+import { API, Storage }     from 'aws-amplify';
 import { withRouter }       from 'react-router-native';
 import ScaledImage          from 'react-native-scalable-image';
 import { DotIndicator }     from 'react-native-indicators';
