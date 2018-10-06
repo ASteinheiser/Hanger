@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter }       from 'react-router-native';
 import ImagePicker          from 'react-native-image-picker';
 import styled               from 'styled-components/native';
 
@@ -8,7 +9,7 @@ import VideoLogo  from '../../assets/icons/video-white.png';
 
 import theme from '../theme.js';
 
-export default class UploadMenu extends Component {
+class UploadMenu extends Component {
 
   handleCameraClick() {
     this.props.close();
@@ -25,10 +26,11 @@ export default class UploadMenu extends Component {
         console.log('ImagePicker Error: ', response.error);
       }
       else {
-        let source = { uri: response.uri };
-
+        let imageUri = response.uri;
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.props.history.push(`/post?image=${imageUri}`);
       }
     });
   }
@@ -116,3 +118,5 @@ const FullScreen = styled.View`
   left: 0;
   right: 0;
 `
+
+export default withRouter(UploadMenu);
