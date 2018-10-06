@@ -162,6 +162,7 @@ class Post extends Component {
 
             <InputMargin>
               <Input accent
+                disabled={loading}
                 onChange={this.onChange.bind(this, 'description')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Description'}
