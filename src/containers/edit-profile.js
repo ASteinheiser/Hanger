@@ -136,12 +136,12 @@ class EditProfile extends Component {
             .then(response => {
               response.blob()
                 .then(blob => {
-                  Storage.put('profile-picture.jpeg', blob, {
+                  Storage.put('profile_img', blob, {
                     level: 'protected',
                     contentType: 'image/jpeg'
                   })
                     .then(result => {
-                      Storage.get('profile-picture.jpeg', {
+                      Storage.get('profile_img', {
                         level: 'protected',
                         identityId: this.props.user.id
                       })
