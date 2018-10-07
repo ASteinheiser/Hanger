@@ -54,7 +54,8 @@ class EditProfile extends Component {
       },
       alertMessage: '',
       profileImage: null,
-      loading: false
+      loading: false,
+      loadingImage: false
     };
   }
 
@@ -130,57 +131,60 @@ class EditProfile extends Component {
       else {
         const { uri } = response;
 
-        fetch(uri)
-          .then(response => {
-            response.blob()
-              .then(blob => {
-                Storage.put('profile-picture.jpeg', blob, {
-                  level: 'protected',
-                  contentType: 'image/jpeg'
-                })
-                  .then(result => {
-                    Storage.get('profile-picture.jpeg', {
-                      level: 'protected',
-                      identityId: this.props.user.id
-                    })
-                      .then(result => {
-                        let profileImage = result.split('?')[0];
-                        let params = {
-                          body: {
-                            profile_img: profileImage
-                          }
-                        }
-                        API.post('HangerAPI', '/v1/user/profile-img', params)
-                          .then(response => {
-                            let newUser = Object.assign({}, this.props.user, {
-                              profile_img: profileImage
-                            });
-                            this.props.setUser(newUser);
-                          })
-                          .catch(err => {
-                            console.error(err);
-                            this.setState({ alertMessage: 'Error Uploading Profile Picture' });
-                          });
-                      })
-                      .catch(err => {
-                        console.error(err);
-                        this.setState({ alertMessage: 'Error Uploading Profile Picture' });
-                      });
+        this.setState({ loadingImage: true }, () => {
+          fetch(uri)
+            .then(response => {
+              response.blob()
+                .then(blob => {
+                  Storage.put('profile-picture.jpeg', blob, {
+                    level: 'protected',
+                    contentType: 'image/jpeg'
                   })
-                  .catch(err => {
-                    console.error(err);
-                    this.setState({ alertMessage: 'Error Uploading Profile Picture' });
-                  });
-              })
-              .catch(err => {
-                console.error(err);
-                this.setState({ alertMessage: 'Error Uploading Profile Picture' });
-              });
-          })
-          .catch(err => {
-            console.error(err);
-            this.setState({ alertMessage: 'Error Uploading Profile Picture' });
-          });
+                    .then(result => {
+                      Storage.get('profile-picture.jpeg', {
+                        level: 'protected',
+                        identityId: this.props.user.id
+                      })
+                        .then(result => {
+                          let profileImage = result.split('?')[0];
+                          let params = {
+                            body: {
+                              profile_img: profileImage
+                            }
+                          }
+                          API.post('HangerAPI', '/v1/user/profile-img', params)
+                            .then(response => {
+                              let newUser = Object.assign({}, this.props.user, {
+                                profile_img: profileImage
+                              });
+                              this.props.setUser(newUser);
+                              this.setState({ loadingImage: false });
+                            })
+                            .catch(err => {
+                              console.error(err);
+                              this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
+                            });
+                        })
+                        .catch(err => {
+                          console.error(err);
+                          this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
+                        });
+                    })
+                    .catch(err => {
+                      console.error(err);
+                      this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
+                    });
+                })
+                .catch(err => {
+                  console.error(err);
+                  this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
+                });
+            })
+            .catch(err => {
+              console.error(err);
+              this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
+            });
+        })
       }
     });
   }
@@ -200,7 +204,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    const { first_name, alertMessage, last_name, display_name, job, location, website, bio, loading } = this.state;
+    const { first_name, alertMessage, last_name, display_name, job, location, website, bio, loading, loadingImage } = this.state;
 
     return(
       <Height>
@@ -211,17 +215,25 @@ class EditProfile extends Component {
           <Container color={theme.palette.canvasColor}>
 
             <AvatarContainer>
-              <Touchable onPress={this.handleProfileUpload.bind(this)}>
+              <Touchable onPress={
+                loadingImage ?
+                  () => {}
+                  :
+                  this.handleProfileUpload.bind(this)
+                }>
                 {
                   this.props.user.profile_img ?
                     <Avatar
                       size={120}
                       image={
-                        <ScaledImage
-                          style={{borderRadius: 60}}
-                          height={120}
-                          source={{uri: this.props.user.profile_img}} />
-                      } />
+                        loadingImage ?
+                          <DotIndicator size={18} count={3} color={theme.palette.primaryColor}/>
+                          :
+                          <ScaledImage
+                            style={{borderRadius: 60}}
+                            height={120}
+                            source={{uri: this.props.user.profile_img}} />
+                        } />
                     :
                     <Avatar icon='person' iconColor='gray' size={120} iconSize={100} />
                 }
