@@ -102,6 +102,7 @@ class TopNavigation extends Component {
                         <ScaledImage
                           style={{borderRadius: 20}}
                           height={40}
+                          width={40}
                           source={{uri: this.props.user.profile_img}} />
                       } />
                     :

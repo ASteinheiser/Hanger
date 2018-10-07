@@ -20,6 +20,7 @@ export default class ProfileHeader extends React.Component {
                 <ScaledImage
                   style={{borderRadius: 60}}
                   height={120}
+                  width={120}
                   source={{uri: this.props.user.profile_img}} />
               } />
             :
