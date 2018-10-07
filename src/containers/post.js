@@ -53,11 +53,11 @@ class Post extends Component {
             let params = {
               body: {
                 description: description.value,
-                image: imageUrl
+                img_uri: imageUrl
               }
             };
 
-            API.post('HangerAPI', '/v1/post', params)
+            API.post('HangerAPI', '/v1/user/post', params)
               .then(response => {
                 this.setState({ loading: false });
                 this.props.history.replace('/home');
@@ -161,7 +161,7 @@ class Post extends Component {
             <Alert message={alertMessage} />
 
             <InputMargin>
-              <Input accent
+              <Input accent multiline
                 disabled={loading}
                 onChange={this.onChange.bind(this, 'description')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
