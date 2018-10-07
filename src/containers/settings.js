@@ -48,13 +48,13 @@ class Settings extends Component {
                   onPress={this.handleSignout.bind(this)} />
               </Margin>
 
-              <Margin>
+              {/* <Margin>
                 <Button
                   accent
                   icon='delete-forever'
                   text='Delete Account'
                   onPress={() => {console.log('deleting account!')}} />
-              </Margin>
+              </Margin> */}
 
             </Container>
           </TopNavigation>
