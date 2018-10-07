@@ -5,7 +5,7 @@ Hanger is an Android and iOS application written in react-native...
 ## Install Dependencies
 ```
 git clone git@github.com:ASteinheiser/hanger.git
-yarn install
+npm install
 react-native link
 ```
 

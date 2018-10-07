@@ -162,27 +162,27 @@ class EditProfile extends Component {
                               this.setState({ loadingImage: false });
                             })
                             .catch(err => {
-                              console.error(err);
+                              console.log(err);
                               this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
                             });
                         })
                         .catch(err => {
-                          console.error(err);
+                          console.log(err);
                           this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
                         });
                     })
                     .catch(err => {
-                      console.error(err);
+                      console.log(err);
                       this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
                     });
                 })
                 .catch(err => {
-                  console.error(err);
+                  console.log(err);
                   this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
                 });
             })
             .catch(err => {
-              console.error(err);
+              console.log(err);
               this.setState({ loadingImage: false, alertMessage: 'Error Uploading Profile Picture' });
             });
         })
@@ -199,7 +199,7 @@ class EditProfile extends Component {
         this.setState({ profileImage: result });
       })
       .catch(err => {
-        console.error(err);
+        console.log(err);
         this.setState({ alertMessage: 'Error Loading Profile Picture' });
       });
   }
@@ -288,7 +288,7 @@ class EditProfile extends Component {
                 value={website.value}
                 error={''}
                 />
-              <Input accent
+              <Input accent multiline
                 onChange={this.onChange.bind(this, 'bio')}
                 containerStyle={{ paddingLeft: 20, paddingRight: 20 }}
                 label={'Bio'}

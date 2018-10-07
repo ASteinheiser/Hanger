@@ -63,13 +63,13 @@ class Post extends Component {
                 this.props.history.replace('/home');
               })
               .catch(err => {
-                console.error(err);
+                console.log(err);
                 this.setState({ loading: false, alertMessage: err.message });
               });
           })
           .catch(err => {
-            console.error(err);
-            this.setState({ loading: false, alertMessage: 'Error Uploading Profile Picture' });
+            console.log(err);
+            this.setState({ loading: false, alertMessage: 'Error Uploading Image' });
           });
       });
     } else {
