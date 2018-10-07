@@ -12,6 +12,7 @@ import Button            from '../components/button.js';
 import Input             from '../components/input.js';
 import TopNavigation     from '../components/top-navigation.js';
 import theme             from '../theme.js';
+import { uuidv4 }        from '../functions/uuid-v4.js';
 import { validateField } from '../functions/validate-field.js';
 import { validateForm }  from '../functions/validate-form.js';
 
@@ -155,7 +156,7 @@ class EditProfile extends Component {
                           API.post('HangerAPI', '/v1/user/profile-img', params)
                             .then(response => {
                               let newUser = Object.assign({}, this.props.user, {
-                                profile_img: profileImage
+                                profile_img: profileImage + '?data=' + uuidv4()
                               });
                               this.props.setUser(newUser);
                               this.setState({ loadingImage: false });
