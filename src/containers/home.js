@@ -9,8 +9,6 @@ import FeedPost         from '../components/feed-post.js';
 import TopNavigation    from '../components/top-navigation.js';
 import theme            from '../theme.js';
 
-import SAMPLE_POSTS from '../../assets/data/posts.json';
-
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -25,8 +23,7 @@ export default class Home extends Component {
     this.setState({ loading: true }, () => {
       API.get('HangerAPI', '/v1/user/feed?page=1')
         .then(response => {
-          console.log(response);
-          this.setState({ loading: false });
+          this.setState({ loading: false, feedPosts: response });
         })
         .catch(err => {
           console.log(err);
@@ -36,13 +33,17 @@ export default class Home extends Component {
   }
 
   render() {
-    const { loading } = this.state;
-    const FeedPosts = _map(SAMPLE_POSTS, post =>
-      <FeedPost
-        key={post.id}
-        title={post.title}
-        image={post.image} />
-    );
+    const { loading, feedPosts } = this.state;
+
+    let FeedPosts = null;
+    if(feedPosts) {
+      FeedPosts = _map(feedPosts.posts, post =>
+        <FeedPost
+          key={post.id}
+          description={post.description}
+          image={post.img_uri} />
+      );
+    }
 
     return (
       <Height>
@@ -56,7 +57,12 @@ export default class Home extends Component {
                     <DotIndicator size={18} color={theme.palette.primaryColor}/>
                   </Spacing>
                   :
-                  FeedPosts
+                  feedPosts ?
+                    FeedPosts
+                    :
+                    <StyledText color={theme.palette.primaryColor}>
+                      {'Feed Unavailable...'}
+                    </StyledText>
               }
 
             </Container>
@@ -78,4 +84,11 @@ const Container = styled.ScrollView`
 
 const Spacing = styled.View`
   margin-top: 50px;
+`
+
+const StyledText = styled.Text`
+  font-size: 24px;
+  color: ${props => props.color};
+  text-align: center;
+  padding: 50px 25px;
 `

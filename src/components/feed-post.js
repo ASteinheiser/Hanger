@@ -43,7 +43,7 @@ export default class FeedPost extends React.Component {
         </ButtonsContainer>
 
         <StyledText color={theme.palette.primaryTextColor}>
-          { this.props.title }
+          { this.props.description }
         </StyledText>
       </PostContainer>
     )
