@@ -1,5 +1,6 @@
 import React          from 'react';
 import { API }        from 'aws-amplify';
+import moment         from 'moment';
 import { withRouter } from 'react-router-native';
 import { Avatar }     from 'react-native-material-ui';
 import styled         from 'styled-components/native';
@@ -68,9 +69,14 @@ class FeedPost extends React.Component {
 
         {
           this.props.type === 'event' ?
-            <EventTitle color={theme.palette.primaryColor}>
-              {this.props.title}
-            </EventTitle>
+            <FlexColumn>
+              <EventTitle color={theme.palette.primaryColor}>
+                {this.props.title}
+              </EventTitle>
+              <EventTime>
+                {moment(this.props.date).format('MM/DD/YYYY - hh:mm A')}
+              </EventTime>
+            </FlexColumn>
             :
             <ButtonsContainer>
               <FlexRow>
@@ -172,7 +178,18 @@ const EventTitle = styled.Text`
   color: ${props => props.color};
   font-size: 24px;
   text-align: center;
-  padding: 15px;
+  padding: 15px 15px 5px;
+`
+
+const FlexColumn = styled.View`
+  flex: 1;
+  flex-direction: column;
+`
+
+const EventTime = styled.Text`
+  font-size: 18px;
+  text-align: center;
+  padding: 5px 15px;
 `
 
 export default withRouter(FeedPost);
