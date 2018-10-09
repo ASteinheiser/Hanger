@@ -35,15 +35,32 @@ export default class Home extends Component {
   render() {
     const { loading, feedPosts } = this.state;
 
-    let FeedPosts = null;
+    let FeedPosts = [];
     if(feedPosts) {
-      FeedPosts = _map(feedPosts.posts, post =>
-        <FeedPost
-          key={post.id}
-          userId={post.user_id}
-          description={post.description}
-          image={post.img_uri} />
-      );
+      if(feedPosts.posts.length > 0) {
+        FeedPosts.push(_map(feedPosts.posts, post =>
+          <FeedPost
+            key={post.id}
+            userId={post.user_id}
+            description={post.description}
+            image={post.img_uri} />
+          )
+        );
+      }
+      console.log(feedPosts);
+      if(feedPosts.events.length > 0) {
+        FeedPosts.push(_map(feedPosts.events, event =>
+          <FeedPost
+            key={event.id}
+            type={'event'}
+            date={event.date}
+            title={event.name}
+            userId={event.user_id}
+            description={event.description}
+            image={event.img_uri} />
+          )
+        );
+      }
     }
 
     return (

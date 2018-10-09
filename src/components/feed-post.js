@@ -66,24 +66,31 @@ class FeedPost extends React.Component {
 
         <StyledImage source={{ uri: this.props.image }} alt='feed_post' />
 
-        <ButtonsContainer>
-          <FlexRow>
-            <ButtonPadding onPress={this.handleLike.bind(this)}>
-              <ButtonIcon source={HexHeart} />
-            </ButtonPadding>
-            <ButtonPadding onPress={this.handleComment.bind(this)}>
-              <ButtonIcon source={CommentIcon} />
-            </ButtonPadding>
-          </FlexRow>
-          <LikesText>
-            {
-              this.props.likes ?
-                this.props.likes
-                :
-                '0 Likes'
-            }
-          </LikesText>
-        </ButtonsContainer>
+        {
+          this.props.type === 'event' ?
+            <EventTitle>
+              {this.props.title}
+            </EventTitle>
+            :
+            <ButtonsContainer>
+              <FlexRow>
+                <ButtonPadding onPress={this.handleLike.bind(this)}>
+                  <ButtonIcon source={HexHeart} />
+                </ButtonPadding>
+                <ButtonPadding onPress={this.handleComment.bind(this)}>
+                  <ButtonIcon source={CommentIcon} />
+                </ButtonPadding>
+              </FlexRow>
+              <LikesText>
+                {
+                  this.props.likes ?
+                  this.props.likes
+                  :
+                  '0 Likes'
+                }
+              </LikesText>
+            </ButtonsContainer>
+        }
 
         <StyledText color={theme.palette.primaryTextColor}>
           { this.props.description }
@@ -159,6 +166,10 @@ const FlexRow = styled.View`
 
 const LikesText = styled.Text`
   margin: auto 25px auto 0;
+`
+
+const EventTitle = styled.Text`
+  
 `
 
 export default withRouter(FeedPost);
