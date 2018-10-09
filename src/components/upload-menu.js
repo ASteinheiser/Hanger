@@ -43,9 +43,9 @@ class UploadMenu extends Component {
     return(
       <FullScreen>
         <StyledView>
-          <CircleContainer color={theme.palette.primaryColor}>
+          {/* <CircleContainer color={theme.palette.primaryColor}>
             <StyledImage source={VideoLogo} />
-          </CircleContainer>
+          </CircleContainer> */}
 
           <CircleContainer color={theme.palette.primaryColor}>
             <Touchable onPress={this.handleCameraClick.bind(this)}>
@@ -53,9 +53,9 @@ class UploadMenu extends Component {
             </Touchable>
           </CircleContainer>
 
-          <CircleContainer color={theme.palette.primaryColor}>
+          {/* <CircleContainer color={theme.palette.primaryColor}>
             <StyledImage source={TextLogo} />
-          </CircleContainer>
+          </CircleContainer> */}
         </StyledView>
 
         <TouchableBackground onPress={() => this.props.close()}/>
