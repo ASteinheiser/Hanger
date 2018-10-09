@@ -1,22 +1,63 @@
-import React      from 'react';
-import { Avatar } from 'react-native-material-ui';
-import styled     from 'styled-components/native';
+import React          from 'react';
+import { API }        from 'aws-amplify';
+import { withRouter } from 'react-router-native';
+import { Avatar }     from 'react-native-material-ui';
+import styled         from 'styled-components/native';
 
 import CommentIcon   from '../../assets/icons/chat.png';
 import HexHeart      from '../../assets/icons/hex-heart.png';
 import ClothesHanger from '../../assets/icons/clothes-hanger.png';
 import theme         from '../theme.js';
 
-export default class FeedPost extends React.Component {
+class FeedPost extends React.Component {
+
+  handleProfile() {
+    let userId = this.props.userId;
+
+    this.props.history.push(`/user/${userId}`);
+  }
+
+  handleLike() {
+    let postId = this.props.key;
+    let params = {
+      body: { }
+    };
+
+    API.post('HangerAPI', `/v1/user/post/like/${postId}`, params)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  handleComment() {
+    let postId = this.props.key;
+    let params = {
+      body: {
+        description: 'some-text'
+      }
+    };
+
+    API.post('HangerAPI', `/v1/user/post/comment/${postId}`, params)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   render() {
     return (
       <PostContainer>
         <UserInfoContainer>
-          <Touchable onPress={() => {console.log('profile click!')}}>
+          <Touchable onPress={this.handleProfile.bind(this)}>
             <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
           </Touchable>
 
-          <Touchable onPress={() => {console.log('profile click!')}}>
+          <Touchable onPress={this.handleProfile.bind(this)}>
             <UsernameText color={theme.palette.primaryColor}>
               { 'John Username' }
             </UsernameText>
@@ -27,18 +68,20 @@ export default class FeedPost extends React.Component {
 
         <ButtonsContainer>
           <FlexRow>
-            <ButtonPadding onPress={() => {}}>
+            <ButtonPadding onPress={this.handleLike.bind(this)}>
               <ButtonIcon source={HexHeart} />
             </ButtonPadding>
-            <ButtonPadding onPress={() => {}}>
+            <ButtonPadding onPress={this.handleComment.bind(this)}>
               <ButtonIcon source={CommentIcon} />
-            </ButtonPadding>
-            <ButtonPadding onPress={() => {}}>
-              <ButtonIcon source={ClothesHanger} />
             </ButtonPadding>
           </FlexRow>
           <LikesText>
-            {'14 Likes'}
+            {
+              this.props.likes ?
+                this.props.likes
+                :
+                '0 Likes'
+            }
           </LikesText>
         </ButtonsContainer>
 
@@ -117,3 +160,5 @@ const FlexRow = styled.View`
 const LikesText = styled.Text`
   margin: auto 25px auto 0;
 `
+
+export default withRouter(FeedPost);

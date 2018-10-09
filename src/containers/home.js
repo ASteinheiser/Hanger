@@ -40,6 +40,7 @@ export default class Home extends Component {
       FeedPosts = _map(feedPosts.posts, post =>
         <FeedPost
           key={post.id}
+          userId={post.user_id}
           description={post.description}
           image={post.img_uri} />
       );
