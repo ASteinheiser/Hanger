@@ -68,7 +68,7 @@ class FeedPost extends React.Component {
 
         {
           this.props.type === 'event' ?
-            <EventTitle>
+            <EventTitle color={theme.palette.primaryColor}>
               {this.props.title}
             </EventTitle>
             :
@@ -169,7 +169,10 @@ const LikesText = styled.Text`
 `
 
 const EventTitle = styled.Text`
-  
+  color: ${props => props.color};
+  font-size: 24px;
+  text-align: center;
+  padding: 15px;
 `
 
 export default withRouter(FeedPost);

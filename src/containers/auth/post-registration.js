@@ -93,7 +93,6 @@ class PostRegistration extends Component {
     return (
       <Flex>
         <BackgroundImage source={JacketBackground} />
-        <BackgroundFilter />
 
         <Container>
           <TopPadding>
@@ -198,17 +197,6 @@ const BackgroundImage = styled.Image`
   width: 100%;
 
   z-index: 1;
-`
-
-const BackgroundFilter = styled.View`
-  position: absolute;
-
-  height: 100%;
-  width: 100%;
-
-  background: rgba(0, 0, 0, 0.5);
-
-  z-index: 2;
 `
 
 const FullWidth = styled.View`

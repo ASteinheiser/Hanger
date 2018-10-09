@@ -47,7 +47,6 @@ export default class Home extends Component {
           )
         );
       }
-      console.log(feedPosts);
       if(feedPosts.events.length > 0) {
         FeedPosts.push(_map(feedPosts.events, event =>
           <FeedPost
@@ -75,7 +74,7 @@ export default class Home extends Component {
                     <DotIndicator size={18} color={theme.palette.primaryColor}/>
                   </Spacing>
                   :
-                  feedPosts ?
+                  FeedPosts.length > 0 ?
                     FeedPosts
                     :
                     <StyledText color={theme.palette.primaryColor}>
