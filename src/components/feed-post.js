@@ -1,5 +1,6 @@
 import React          from 'react';
 import { API }        from 'aws-amplify';
+import ScaledImage    from 'react-native-scalable-image';
 import moment         from 'moment';
 import { withRouter } from 'react-router-native';
 import { Avatar }     from 'react-native-material-ui';
@@ -65,7 +66,13 @@ class FeedPost extends React.Component {
           </Touchable>
         </UserInfoContainer>
 
-        <StyledImage source={{ uri: this.props.image }} alt='feed_post' />
+        <Centered>
+          <ScaledImage
+            height={400}
+            width={400}
+            alt='feed_post'
+            source={{uri: this.props.image}} />
+        </Centered>
 
         {
           this.props.type === 'event' ?
@@ -117,11 +124,6 @@ const StyledText = styled.Text`
   color: ${props => props.color};
 
   margin: 20px 25px 15px 25px;
-`
-
-const StyledImage = styled.Image`
-  height: 400px;
-  width: 100%;
 `
 
 const UserInfoContainer = styled.View`
@@ -190,6 +192,10 @@ const EventTime = styled.Text`
   font-size: 18px;
   text-align: center;
   padding: 5px 15px;
+`
+
+const Centered = styled.View`
+  margin: auto;
 `
 
 export default withRouter(FeedPost);

@@ -25,7 +25,7 @@ class Post extends Component {
       loading: false
     };
 
-    this.handleProfileUpload = this.handleProfileUpload.bind(this);
+    this.handleImageUpload = this.handleImageUpload.bind(this);
   }
 
   onChange(field, e) {
@@ -48,7 +48,7 @@ class Post extends Component {
       this.setState({ loading: true }, () => {
         this.clearAlert();
 
-        this.handleProfileUpload()
+        this.handleImageUpload()
           .then(imageUrl => {
             let params = {
               body: {
@@ -83,7 +83,7 @@ class Post extends Component {
     this.setState({ alertMessage: '' });
   }
 
-  handleProfileUpload() {
+  handleImageUpload() {
     return new Promise((resolve, reject) => {
       const { imageURI } = this.state;
 
@@ -155,6 +155,7 @@ class Post extends Component {
             <Centered>
               <ScaledImage
                 height={400}
+                width={400}
                 source={{uri: imageURI}} />
             </Centered>
 
@@ -205,7 +206,7 @@ const Centered = styled.View`
   flex: 1;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0 25px;
+  padding: 25px 0;
 `
 
 const TopMargin = styled.View`
