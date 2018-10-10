@@ -30,7 +30,7 @@ class UploadMenu extends Component {
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
-        this.props.history.push(`/post?image=${imageUri}`);
+        this.props.history.push(`/post-image?image=${imageUri}`);
       }
     });
   }

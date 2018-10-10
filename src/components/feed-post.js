@@ -36,19 +36,7 @@ class FeedPost extends React.Component {
 
   handleComment() {
     let postId = this.props.key;
-    let params = {
-      body: {
-        description: 'some-text'
-      }
-    };
-
-    API.post('HangerAPI', `/v1/user/post/comment/${postId}`, params)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    this.props.history.push(`/post/${postId}`);
   }
 
   render() {

@@ -12,6 +12,7 @@ import NewPassword      from './containers/auth/new-password.js';
 import Notifications    from './containers/notifications';
 import PostRegistration from './containers/auth/post-registration.js';
 import EditProfile      from './containers/edit-profile.js';
+import PostImage        from './containers/post-image.js';
 import Post             from './containers/post.js';
 import Projects         from './containers/projects.js';
 import Profile          from './containers/profile';
@@ -38,9 +39,10 @@ export default class Router extends Component {
           <Route path="/edit-profile" render={() => <Private component={EditProfile} /> } />
           <Route path="/messages" render={() => <Private component={Messages} /> } />
           <Route path="/notifications" render={() => <Private component={Notifications} /> } />
-          <Route path="/post" render={() => <Private component={Post} /> } />
+          <Route path="/post-image" render={() => <Private component={PostImage} /> } />
           <Route path="/profile" render={() => <Private component={Profile} /> } />
           <Route path="/user/:id" render={() => <Private component={User} /> } />
+          <Route path="/post/:id" render={() => <Private component={Post} /> } />
           <Route path="/shopping" render={() => <Private component={Shopping} /> } />
           <Route path="/search" render={() => <Private component={Search} /> } />
           <Route path="/hive" render={() => <Private component={Hive} /> } />
