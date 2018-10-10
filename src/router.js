@@ -21,6 +21,7 @@ import Register         from './containers/auth/register.js';
 import Shopping         from './containers/shopping.js';
 import Search           from './containers/search.js';
 import Settings         from './containers/settings.js';
+import User             from './containers/user';
 
 export default class Router extends Component {
   render() {
@@ -39,6 +40,7 @@ export default class Router extends Component {
           <Route path="/notifications" render={() => <Private component={Notifications} /> } />
           <Route path="/post" render={() => <Private component={Post} /> } />
           <Route path="/profile" render={() => <Private component={Profile} /> } />
+          <Route path="/user/:id" render={() => <Private component={User} /> } />
           <Route path="/shopping" render={() => <Private component={Shopping} /> } />
           <Route path="/search" render={() => <Private component={Search} /> } />
           <Route path="/hive" render={() => <Private component={Hive} /> } />

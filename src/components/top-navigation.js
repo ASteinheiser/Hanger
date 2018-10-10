@@ -119,10 +119,10 @@ class TopNavigation extends Component {
                       if(this.props.onpress) {
                         this.props.onpress();
                       }
-                      else if(this.props.route !== 'back') {
+                      else if(this.props.route) {
                         this.props.history.push(this.props.route);
                       } else {
-                        this.props.history.push('/home');
+                        this.props.history.goBack();
                       }
                     } }>
                     <StyledIconImage source={BackLogo} small />

@@ -149,7 +149,6 @@ class Post extends Component {
       <Height>
         <TopNavigation
           back-button
-          route='/home'
           title='Create Post'>
           <Container color={theme.palette.canvasColor}>
             <Centered>
