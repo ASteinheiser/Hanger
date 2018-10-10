@@ -24,21 +24,21 @@ class Settings extends Component {
         <BottomNavigation>
           <TopNavigation title='Settings'>
             <Container color={theme.palette.canvasColor}>
-              <Margin>
+              {/* <Margin>
                 <Button
                   accent
                   icon='notifications-active'
                   text='Notifications'
                   onPress={() => {console.log('changing notifications!')}} />
-              </Margin>
+              </Margin> */}
 
-              <Margin>
+              {/* <Margin>
                 <Button
                   accent
                   icon='stars'
                   text='Try Premium Account'
                   onPress={() => {console.log('try premium account!')}} />
-              </Margin>
+              </Margin> */}
 
               <Margin>
                 <Button

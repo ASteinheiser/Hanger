@@ -26,13 +26,13 @@ class Profile extends Component {
 
               <SocialMediaAccounts user={user} />
 
-              <Margin>
+              {/* <Margin>
                 <Button
                   accent
                   icon='stars'
                   text='Try Premium Account'
                   onPress={() => {console.log('try a premium account!');}} />
-              </Margin>
+              </Margin> */}
 
             </Container>
           </TopNavigation>

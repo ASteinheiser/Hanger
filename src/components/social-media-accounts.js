@@ -18,7 +18,7 @@ export default class SocialMediaAccounts extends Component {
 
     return(
       <SocialContainer>
-        <SocialMediaLogo source={Facebook} />
+        <SocialMediaLogo source={user.facebook ? FacebookColor : Facebook} />
         <SocialMediaLogo source={Instagram} />
         <SocialMediaLogo source={LinkedIn} />
         <SocialMediaLogo source={Pinterest} />
