@@ -8,31 +8,37 @@ import theme from '../theme.js';
 export default class MessageItem extends React.Component {
   render() {
     return (
-      <Container color={theme.palette.disabledColor}>
+      <Touchable onPress={this.props.onPress.bind(this)}>
+        <Container color={theme.palette.disabledColor}>
 
-        <ImageContainer>
-          <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
-        </ImageContainer>
+          <ImageContainer>
+            <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
+          </ImageContainer>
 
-        <FlexColumn>
+          <FlexColumn>
 
-          <ColoredText color={theme.palette.secondaryTextColor}>
-            { this.props.user }
-            <ColoredText color={theme.palette.disabledColor}>
-              { '  |  ' + this.props.timestamp }
+            <ColoredText color={theme.palette.secondaryTextColor}>
+              { this.props.user }
+              <ColoredText color={theme.palette.disabledColor}>
+                { '  |  ' + this.props.timestamp }
+              </ColoredText>
             </ColoredText>
-          </ColoredText>
 
-          <ColoredText color={theme.palette.primaryTextColor}>
-            { this.props.text }
-          </ColoredText>
+            <ColoredText color={theme.palette.primaryTextColor}>
+              { this.props.text }
+            </ColoredText>
 
-        </FlexColumn>
+          </FlexColumn>
 
-      </Container>
+        </Container>
+      </Touchable>
     )
   }
 }
+
+const Touchable = styled.TouchableOpacity`
+  z-index: 1000;
+`
 
 const ColoredText = styled.Text`
   font-size: 14px;

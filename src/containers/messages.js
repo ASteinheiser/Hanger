@@ -11,12 +11,15 @@ import SAMPLE_MESSAGES from '../../assets/data/messages.json';
 
 export default class Messages extends Component {
   render() {
-    const Messages = _map(SAMPLE_MESSAGES, message =>
+    const Conversations = _map(SAMPLE_MESSAGES, conversation =>
       <MessageItem
-        key={message.id}
-        user={message.user}
-        text={message.text}
-        timestamp={message.timestamp} />
+        onPress={() => {
+          this.props.history.push(`/message/${conversation.id}`)
+        }}
+        key={conversation.id}
+        user={conversation.user}
+        text={conversation.text}
+        timestamp={conversation.timestamp} />
     );
 
     return (
@@ -25,7 +28,7 @@ export default class Messages extends Component {
           <TopNavigation title='Messages'>
             <Container color={theme.palette.canvasColor}>
 
-              { Messages }
+              { Conversations }
 
             </Container>
           </TopNavigation>

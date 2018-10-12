@@ -8,6 +8,7 @@ import Hive             from './containers/hive.js';
 import Home             from './containers/home.js';
 import Login            from './containers/auth/login.js';
 import Messages         from './containers/messages.js';
+import MessageView      from './containers/message-view.js';
 import NewPassword      from './containers/auth/new-password.js';
 import Notifications    from './containers/notifications';
 import PostRegistration from './containers/auth/post-registration.js';
@@ -38,6 +39,7 @@ export default class Router extends Component {
           <Route path="/post-registration" render={() => <Private component={PostRegistration} /> } />
           <Route path="/edit-profile" render={() => <Private component={EditProfile} /> } />
           <Route path="/messages" render={() => <Private component={Messages} /> } />
+          <Route path="/message/:id" render={() => <Private component={MessageView} /> } />
           <Route path="/notifications" render={() => <Private component={Notifications} /> } />
           <Route path="/post-image" render={() => <Private component={PostImage} /> } />
           <Route path="/profile" render={() => <Private component={Profile} /> } />
