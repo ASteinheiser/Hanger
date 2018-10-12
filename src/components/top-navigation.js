@@ -18,8 +18,8 @@ import theme           from '../theme.js';
 let toolbarStyle = { container: {} };
 if (Platform.OS === 'ios') {
   toolbarStyle.container = { // iOS needs extra padding to look good
-    paddingTop: 30,
-    height: 90
+    paddingTop: 20,
+    height: 70
   };
 }
 
@@ -37,7 +37,7 @@ class TopNavigation extends Component {
   }
 
   render() {
-    let { children, ...other } = this.props;
+    let { children, ...otherProps } = this.props;
     toolbarStyle.leftElementContainer = {};
 
     if(this.props.type === 'search') {
@@ -51,7 +51,7 @@ class TopNavigation extends Component {
             }
             centerElement={
               <Input
-                {...other}
+                {...otherProps}
                 placeholder={'Search Events, Gigs, etc.'}
                 label={''}
                 containerStyle={{ paddingRight: 35, paddingBottom: 25 }}
