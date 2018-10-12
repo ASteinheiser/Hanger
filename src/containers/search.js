@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 import _debounce            from 'lodash.debounce';
+import { Icon, Toolbar }    from 'react-native-material-ui';
+import _map                 from 'lodash.map';
 
 import BottomNavigation from '../components/bottom-navigation.js';
 import HeaderText       from '../components/header-text.js';
 import FeedPost         from '../components/feed-post.js';
+import Input            from '../components/input.js';
 import TopNavigation    from '../components/top-navigation.js';
+import SearchItem       from '../components/search-item.js';
 import theme            from '../theme.js';
 
-const SEARCH_DEBOUNCE_TIME = 1500; // 1.5 seconds
+const SEARCH_DEBOUNCE_TIME = 750; // .75 seconds
 
 export default class Search extends Component {
   constructor(props) {
@@ -22,7 +26,11 @@ export default class Search extends Component {
   }
 
   searchEvents() {
-    console.log('Searching for events: ', this.state.searchValue);
+    const { searchValue } = this.state;
+
+    if(searchValue !== '') {
+      console.log('Searching for events: ', searchValue);
+    }
   }
 
   onChange(e) {
@@ -32,27 +40,56 @@ export default class Search extends Component {
   }
 
   render() {
+    const toolbarStyle = {
+      leftElementContainer: {
+        paddingLeft: 25,
+        paddingTop: 15
+      }
+    }
+
+    let resultArray = {
+      '1': {
+        id: 1,
+        text: 'John Snow'
+      },
+      '2': {
+        id: 2,
+        text: 'PHX FW'
+      }
+    }
+
+    let results = _map(resultArray, result =>
+      <SearchItem
+        onPress={() => {}}
+        key={result.id}
+        text={result.text} />
+    );
+
     return (
       <Height>
         <BottomNavigation>
-          <TopNavigation
-            type='search'
-            onChange={this.onChange.bind(this)}
-            value={this.state.searchValue}>
-            <Container color={theme.palette.canvasColor}>
+          <TopNavigation>
 
-              <HeaderText blue small
-                text='Explore Events, Gigs, etc!' />
+            <Toolbar style={ toolbarStyle }
+              leftElement={
+                <Icon
+                  name='search'
+                  size={30}
+                  color={'white'} />
+              }
+              centerElement={
+                <Input
+                  containerStyle={{ paddingRight: 25, paddingBottom: 15 }}
+                  onChange={this.onChange.bind(this)}
+                  label='Search Events and Users'
+                  value={this.state.searchValue}
+                  error={''} />
+              } />
 
-              <FeedPost
-                title={'Phoenix Fashion Week 2018'}
-                image={'https://www.zonamedspa.com/wp-content/uploads/PHXFW.16-Silver-Flyer.jpg'} />
+              <Container color={theme.palette.canvasColor}>
+                { results }
+              </Container>
 
-              <FeedPost
-                title={'Photographer and 2 Models needed for Paid Photoshoot'}
-                image={'https://i.pinimg.com/736x/d6/7a/3b/d67a3bac1c2deb60e02dd8373db472a0--behind-the-scenes-shooting.jpg'} />
-
-            </Container>
           </TopNavigation>
         </BottomNavigation>
       </Height>
@@ -66,5 +103,4 @@ const Height = styled.View`
 
 const Container = styled.ScrollView`
   background-color: ${props => props.color};
-  flex: 1;
 `

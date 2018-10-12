@@ -9,26 +9,15 @@ export default class MessageItem extends React.Component {
   render() {
     return (
       <Touchable onPress={this.props.onPress.bind(this)}>
-        <Container>
+        <Container color={theme.palette.disabledColor}>
 
           <ImageContainer>
             <Avatar icon='person' iconColor='gray' size={40} iconSize={30} />
           </ImageContainer>
 
-          <FlexColumn>
-
-            <ColoredText color={theme.palette.secondaryTextColor}>
-              { this.props.user }
-              <ColoredText color={theme.palette.disabledColor}>
-                { '  |  ' + this.props.timestamp }
-              </ColoredText>
-            </ColoredText>
-
-            <ColoredText color={theme.palette.primaryTextColor}>
-              { this.props.text }
-            </ColoredText>
-
-          </FlexColumn>
+          <ColoredText color={theme.palette.primaryColor}>
+            { this.props.text }
+          </ColoredText>
 
         </Container>
       </Touchable>
@@ -51,13 +40,6 @@ const Container = styled.View`
   flex-direction: row;
 
   padding: 15px;
-`
-
-const FlexColumn = styled.View`
-  flex: 1;
-  flex-direction: column;
-
-  align-self: flex-start;
 `
 
 const ImageContainer = styled.View`

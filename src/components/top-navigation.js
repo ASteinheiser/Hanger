@@ -4,7 +4,7 @@ import { Platform }         from 'react-native';
 import { withRouter }       from 'react-router-native';
 import ScaledImage          from 'react-native-scalable-image';
 import styled               from 'styled-components/native';
-import { Avatar, Toolbar, Icon } from 'react-native-material-ui';
+import { Avatar, Toolbar }  from 'react-native-material-ui';
 
 import Input           from './input.js';
 import Drawer          from './drawer.js';
@@ -37,32 +37,7 @@ class TopNavigation extends Component {
   }
 
   render() {
-    let { children, ...otherProps } = this.props;
-    toolbarStyle.leftElementContainer = {};
-
-    if(this.props.type === 'search') {
-      toolbarStyle.leftElementContainer = { paddingLeft: 20 };
-
-      return (
-        <StyledView>
-          <Toolbar style={ toolbarStyle }
-            leftElement={
-              <Icon name='search' size={30} color={'white'} />
-            }
-            centerElement={
-              <Input
-                {...otherProps}
-                placeholder={'Search Events, Gigs, etc.'}
-                label={''}
-                containerStyle={{ paddingRight: 35, paddingBottom: 25 }}
-                />
-            } />
-
-          { children }
-
-        </StyledView>
-      );
-    }
+    let { children } = this.props;
 
     return (
       <StyledView>
