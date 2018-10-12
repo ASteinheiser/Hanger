@@ -2,27 +2,28 @@ import React, { Component }    from 'react';
 import { NativeRouter, Route } from 'react-router-native';
 import styled                  from 'styled-components/native';
 
-import CheckEmail       from './containers/auth/check-email.js';
-import ForgotPassword   from './containers/auth/forgot-password.js';
-import Hive             from './containers/hive.js';
-import Home             from './containers/home.js';
-import Login            from './containers/auth/login.js';
-import Messages         from './containers/messages.js';
-import MessageView      from './containers/message-view.js';
-import NewPassword      from './containers/auth/new-password.js';
+import CheckEmail       from './containers/auth/check-email';
+import Event            from './containers/event';
+import ForgotPassword   from './containers/auth/forgot-password';
+import Hive             from './containers/hive';
+import Home             from './containers/home';
+import Login            from './containers/auth/login';
+import Messages         from './containers/messages';
+import MessageView      from './containers/message-view';
+import NewPassword      from './containers/auth/new-password';
 import Notifications    from './containers/notifications';
-import PostRegistration from './containers/auth/post-registration.js';
-import EditProfile      from './containers/edit-profile.js';
-import PostImage        from './containers/post-image.js';
-import Post             from './containers/post.js';
-import Projects         from './containers/projects.js';
+import PostRegistration from './containers/auth/post-registration';
+import EditProfile      from './containers/edit-profile';
+import PostImage        from './containers/post-image';
+import Post             from './containers/post';
+import Projects         from './containers/projects';
 import Profile          from './containers/profile';
-import Public           from './components/public-route.js';
-import Private          from './components/private-route.js';
-import Register         from './containers/auth/register.js';
-import Shopping         from './containers/shopping.js';
-import Search           from './containers/search.js';
-import Settings         from './containers/settings.js';
+import Public           from './components/public-route';
+import Private          from './components/private-route';
+import Register         from './containers/auth/register';
+import Shopping         from './containers/shopping';
+import Search           from './containers/search';
+import Settings         from './containers/settings';
 import User             from './containers/user';
 
 export default class Router extends Component {
@@ -45,6 +46,7 @@ export default class Router extends Component {
           <Route path="/profile" render={() => <Private component={Profile} /> } />
           <Route path="/user/:id" render={() => <Private component={User} /> } />
           <Route path="/post/:id" render={() => <Private component={Post} /> } />
+          <Route path="/event/:id" render={() => <Private component={Event} /> } />
           <Route path="/shopping" render={() => <Private component={Shopping} /> } />
           <Route path="/search" render={() => <Private component={Search} /> } />
           <Route path="/hive" render={() => <Private component={Hive} /> } />
