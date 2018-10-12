@@ -43,7 +43,7 @@ export default class Search extends Component {
     const toolbarStyle = {
       leftElementContainer: {
         paddingLeft: 25,
-        paddingTop: 15
+        paddingTop: 10
       }
     }
 
@@ -79,7 +79,7 @@ export default class Search extends Component {
               }
               centerElement={
                 <Input
-                  containerStyle={{ paddingRight: 25, paddingBottom: 15 }}
+                  containerStyle={{ paddingRight: 25, paddingBottom: 25 }}
                   onChange={this.onChange.bind(this)}
                   label='Search Events and Users'
                   value={this.state.searchValue}
