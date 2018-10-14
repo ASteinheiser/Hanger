@@ -17,11 +17,15 @@ export default class SocialMediaAccounts extends Component {
   render() {
     const { user } = this.props;
 
+    let facebook = false;
+
+    if(user.keys && user.keys.facebookToken) facebook = true;
+
     return(
       <SocialContainer>
 
-        <ActiveBg active={user.facebook} color={theme.palette.disabledColor}>
-          <SocialMediaLogo source={user.facebook ? FacebookColor : Facebook} />
+        <ActiveBg active={facebook} color={theme.palette.disabledColor}>
+          <SocialMediaLogo source={facebook ? FacebookColor : Facebook} />
         </ActiveBg>
 
         <ActiveBg active={false} color={theme.palette.disabledColor}>

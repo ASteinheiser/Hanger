@@ -96,7 +96,7 @@ class EditProfile extends Component {
 
         API.post('HangerAPI', '/v1/user', params)
           .then(response => {
-            this.props.setUser(); // clean out old user so auth routes will update with new info
+            this.props.setUser(params.body);
             this.setState({ loading: false });
             this.props.history.replace('/profile');
           })
