@@ -132,6 +132,8 @@ class Login extends Component {
   }
 
   handleFacebookLogin() {
+    this.closeAlert();
+
     let self = this;
     // Attempt a login using the Facebook login dialog asking for default permissions.
     LoginManager.logInWithReadPermissions(['public_profile', 'email'])
