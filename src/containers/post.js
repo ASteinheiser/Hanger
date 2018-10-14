@@ -1,14 +1,50 @@
 import React, { Component } from 'react';
+import { API }              from 'aws-amplify';
+import { DotIndicator }     from 'react-native-indicators';
 import styled               from 'styled-components/native';
 
-import CommentSection from '../components/comment-section';
-import TopNavigation  from '../components/top-navigation.js';
-import FeedPost       from '../components/feed-post';
-import theme          from '../theme.js';
+import CommentSection  from '../components/comment-section';
+import TopNavigation   from '../components/top-navigation.js';
+import FeedPost        from '../components/feed-post';
+import theme, { blue } from '../theme.js';
 
 export default class Post extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      post: null
+    };
+  }
+
+  componentDidMount() {
+    const { id } = this.props.location.state;
+
+    API.get('HangerAPI', `/v1/user/post/${id}`)
+      .then(res => {
+        this.setState({ post: res });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   render() {
-    const { key, userId, description, image, comments } = this.props.location.state;
+    const { post } = this.state;
+
+    if(post === null) {
+      return(
+        <Height>
+          <TopNavigation back-button>
+            <Centered>
+              <DotIndicator color={blue} size={18} />
+            </Centered>
+          </TopNavigation>
+        </Height>
+      );
+    }
+
+    const { id, user_id, description, img_uri, comments } = post;
 
     return (
       <Height>
@@ -16,14 +52,14 @@ export default class Post extends Component {
           <Container color={theme.palette.canvasColor}>
 
             <FeedPost
-              key={key}
-              userId={userId}
+              id={id}
+              userId={user_id}
               description={description}
-              image={image}
+              image={img_uri}
               no_comment />
 
             <CommentSection
-              key={key}
+              id={id}
               comments={comments} />
 
           </Container>
@@ -42,4 +78,11 @@ const Container = styled.ScrollView`
   flex: 1;
 
   padding-top: 15px;
+`
+
+const Centered = styled.View`
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
 `

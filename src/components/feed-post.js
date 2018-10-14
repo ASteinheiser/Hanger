@@ -16,11 +16,16 @@ class FeedPost extends React.Component {
   handleProfile() {
     let userId = this.props.userId;
 
-    this.props.history.push(`/user/${userId}`);
+    this.props.history.push({
+      pathname: `/user/${userId}`,
+      state: {
+        user: this.props.User
+      }
+    });
   }
 
   handleLike() {
-    let postId = this.props.key;
+    let postId = this.props.id;
     let params = {
       body: { }
     };
@@ -35,16 +40,12 @@ class FeedPost extends React.Component {
   }
 
   handleComment() {
-    const { key, userId, image, description, comments } = this.props;
+    const { id } = this.props;
 
     this.props.history.push({
-      pathname: `/post/${key}`,
+      pathname: `/post/${id}`,
       state: {
-        key,
-        userId,
-        image,
-        description,
-        comments
+        id
       }
     });
   }

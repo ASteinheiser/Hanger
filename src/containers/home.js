@@ -41,6 +41,8 @@ export default class Home extends Component {
         FeedPosts.push(_map(feedPosts.posts, post =>
           <FeedPost
             key={post.id}
+            id={post.id}
+            user={post.User}
             userId={post.user_id}
             comments={post.comments}
             description={post.description}
@@ -52,6 +54,8 @@ export default class Home extends Component {
         FeedPosts.push(_map(feedPosts.events, event =>
           <FeedPost
             key={event.id}
+            id={event.id}
+            user={event.User}
             type={'event'}
             date={event.date}
             title={event.name}
