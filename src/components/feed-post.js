@@ -35,7 +35,7 @@ class FeedPost extends React.Component {
   }
 
   handleComment() {
-    const { key, userId, image, description } = this.props;
+    const { key, userId, image, description, comments } = this.props;
 
     this.props.history.push({
       pathname: `/post/${key}`,
@@ -43,7 +43,8 @@ class FeedPost extends React.Component {
         key,
         userId,
         image,
-        description
+        description,
+        comments
       }
     });
   }

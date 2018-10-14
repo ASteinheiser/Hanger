@@ -42,6 +42,7 @@ export default class Home extends Component {
           <FeedPost
             key={post.id}
             userId={post.user_id}
+            comments={post.comments}
             description={post.description}
             image={post.img_uri} />
           )

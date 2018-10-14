@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import styled               from 'styled-components/native';
 
-import TopNavigation from '../components/top-navigation.js';
-import FeedPost      from '../components/feed-post';
-import theme         from '../theme.js';
+import CommentSection from '../components/comment-section';
+import TopNavigation  from '../components/top-navigation.js';
+import FeedPost       from '../components/feed-post';
+import theme          from '../theme.js';
 
 export default class Post extends Component {
   render() {
-    const { key, userId, description, image } = this.props.location.state;
+    const { key, userId, description, image, comments } = this.props.location.state;
 
     return (
       <Height>
@@ -20,6 +21,10 @@ export default class Post extends Component {
               description={description}
               image={image}
               no_comment />
+
+            <CommentSection
+              key={key}
+              comments={comments} />
 
           </Container>
         </TopNavigation>
