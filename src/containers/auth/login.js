@@ -161,16 +161,23 @@ class Login extends Component {
                       .then(result => {
                         API.post('HangerAPI', '/v1/auth/fb', params)
                           .then(response => {
+                            // set the token and expires at in the redux state for refresh token func
+                            self.props.setUser({
+                              keys: {
+                                facebookToken: token,
+                                facebookExpires: expires_at
+                              }
+                            });
                             self.handleNavigation('/home');
                           })
                           .catch(err => {
                             console.log(err);
-                            this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
+                            self.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
                           });
                       })
                       .catch(err => {
                         console.log(err);
-                        this.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
+                        self.setState({ alertMessage: 'Error authenticating with Facebook. Please try again.' });
                       });
                   }
                 }

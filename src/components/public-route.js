@@ -28,7 +28,8 @@ class PublicRoute extends Component {
   }
 
   authenticate() {
-    if(JSON.stringify(this.props.user) === JSON.stringify({})) {
+    if(JSON.stringify(this.props.user) === JSON.stringify({}) ||
+      JSON.stringify(Object.keys(this.props.user)) === JSON.stringify(["keys"])) {
       API.get('HangerAPI', '/v1/user')
         .then(response => {
           this.setState({ authenticationComplete: true });
