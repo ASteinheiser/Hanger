@@ -48,7 +48,7 @@ export default class Router extends Component {
   componentDidMount() {
     const { user } = store.getState();
     // if the user is a facebook user, as determined by the token
-    // we need to use the stored fb token and re-authenticate
+    // we need to re-authenticate and get a fresh token
     if(user && user.keys) {
       this.setState({ loading: true }, () => {
         AccessToken.getCurrentAccessToken()
