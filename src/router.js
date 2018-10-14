@@ -1,6 +1,13 @@
 import React, { Component }    from 'react';
+import { API, Auth }           from 'aws-amplify';
 import { NativeRouter, Route } from 'react-router-native';
+import { DotIndicator }        from 'react-native-indicators';
 import styled                  from 'styled-components/native';
+import {
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager
+} from 'react-native-fbsdk';
 
 import CheckEmail       from './containers/auth/check-email';
 import Event            from './containers/event';
@@ -26,8 +33,83 @@ import Search           from './containers/search';
 import Settings         from './containers/settings';
 import User             from './containers/user';
 
+import { blue }  from './theme.js';
+import { store } from './redux/config';
+
 export default class Router extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false
+    };
+  }
+
+  componentDidMount() {
+    const { user } = store.getState();
+    // if the user is a facebook user, as determined by the token
+    // we need to use the stored fb token and re-authenticate
+    if(user && user.keys) {
+      this.setState({ loading: true }, () => {
+        AccessToken.getCurrentAccessToken()
+          .then(data => {
+            let token = data.accessToken;
+            let expires_at = data.expirationTime;
+            let user = data;
+
+            let graphParams = { parameters: {} };
+            let infoRequest = new GraphRequest('/me', graphParams, (error, result) => {
+                if (error) {
+                  console.log('Error fetching data: ' + error.toString());
+                  this.setState({ loading: false });
+                } else {
+                  let params = {
+                    body: {
+                      user: result
+                    }
+                  };
+                  Auth.federatedSignIn('facebook', { token, expires_at }, user)
+                    .then(result => {
+                      API.post('HangerAPI', '/v1/auth/fb', params)
+                        .then(response => {
+                          console.log('re-authed fb tokens');
+                          this.setState({ loading: false });
+                        })
+                        .catch(err => {
+                          console.log(err);
+                          this.setState({ loading: false });
+                        });
+                    })
+                    .catch(err => {
+                      console.log(err);
+                      this.setState({ loading: false });
+                    });
+                }
+              }
+            );
+            infoRequest.addStringParameter('id,name,email', 'fields');
+            // Start the graph request.
+            new GraphRequestManager().addRequest(infoRequest).start();
+          })
+          .catch(err => {
+            console.log(err);
+            this.setState({ loading: false });
+          });
+      });
+    }
+  }
+
   render() {
+    const { loading } = this.state;
+
+    if(loading) {
+      return(
+        <Centered>
+          <DotIndicator color={blue} size={18} />
+        </Centered>
+      );
+    }
+
     return(
       <NativeRouter>
         <StyledView>
@@ -61,4 +143,11 @@ export default class Router extends Component {
 const StyledView = styled.View`
   display: flex;
   flex: 1;
+`
+
+const Centered = styled.View`
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
 `
