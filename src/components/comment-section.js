@@ -44,9 +44,14 @@ export default class CommentSection extends Component {
   render() {
     return(
       <CommentContainer>
-        <StyledText>
-          {'Comment Section!!!'}
-        </StyledText>
+        {
+          this.props.comments ?
+            null
+            :
+            <StyledText>
+              {'Be the first to comment!'}
+            </StyledText>
+        }
 
         <Input accent multiline
           onChange={this.handleUpdate.bind(this)}

@@ -19,7 +19,7 @@ class FeedPost extends React.Component {
     this.props.history.push({
       pathname: `/user/${userId}`,
       state: {
-        user: this.props.User
+        user: this.props.user
       }
     });
   }
@@ -32,7 +32,7 @@ class FeedPost extends React.Component {
 
     API.post('HangerAPI', `/v1/user/post/like/${postId}`, params)
       .then(response => {
-        console.log(response);
+        // console.log(response);
       })
       .catch(err => {
         console.log(err);
@@ -101,9 +101,9 @@ class FeedPost extends React.Component {
               <LikesText>
                 {
                   this.props.likes ?
-                  this.props.likes
-                  :
-                  '0 Likes'
+                    this.props.likes
+                    :
+                    '0 Likes'
                 }
               </LikesText>
             </ButtonsContainer>

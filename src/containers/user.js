@@ -9,7 +9,10 @@ import theme               from '../theme.js';
 
 export default class User extends Component {
   render() {
-    let user = {};
+    const { user } = this.props.location.state;
+
+    console.log(user);
+
     return (
       <Height>
         <TopNavigation back-button>
