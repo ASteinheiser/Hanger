@@ -10,7 +10,16 @@ export default class Event extends Component {
       <Height>
         <TopNavigation back-button>
           <Container color={theme.palette.canvasColor}>
-            {/* event content */}
+
+            {/* <FeedPost
+              key={event.id}
+              type={'event'}
+              date={event.date}
+              title={event.name}
+              userId={event.user_id}
+              description={event.description}
+              image={event.img_uri} /> */}
+
           </Container>
         </TopNavigation>
       </Height>

@@ -78,9 +78,14 @@ class FeedPost extends React.Component {
                 <ButtonPadding onPress={this.handleLike.bind(this)}>
                   <ButtonIcon source={HexHeart} />
                 </ButtonPadding>
-                <ButtonPadding onPress={this.handleComment.bind(this)}>
-                  <ButtonIcon source={CommentIcon} />
-                </ButtonPadding>
+                {
+                  this.props.no_comment ?
+                    null
+                    :
+                    <ButtonPadding onPress={this.handleComment.bind(this)}>
+                      <ButtonIcon source={CommentIcon} />
+                    </ButtonPadding>
+                }
               </FlexRow>
               <LikesText>
                 {
