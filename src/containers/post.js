@@ -7,16 +7,18 @@ import theme         from '../theme.js';
 
 export default class Post extends Component {
   render() {
+    const { key, userId, description, image } = this.props.location.state;
+
     return (
       <Height>
         <TopNavigation back-button>
           <Container color={theme.palette.canvasColor}>
 
             <FeedPost
-              // key={post.id}
-              // userId={post.user_id}
-              // description={post.description}
-              // image={post.img_uri}
+              key={key}
+              userId={userId}
+              description={description}
+              image={image}
               no_comment />
 
           </Container>

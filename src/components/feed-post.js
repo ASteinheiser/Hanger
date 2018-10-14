@@ -35,8 +35,17 @@ class FeedPost extends React.Component {
   }
 
   handleComment() {
-    let postId = this.props.key;
-    this.props.history.push(`/post/${postId}`);
+    const { key, userId, image, description } = this.props;
+
+    this.props.history.push({
+      pathname: `/post/${key}`,
+      state: {
+        key,
+        userId,
+        image,
+        description
+      }
+    });
   }
 
   render() {
