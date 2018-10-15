@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { API }              from 'aws-amplify';
 import styled               from 'styled-components/native';
 import _debounce            from 'lodash.debounce';
 import { Icon, Toolbar }    from 'react-native-material-ui';
@@ -19,7 +20,8 @@ export default class Search extends Component {
     super(props);
 
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      searchResults: null
     };
 
     this._searchEvents = _debounce(this.searchEvents, SEARCH_DEBOUNCE_TIME);
@@ -29,7 +31,13 @@ export default class Search extends Component {
     const { searchValue } = this.state;
 
     if(searchValue !== '') {
-      console.log('Searching for events: ', searchValue);
+      API.get('HangerAPI', `/v1/user/search?search=${searchValue}`)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 
@@ -47,23 +55,17 @@ export default class Search extends Component {
       }
     }
 
-    let resultArray = {
-      '1': {
-        id: 1,
-        text: 'John Snow'
-      },
-      '2': {
-        id: 2,
-        text: 'PHX FW'
-      }
-    }
+    const { searchResults } = this.state;
+    let results = null;
 
-    let results = _map(resultArray, result =>
-      <SearchItem
-        onPress={() => {}}
-        key={result.id}
-        text={result.text} />
-    );
+    if(searchResults) {
+      results = _map(searchResults, result =>
+        <SearchItem
+          onPress={() => {}}
+          key={result.id}
+          text={result.text} />
+      );
+    }
 
     return (
       <Height>
