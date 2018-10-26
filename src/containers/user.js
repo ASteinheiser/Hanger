@@ -11,18 +11,16 @@ export default class User extends Component {
   render() {
     const { user } = this.props.location.state;
 
-    console.log(user);
-
     return (
       <Height>
         <TopNavigation back-button>
           <Container color={theme.palette.canvasColor}>
 
-            {/* <ProfileHeader user={user} />
+            <ProfileHeader user={user} />
 
             <ProfileInformation user={user} />
 
-            <SocialMediaAccounts user={user} /> */}
+            <SocialMediaAccounts user={user} />
 
           </Container>
         </TopNavigation>
